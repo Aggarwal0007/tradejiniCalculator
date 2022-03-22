@@ -3,7 +3,7 @@ import React from "react";
 function BrokerageCalculator() {
     return (
         <>
-           Brokerage Calculator Will be here!!
+           We are workout for Brokerage calculator!!!
         </>
     );
 }

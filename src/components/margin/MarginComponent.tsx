@@ -3,7 +3,7 @@ import React from "react";
 function MarginCalculator() {
     return (
         <>
-           Margin Calculator Will be here!!
+           We are workout for margin calculator!!!
         </>
     );
 }

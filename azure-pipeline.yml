@@ -1,0 +1,70 @@
+trigger: 
+  - develop
+
+resources:
+  repositories:
+    - repository: iouring-githooks
+      type: git
+      name: init/iouring-githooks
+      ref: master
+
+
+pool:
+  name: Default
+variables:
+  npm_config_cache: '$(Pipeline.Workspace)/.npm'
+
+steps:
+- checkout: self
+- checkout: iouring-githooks
+
+- task: NodeTool@0
+  displayName: 'Use Node 16.x'
+  inputs:
+    versionSpec: 16.x
+
+- task: Cache@2
+  displayName: Cache
+  inputs:
+    key: 'npm | "$(Agent.OS)" | tradejini-spa-website/package.json'
+    path: '$(npm_config_cache)'
+    cacheHitVar: '$(npm_config_cache)'
+    restoreKeys: 'npm | "$(Agent.OS)"'
+  enabled: false
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    command: 'install'
+    workingDir: 'tradejini-spa-website'
+    verbose: false
+
+- template: pipeline/azure/code-validation-template.yaml@iouring-githooks
+  parameters: 
+    codeDir: tradejini-spa-website
+    lang: web
+
+
+- task: Bash@3
+  displayName: 'Package'
+  inputs:
+    targetType: 'inline'
+    script: |
+        cd tradejini-spa-website/
+        npm run build:dev
+
+- task: ArchiveFiles@2
+  displayName: 'Archiving web app build'
+  enabled: true
+  inputs:
+    rootFolderOrFile: '$(system.defaultworkingdirectory)/tradejini-spa-website/build'
+    includeRootFolder: false
+    archiveType: 'tar'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/nxtrade-webapp.tar.gz'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish service apis drop'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)/nxtrade-webapp.tar.gz'
+  enabled: true
