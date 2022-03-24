@@ -55,7 +55,7 @@ steps:
 
 - task: ArchiveFiles@2
   displayName: 'Archiving web app build'
-  enabled: true
+  enabled: false
   inputs:
     rootFolderOrFile: '$(system.defaultworkingdirectory)/tradejini-spa-website/build'
     includeRootFolder: false
@@ -67,4 +67,4 @@ steps:
   displayName: 'Publish service apis drop'
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)/nxtrade-webapp.tar.gz'
-  enabled: true
+  enabled: false
