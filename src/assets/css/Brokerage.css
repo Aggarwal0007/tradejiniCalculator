@@ -1,0 +1,158 @@
+.brokerage-base {
+  padding: 20px 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+.brokerage-base .segment-selection {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2px;
+}
+
+.brokerage-base .segment-detail {
+  background: url("../images/brokerage_calc_bg.jpg");
+  width: 100%;
+  background-size: cover;
+  padding: 0 0 15px;
+  color: #fff;
+}
+
+.segment-selection .segment-item {
+  color: #fff;
+  background: #a157b8;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 5px;
+  display: inline-block;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.segment-selection .segment-item.active-segment {
+  color: #fff;
+  background: #639;
+  pointer-events: none;
+}
+
+.section-title {
+  width: 100%;
+  color: #fff;
+  background: rgb(255 255 255 / 8%);
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 31px;
+  text-align: center;
+  padding: 30px 0;
+}
+
+.category-list {
+  border-bottom: 1px solid #5a5d59;
+  border-bottom-left-radius: 10px;
+  background: rgb(255 255 255 / 8%);
+  border-bottom-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.category-item {
+  /* height: 40px; */
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  border: 0;
+  color: #fff;
+  background: rgb(255 255 255 / 10%);
+  padding: 8px 20px;
+  margin-right: 2px;
+  border-radius: 4px 4px 0 0;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.category-item:hover {
+  background: rgb(255 255 255 / 30%);
+  color: #fff;
+}
+
+.category-item.category-active {
+  background: rgb(255 255 255 / 30%);
+  border-top: 2px solid #639;
+  color: #fff;
+  pointer-events: none;
+}
+
+.category-details {
+  padding: 0 15px;
+}
+
+.detail-input-section {
+  width: 100%;
+  padding: 20px 15px;
+  margin-bottom: 25px;
+  color: #fff;
+  border-bottom: 1px solid #5a5d59;
+  background: rgb(255 255 255 / 8%);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.quantity-input-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+  font-size: 15px;
+}
+
+.common-input {
+  min-width: 100px;
+  max-width: 140px;
+  margin: 0 auto;
+  line-height: normal;
+  background: #151515;
+  outline: 0;
+  border: 0;
+  padding: 8px;
+  color: #eee;
+  border-radius: 4px;
+}
+
+.top-output-container .input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 5px;
+  font-size: 15px;
+  flex-wrap: wrap;
+  min-width: 280px;
+  padding: 15px;
+}
+
+.top-output-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.brokerage-label::after,
+.profit-label::after {
+  content: "(\20B9)";
+  padding-left: 5px;
+}
+
+.output-bg {
+  background: #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+}

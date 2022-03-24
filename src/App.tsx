@@ -1,4 +1,3 @@
-import "./App.css";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AppSettings } from "./common/AppSettings";
 import BrokerageCalculator from "./components/brokerage/BrokerageComponent";
