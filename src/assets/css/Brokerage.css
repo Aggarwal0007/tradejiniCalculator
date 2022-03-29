@@ -156,3 +156,178 @@
   padding: 5px 10px;
   border-radius: 5px;
 }
+
+.actions-calc {
+  width: 100%;
+}
+
+.action-group {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.actions-calc .brokerage-savings {
+  background-color: #151515;
+  color: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.actions-calc .brokerage-savings.active,
+.actions-calc .see-all-charges.active {
+  background-color: #00cd97;
+}
+
+.actions-calc .see-all-charges {
+  background-color: #151515;
+  color: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.charge-details-section {
+  padding: 10px;
+}
+
+.present-brok-tag {
+  font-size: 26px;
+  background: #fff;
+  line-height: 29px;
+  color: #222;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.brokerage-present-input {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.brokerage-present-input input {
+  min-width: 100px;
+  max-width: 140px;
+  margin: 0 auto;
+  line-height: normal;
+  background: #151515;
+  outline: 0;
+  border: 0;
+  padding: 8px;
+  color: #eee;
+  border-radius: 4px;
+}
+
+.brokerage-present-input > span {
+  padding-left: 15px;
+}
+
+.your-savings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.your-savings .your-savings-text {
+  font-size: 24px;
+  line-height: 27px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.your-savings-output {
+  background: #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  min-width: 50px;
+  min-height: 32px;
+  margin-left: 20px;
+}
+
+/*
+   charges List Table
+
+*/
+
+.charges-table {
+  padding-bottom: 1px;
+  background: #fff;
+  border-radius: 12px;
+}
+
+.charges-table .table {
+  background-color: #fff;
+}
+
+.charges-table .table tr th {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+  line-height: 23px;
+}
+
+.charges-table .table tr td {
+  font-size: 14px;
+  font-weight: normal;
+  color: #222;
+  line-height: 20px;
+}
+
+.charges-table .table th {
+  border: 1px solid #ddd !important;
+  border-width: unset !important;
+}
+
+.table-heading {
+  background: #4c4b49;
+  padding: 15px;
+  color: #d7e021;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.table-heading::before {
+  /* content: "\f012"; */
+}
+
+/*  Total charges Table */
+
+/* .total-charges-table {
+
+} */
+
+.charges-list {
+  width: 100%;
+  padding: 0;
+  background: #a49f9c;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+.item-name {
+  width: 150px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.item-value {
+  flex: 1;
+  width: 100%;
+  padding: 5px 10px;
+  color: #fff;
+  background: #8d8c8a;
+  outline: 0;
+  border: 0;
+  font-family: sans-serif;
+}
