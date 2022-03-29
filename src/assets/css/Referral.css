@@ -1,0 +1,86 @@
+.referral-calculator {
+  background: url("../images/referral_calc_bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 15px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.referral-title {
+  font-size: 27px;
+  color: #fff;
+  font-weight: 400;
+  text-align: center;
+  padding-top: 30px;
+  margin-bottom: 20px;
+}
+
+.referral-para {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+}
+
+.referral-box {
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-bottom: 30px;
+  display: inline-flex;
+}
+
+.referral-single-box {
+  margin-right: 10px;
+  width: 20%;
+  margin-bottom: 10px;
+}
+
+.referral-content {
+  font-weight: 500;
+  color: #fff;
+  border: 1px solid white;
+  font-size: 16px;
+  padding-top: 30px;
+}
+
+.referral-content p {
+  padding-bottom: 20px;
+}
+
+.referral-inputs {
+  padding: 6px 20px;
+  background: #639;
+}
+
+.referral-input {
+  width: 100%;
+  border-color: transparent;
+  background: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.referral-input:focus {
+  outline: none;
+}
+
+.referral-input-readonly {
+  background: #639 !important;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+@media only screen and (max-width: 540px) {
+  .referral-box {
+    display: block;
+  }
+
+  .referral-single-box {
+    width: auto !important;
+  }
+}
