@@ -20,3 +20,19 @@ export interface Charges {
     pipsBreakeven?: number,
     STTCharges?: number
 }
+
+export interface ConfigData {
+    brokeragePercentage: number,
+        brokerageBuy: number,
+        brokerageSell: number,
+        stt: number,
+        transactionCharges: number,
+        sebi: number,
+        gstPercentage: number,
+        stampCharge: number
+}
+
+export interface ChargesItem {
+    name: string,
+    value: string
+}

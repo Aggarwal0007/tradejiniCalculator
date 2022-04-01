@@ -1,88 +1,88 @@
-import { EQUITES_CATEGORY } from "./Constants";
+import { ConfigData } from "../../common/Types";
+import { configDetails } from "../../common/Dataconfig";
+import { EQUITES_CATEGORY } from "../../common/Constants";
 
-interface CONFIGDATA {
-    brokeragePercentage: number,
-        brokerageBuy: number,
-        brokerageSell: number,
-        stt: number,
-        transactionCharges: number,
-        sebi: number,
-        gstPercentage: number,
-        stampCharge: number
-}
-
-const BROKERAGE_CONFIG_VALUES: Record<string, CONFIGDATA> = {
-    EQUITY_INTRADAY: {
-        brokeragePercentage: 0.05,
-        brokerageBuy: 20,
-        brokerageSell: 20,
-        stt: 0.00025,
-        transactionCharges: 345,
-        sebi: 10,
-        gstPercentage: 0.18,
-        stampCharge: 0.00003
-    },
-    EQUITY_DELIVERY: {
-        brokeragePercentage: 0.1,
-        brokerageBuy: 20,
-        brokerageSell: 20,
-        stt: 0.001,
-        transactionCharges: 345,
-        sebi: 10,
-        gstPercentage: 0.18,
-        stampCharge: 0.00015
-    },
-    EQUITY_FUTURES: {
-        brokeragePercentage: 0.05,
-        brokerageBuy: 20,
-        brokerageSell: 20,
-        stt: 0.0001,
-        transactionCharges: 200,
-        sebi: 10,
-        gstPercentage: 0.18,
-        stampCharge: 0.00002
-    },
-    EQUITY_OPTIONS: {
-        brokeragePercentage: 0.1,
-        brokerageBuy: 20,
-        brokerageSell: 20,
-        stt: 0.0005,
-        transactionCharges: 5300,
-        sebi: 10,
-        gstPercentage: 0.18,
-        stampCharge: 0.00003
-    },
-    COMMODITY_CATEGORY: {
-        brokeragePercentage: 0.05,
-        brokerageBuy: 20,
-        brokerageSell: 20,
-        stt: 0.0001,
-        transactionCharges: 350,
-        sebi: 10,
-        gstPercentage: 0.18,
-        stampCharge: 0.00002
-    }, 
-    CURRENCY_FUTURES: {
-        brokeragePercentage: 0.05,
-        brokerageBuy: 20,
-        brokerageSell: 20,
-        stt: 0,
-        transactionCharges: 90,
-        sebi: 10,
-        gstPercentage: 0.18,
-        stampCharge: 0.001
-    },
-    CURRENCY_OPTIONS: {
-        brokeragePercentage: 0.1,
-        brokerageBuy: 20,
-        brokerageSell: 20,
-        stt: 0,
-        transactionCharges: 3500,
-        sebi: 10,
-        gstPercentage: 0.18,
-        stampCharge: 0.001
-    }
+const getConfigData = (category: string) => {
+    const dataResponse:Record<string, ConfigData> = configDetails.getBrokerageDetails();
+    return dataResponse[ category ];
 };
+
+
+// const BROKERAGE_CONFIG_VALUES: Record<string, ConfigData> = {
+//     EQUITY_INTRADAY: {
+//         brokeragePercentage: 0.05,
+//         brokerageBuy: 20,
+//         brokerageSell: 20,
+//         stt: 0.00025,
+//         transactionCharges: 345,
+//         sebi: 10,
+//         gstPercentage: 0.18,
+//         stampCharge: 0.00003
+//     },
+//     EQUITY_DELIVERY: {
+//         brokeragePercentage: 0.1,
+//         brokerageBuy: 20,
+//         brokerageSell: 20,
+//         stt: 0.001,
+//         transactionCharges: 345,
+//         sebi: 10,
+//         gstPercentage: 0.18,
+//         stampCharge: 0.00015
+//     },
+//     EQUITY_FUTURES: {
+//         brokeragePercentage: 0.05,
+//         brokerageBuy: 20,
+//         brokerageSell: 20,
+//         stt: 0.0001,
+//         transactionCharges: 200,
+//         sebi: 10,
+//         gstPercentage: 0.18,
+//         stampCharge: 0.00002
+//     },
+//     EQUITY_OPTIONS: {
+//         brokeragePercentage: 0.1,
+//         brokerageBuy: 20,
+//         brokerageSell: 20,
+//         stt: 0.0005,
+//         transactionCharges: 5300,
+//         sebi: 10,
+//         gstPercentage: 0.18,
+//         stampCharge: 0.00003
+//     },
+//     COMMODITY_CATEGORY: {
+//         brokeragePercentage: 0.05,
+//         brokerageBuy: 20,
+//         brokerageSell: 20,
+//         stt: 0.0001,
+//         transactionCharges: 350,
+//         sebi: 10,
+//         gstPercentage: 0.18,
+//         stampCharge: 0.00002
+//     }, 
+//     CURRENCY_FUTURES: {
+//         brokeragePercentage: 0.05,
+//         brokerageBuy: 20,
+//         brokerageSell: 20,
+//         stt: 0,
+//         transactionCharges: 90,
+//         sebi: 10,
+//         gstPercentage: 0.18,
+//         stampCharge: 0.001
+//     },
+//     CURRENCY_OPTIONS: {
+//         brokeragePercentage: 0.1,
+//         brokerageBuy: 20,
+//         brokerageSell: 20,
+//         stt: 0,
+//         transactionCharges: 3500,
+//         sebi: 10,
+//         gstPercentage: 0.18,
+//         stampCharge: 0.001
+//     }
+// };
+
+// const BROKERAGE_CONFIG_VALUES = BROKERAGE_CONFIG_DETAILS;
+// console.log("BROKERAGE_CONFIG_VALUES:", BROKERAGE_CONFIG_VALUES);
 
 const decimalConversion = (value: number, decimalPoints: number = 2) => {
     const covertedValue = value.toFixed(decimalPoints);
@@ -93,7 +93,7 @@ export const getTurnOver = (qty: number, buyPrice: number, sellPrice: number) =>
     return ( qty * buyPrice ) + ( qty * sellPrice );
 };
 
-export const getBrokerage = (turnOver: number, configData: CONFIGDATA) => {
+export const getBrokerage = (turnOver: number, configData: ConfigData) => {
    
     const brokerage1 = ( (turnOver) * ( configData.brokeragePercentage * ( 1 / 100 ) ) );
 
@@ -104,7 +104,13 @@ export const getBrokerage = (turnOver: number, configData: CONFIGDATA) => {
     return brokerage;
 };
 
-export const getSTT = (qty: number, sellPrice: number, configData: CONFIGDATA, category: string, turnover: number) => {
+export const getSTT = (
+    qty: number, 
+    sellPrice: number, 
+    configData: ConfigData, 
+    category: string, 
+    turnover: number
+) => {
     let sttValue:number = 0;
     if (category === EQUITES_CATEGORY[ 1 ].name) {
         const sttVal = ((0.1*(1/100) )*(turnover)); 
@@ -115,31 +121,40 @@ export const getSTT = (qty: number, sellPrice: number, configData: CONFIGDATA, c
     return sttValue;
 };
 
-export const getTransactionCharges = (turnOver: number, configData:CONFIGDATA) => {
+export const getTransactionCharges = (turnOver: number, configData:ConfigData) => {
     let transCharges = ( ( configData.transactionCharges ) * ( ( turnOver / 10000000 ) ) );
     transCharges = Number(transCharges.toFixed(1));
     
     return transCharges;
 };
 
-export const getSEBICharges = (turnOver: number, configData:CONFIGDATA) => {
+export const getSEBICharges = (turnOver: number, configData:ConfigData) => {
     const sebiCharges = ( ( configData.sebi ) * ( turnOver / 10000000 ) );
     return sebiCharges;
 };
 
-export const getGSTCharges = (transactionCharges: number, brokerage:number, configData:CONFIGDATA ) => {
+export const getGSTCharges = (
+    transactionCharges: number, 
+    brokerage:number, 
+    configData:ConfigData 
+) => {
     const GSTCharges = ( (configData.gstPercentage ) * ( brokerage + transactionCharges ) );
     return GSTCharges;
 };
 
-export const getStampCharges = (qty: number, buyPrice: number, configData:CONFIGDATA) => {
+export const getStampCharges = (qty: number, buyPrice: number, configData:ConfigData) => {
     const stampCharges = configData.stampCharge * qty * buyPrice ; 
     return stampCharges;
 };
 
-export const calculateEquityBrokerage = (qty: number, buyPrice: number, sellPrice: number, category: string) => {
+export const calculateEquityBrokerage = (
+    qty: number, 
+    buyPrice: number, 
+    sellPrice: number, 
+    category: string
+) => {
 
-    const configData = BROKERAGE_CONFIG_VALUES[ category ];
+    const configData = getConfigData(category);
 
     const turnOver = getTurnOver(qty, buyPrice, sellPrice );
 
@@ -201,7 +216,7 @@ export const calculateCommodityBrokerage = (
     category: string
 ) => {
 
-    const configData = BROKERAGE_CONFIG_VALUES[ category ];
+    const configData = getConfigData(category);
 
     const quantity = qty * comValue;
 
@@ -255,9 +270,14 @@ export const calculateCommodityBrokerage = (
     };
 };
 
-export const calculateCurrencyBrokerage = (qty: number, buyPrc: number, sellPrc: number, category: string) => {
+export const calculateCurrencyBrokerage = (
+    qty: number, 
+    buyPrc: number, 
+    sellPrc: number,
+    category: string
+) => {
     
-    const configData = BROKERAGE_CONFIG_VALUES[ category ];
+    const configData = getConfigData(category);
 
     const turnOver = ( ( qty * buyPrc ) + ( qty * sellPrc ) ) * 1000;
 

@@ -1,6 +1,7 @@
 {
   "name": "tradejini-spa-website",
   "version": "0.1.0",
+  "homepage": "https://services-tradejini-dev.iouring.in/wp-content/reactpress/apps/spa/build",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -21,7 +22,7 @@
   },
   "scripts": {
     "start": "env-cmd .env.development react-scripts start",
-    "build": "react-scripts build && npm run build-dist",
+    "build": "react-scripts build",
     "build:dev": "env-cmd .env.development react-scripts build",
     "build-dist": "cd build && copy static\\js\\*.js main.js && copy static\\css\\*.css main.css",
     "test": "react-scripts test",

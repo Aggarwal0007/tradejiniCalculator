@@ -1,13 +1,46 @@
 import { Charges, InputTypes } from "../../common/Types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SEGMENT_LIST, SEGMENT_TITLE } from "../../common/Constants";
+import { brokerageURL } from "../../communicator/ServiceUrls";
 import CommoditiesCalculator from "./commodities/CommoditiesComponent";
+import { configDetails } from "../../common/Dataconfig";
 import CurrenciesCalculator from "./currencies/CurrenciesCalculator";
 import EquitesCalculator from "./equites/EquitesCalculator";
+import { getFullURL } from "../../common/AppSettings";
 import KnowBrokerageSavings from "./KnowBrokerageSavingsComponent";
 import SeeAllCharges from "./SeeAllChargesComponent";
+import ServiceRequest from "../../communicator/Request";
+import useFetch from "../../communicator/UseFetch";
 
 function BrokerageCalculator() {
+
+    const fetchAPI = useFetch();
+
+    const [
+       
+        isConfigData, setIsConfigData
+    ] = useState<boolean>(false);
+
+    const successCB = (response: { d: Charges; }) => {
+        console.log("configSuccess", response);
+        configDetails.setBrokerageDetails(response.d);
+        setIsConfigData(true);
+    };
+
+    const errorCB = (error: string) => {
+        console.log("configError", error);
+    };
+
+    const fetchBrokerageConfigDetails = () => {
+        const request = new ServiceRequest();
+        request.addData({});
+        fetchAPI.placeGETRequest(getFullURL(brokerageURL), request, successCB, errorCB );
+    };
+
+    useEffect(() => {
+        fetchBrokerageConfigDetails();
+    }, [
+    ]);
 
     const [
         selectedSegment, setSelectedSegment
@@ -46,8 +79,8 @@ function BrokerageCalculator() {
     };
     
     const brokerageProps = {
-        inputKeys: equititesInputs,
-        chargesList: allCharges
+        inputKeys: equititesInputs as InputTypes,
+        chargesList: allCharges as Charges
     };
 
     return (
@@ -82,19 +115,19 @@ function BrokerageCalculator() {
                     <div className="calculator-details">
                         {
                              
-                            selectedSegment && selectedSegment === 
+                            isConfigData && selectedSegment && selectedSegment === 
                             SEGMENT_LIST[ 0 ].name ?
                                 <EquitesCalculator 
                                     parentCBAllCharges={getCharges}
                                     equitiesInput = {getEquitesInput}
                                 /> :
-                                selectedSegment && selectedSegment === 
+                                isConfigData && selectedSegment && selectedSegment === 
                                 SEGMENT_LIST[ 1 ].name ?
                                     <CurrenciesCalculator 
                                         parentCBAllCharges={getCharges}
                                         equitiesInput = {getEquitesInput}
                                     /> :
-                                    selectedSegment && selectedSegment === 
+                                    isConfigData && selectedSegment && selectedSegment === 
                                     SEGMENT_LIST[ 2 ].name ?
                                         <CommoditiesCalculator 
                                             parentCBAllCharges={getCharges}

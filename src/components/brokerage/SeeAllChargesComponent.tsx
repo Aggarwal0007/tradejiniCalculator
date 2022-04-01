@@ -1,8 +1,9 @@
+import { Charges, InputTypes } from "common/Types";
 import ChargeListTable from "./ChargeListTableComponent";
 import React from "react";
 import TotalChargesTable from "./TotalChargesTableComponent";
 
-const SeeAllCharges = (props: { chargesList: any; inputKeys: any }) => {
+const SeeAllCharges = (props: { chargesList: Charges; inputKeys: InputTypes }) => {
 
     console.log("props charges", props);
     const chargeProps = {

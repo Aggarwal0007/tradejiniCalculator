@@ -26,24 +26,24 @@ export const CURRENCY_CATEGORY = [
 ];
 
 export const COMMODITY_CATEGORY = [
-    { name: "COMMODITY_CATEGORY", value: "Commodity" }
+    { name: "COMMODITY", value: "Commodity" }
 ];
 
 export const COMMODITY_SELECT_LIST = [
-    { name: "ALUMINIUM", value: 5000 },
-    { name: "COPPER", value: 2500 },
-    { name: "CRUDEOIL", value: 100 },
-    { name: "GOLD", value: 100 },
-    { name: "GOLDGUINEA", value: 1 },
-    { name: "GOLDM", value: 10 },
-    { name: "GOLDPETAL", value: 1 },
-    { name: "LEAD", value: 5000 },
-    { name: "NATURALGAS", value: 1250 },
-    { name: "NICKEL", value: 1500 },
-    { name: "SILVER", value: 30 },
-    { name: "SILVERM", value: 5 },
-    { name: "SILVERMIC", value: 1 },
-    { name: "ZINC", value: 5000 },
+    { name: "ALUMINIUM", value: "ALUMINIUM-5000" },
+    { name: "COPPER", value: "COPPER-2500" },
+    { name: "CRUDEOIL", value: "CRUDEOIL-100" },
+    { name: "GOLD", value: "GOLD-100" },
+    { name: "GOLDGUINEA", value: "GOLDGUINEA-1" },
+    { name: "GOLDM", value: "GOLDM-10" },
+    { name: "GOLDPETAL", value: "GOLDPETAL-1" },
+    { name: "LEAD", value: "LEAD-5000" },
+    { name: "NATURALGAS", value: "NATURALGAS-1250" },
+    { name: "NICKEL", value: "NICKEL-1500" },
+    { name: "SILVER", value: "SILVER-30" },
+    { name: "SILVERM", value: "SILVERM-5" },
+    { name: "SILVERMIC", value: "SILVERMIC-1" },
+    { name: "ZINC", value: "ZINC-5000" },
 ];
 
 export const CHARGE_LIST: Record<string, any> = {
@@ -95,7 +95,7 @@ export const CHARGE_LIST: Record<string, any> = {
         { name: "GST", value: "18% on Brokerage & Transaction Charges" },
         { name: "Stamp duty(w.e.f 01st Jul 2020)", value: "0.003% on Buyer - Rs.300 Per Cr" },
     ],
-    COMMODITY_CATEGORY: [
+    COMMODITY: [
         { name: "Charges", value: "Commodity" },
         { name: "STT/CTT", value: "0.025% on the Sell Side" },
         { name: "Transaction/ Turnover Charges", value: "NSE: 345/Crore & BSE: 275/Crore" },

@@ -2,8 +2,13 @@ import { Charges, InputTypes } from "common/Types";
 import { COMMODITY_CATEGORY, COMMODITY_SELECT_LIST } from "../../../common/Constants";
 import React, { useEffect, useState } from "react";
 import BrokerageOutputs from "../BrokerageOutputsComponent";
-import { calculateCommodityBrokerage } from "../../../common/BrokerageCalcUtils";
+import { calculateCommodityBrokerage } from "../BrokerageCalcUtils";
 import InputText from "components/common/InputTextComponent";
+
+const getCommodityValue = (commodity: string) => {
+    const value = commodity.split("-").pop();
+    return Number(value);
+};
 
 const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => void;
     equitiesInput: (arg0: InputTypes) => void; }) => {
@@ -26,11 +31,11 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
 
     const [
         commodityValue, setCommodityValue
-    ] = useState<number>(COMMODITY_SELECT_LIST[ 0 ].value);
+    ] = useState<number>(getCommodityValue(COMMODITY_SELECT_LIST[ 0 ].value));
 
     const [
         viewResult, setViewResults
-    ] = useState<any>();
+    ] = useState<Charges | null>();
 
     const onSelectedCategory = (selectedItem: string) => {
         setSelectedCategory(selectedItem);
@@ -43,7 +48,6 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
         setCommodityValue(comValue);
         const result = calculateCommodityBrokerage(qty, buyPrc, sellPrc, comValue, selectedCategory);
         setViewResults(result);
-        console.log("result", result);
         props.parentCBAllCharges(result);
         props.equitiesInput({
             quantity: qty,
@@ -55,7 +59,7 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
 
     useEffect(() => {
         if (selectedCategory === COMMODITY_CATEGORY[ 0 ].name) {
-            calculateBrokerageValues(1, 119.6, 121.6, COMMODITY_SELECT_LIST[ 0 ].value);
+            calculateBrokerageValues(1, 119.6, 121.6, getCommodityValue(COMMODITY_SELECT_LIST[ 0 ].value));
         }
         
     }, [
@@ -80,8 +84,8 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
     };
 
     const onChangeCommodity = (evt: React.ChangeEvent<HTMLSelectElement>) => {
-        setCommodityValue(Number(evt.target.value));
-        calculateBrokerageValues(quantity, buyPrice, sellPrice, Number(evt.target.value));
+        setCommodityValue(getCommodityValue(evt.target.value));
+        calculateBrokerageValues(quantity, buyPrice, sellPrice, getCommodityValue(evt.target.value));
         
     };
 
@@ -144,8 +148,8 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
                         <div className="qty-label">Quantity</div>
                         <div className="qty-input">
                             <InputText 
-                                parentCallBack={(evt) => {
-                                    return onChangeQuantity(evt); 
+                                parentCallBack={(val) => {
+                                    return onChangeQuantity(Number(val)); 
                                 }}
                                 ipValue={quantity}
                                 numbersOnly = {true}
@@ -157,8 +161,8 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
                         <div className="qty-label">Buy Price(INR)</div>
                         <div className="qty-input">
                             <InputText 
-                                parentCallBack={(evt) => {
-                                    return onChangeBuyPrice(evt); 
+                                parentCallBack={(val) => {
+                                    return onChangeBuyPrice(Number(val)); 
                                 }}
                                 ipValue={buyPrice}
                                 numbersOnly = {true}
@@ -171,8 +175,8 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
                         <div className="qty-label">Sell Price(INR)</div>
                         <div className="qty-input">
                             <InputText 
-                                parentCallBack={(evt) => {
-                                    return onChangeSellPrice(evt); 
+                                parentCallBack={(val) => {
+                                    return onChangeSellPrice(Number(val)); 
                                 }}
                                 ipValue={sellPrice}
                                 numbersOnly = {true}
@@ -183,7 +187,7 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
                 </div>
                 <>
                     <BrokerageOutputs 
-                        chargesBreakDown = {viewResult}
+                        chargesBreakDown = {viewResult as Charges}
                     />
                 </>
             </div>

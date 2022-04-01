@@ -1,7 +1,7 @@
 import { Charges, InputTypes } from "../../../common/Types";
 import React, { useEffect, useState } from "react";
 import BrokerageOutputs from "../BrokerageOutputsComponent";
-import { calculateCurrencyBrokerage } from "common/BrokerageCalcUtils";
+import { calculateCurrencyBrokerage } from "components/brokerage/BrokerageCalcUtils";
 import { CURRENCY_CATEGORY } from "../../../common/Constants";
 import InputText from "components/common/InputTextComponent";
 
@@ -35,7 +35,7 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
 
     const [
         viewResult, setViewResults
-    ] = useState<any>();
+    ] = useState<Charges>();
 
     
     const calculateBrokerageValues = (qty: number, buyPrc: number, sellPrc: number, strikePrc: number) => {
@@ -45,7 +45,6 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
         setStrikePrice(strikePrc);
         const result = calculateCurrencyBrokerage(qty, buyPrc, sellPrc, selectedCategory);
         setViewResults(result);
-        console.log("result", result);
         props.parentCBAllCharges(result);
         props.equitiesInput({
             quantity: qty,
@@ -89,30 +88,6 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
 
     };
 
-    // const onChangeQuantity = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    //     if (evt && evt.target)
-    //         setQuantity(Number(evt.target.value));
-    //     calculateBrokerageValues(Number(evt.target.value), buyPrice, sellPrice, strikePrice);
-    // };
-
-    // const onChangeBuyPrice = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    //     if (evt && evt.target)
-    //         setBuyPrice(Number(evt.target.value));
-    //     calculateBrokerageValues(quantity, Number(evt.target.value), sellPrice, strikePrice);
-    // };
-
-    // const onChangeSellPrice = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    //     if (evt && evt.target)
-    //         setSellPrice(Number(evt.target.value));
-    //     calculateBrokerageValues(quantity, buyPrice, Number(evt.target.value), strikePrice);
-    // };
-
-    // const onChangeStrikePrice = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    //     if (evt && evt.target)
-    //         setStrikePrice(Number(evt.target.value));
-    //     calculateBrokerageValues(quantity, buyPrice, sellPrice, Number(evt.target.value));
-    // };
-
     return (
         <>
             <div className="category-list">
@@ -145,17 +120,9 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
                             <div className="quantity-input-section">
                                 <div className="qty-label">Strike Price</div>
                                 <div className="qty-input">
-                                    {/* <input 
-                                        type="text"
-                                        value={strikePrice}
-                                        onChange = {(evt) => {
-                                            return onChangeStrikePrice(evt); 
-                                        }}
-                                        className="common-input"
-                                    /> */}
                                     <InputText 
-                                        parentCallBack={(evt) => {
-                                            return onChangeStrikePrice(evt); 
+                                        parentCallBack={(val) => {
+                                            return onChangeStrikePrice(Number(val)); 
                                         }}
                                         ipValue={strikePrice}
                                         numbersOnly = {true}
@@ -169,17 +136,9 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
                     <div className="quantity-input-section">
                         <div className="qty-label">Quantity</div>
                         <div className="qty-input">
-                            {/* <input 
-                                type="text"
-                                value={quantity}
-                                onChange = {(evt) => {
-                                    return onChangeQuantity(evt); 
-                                }}
-                                className="common-input"
-                            /> */}
                             <InputText 
-                                parentCallBack={(evt) => {
-                                    return onChangeQuantity(evt); 
+                                parentCallBack={(val) => {
+                                    return onChangeQuantity(Number(val)); 
                                 }}
                                 ipValue={quantity}
                                 numbersOnly = {true}
@@ -190,17 +149,9 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
                     <div className="quantity-input-section">
                         <div className="qty-label">Buy Price(INR)</div>
                         <div className="qty-input">
-                            {/* <input 
-                                type="text"
-                                value={buyPrice}
-                                onChange = {(evt) => {
-                                    return onChangeBuyPrice(evt); 
-                                }}
-                                className="common-input"
-                            /> */}
                             <InputText 
-                                parentCallBack={(evt) => {
-                                    return onChangeBuyPrice(evt); 
+                                parentCallBack={(val) => {
+                                    return onChangeBuyPrice(Number(val)); 
                                 }}
                                 ipValue={buyPrice}
                                 numbersOnly = {true}
@@ -211,17 +162,9 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
                     <div className="quantity-input-section">
                         <div className="qty-label">Sell Price(INR)</div>
                         <div className="qty-input">
-                            {/* <input 
-                                type="text"
-                                value={sellPrice}
-                                onChange = {(evt) => {
-                                    return onChangeSellPrice(evt); 
-                                }}
-                                className="common-input"
-                            /> */}
                             <InputText 
-                                parentCallBack={(evt) => {
-                                    return onChangeSellPrice(evt); 
+                                parentCallBack={(val) => {
+                                    return onChangeSellPrice(Number(val)); 
                                 }}
                                 ipValue={sellPrice}
                                 numbersOnly = {true}
@@ -231,7 +174,7 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
                 </div>
                 <>
                     <BrokerageOutputs
-                        chargesBreakDown = {viewResult}
+                        chargesBreakDown = {viewResult as Charges}
                     />
                 </>
             </div>
