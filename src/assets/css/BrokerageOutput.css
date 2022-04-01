@@ -1,0 +1,290 @@
+.field-inputs {
+  background: url("../images/brokerage_output.jpg");
+  width: 20px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 2px;
+  font-size: 22px;
+  text-indent: -9999px;
+}
+
+.counter-inputs {
+  background: url("../images/brokerage_output.jpg");
+  width: 20px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 2px;
+  font-size: 22px;
+  text-indent: -9999px;
+}
+
+.digit-default {
+  background-position: 0 0 !important;
+}
+
+.digitnone {
+  animation-name: digitspin0;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -300px;
+}
+
+.digit-1 {
+  animation-name: digitspin1;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -30px;
+}
+
+.digit-2 {
+  animation-name: digitspin2;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -60px;
+}
+
+.digit-3 {
+  animation-name: digitspin3;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -90px;
+}
+
+.digit-4 {
+  animation-name: digitspin4;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -120px;
+}
+
+.digit-5 {
+  animation-name: digitspin5;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -150px;
+}
+
+.digit-6 {
+  animation-name: digitspin6;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -180px;
+}
+
+.digit-7 {
+  animation-name: digitspin7;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -210px;
+}
+
+.digit-8 {
+  animation-name: digitspin8;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -240px;
+}
+
+.digit-9 {
+  animation-name: digitspin9;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -270px;
+}
+
+.digit-hyphen {
+  animation-name: digitspinhyphen;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -360px;
+}
+
+.digit-point {
+  animation-name: digitspinpoint;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  background-position: 0 -330px;
+}
+
+@keyframes digitspin1 {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -30px;
+  }
+}
+
+@keyframes digitspin2 {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -60px;
+  }
+}
+
+@keyframes digitspin0 {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -300px;
+  }
+}
+
+@keyframes digitspin3 {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -90px;
+  }
+}
+
+@keyframes digitspin4 {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -120px;
+  }
+}
+
+@keyframes digitspin5 {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -150;
+  }
+}
+
+@keyframes digitspin6 {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -180px;
+  }
+}
+
+@keyframes digitspin7 {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -210px;
+  }
+}
+
+@keyframes digitspin8 {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -240px;
+  }
+}
+
+@keyframes digitspin9 {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -270px;
+  }
+}
+
+@keyframes digitspinhyphen {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -360px;
+  }
+}
+
+@keyframes digitspinpoint {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -330px;
+  }
+}
+
+.icon-rupee {
+  background: url("../images/icon_rupee_bg.jpg");
+  letter-spacing: 0;
+  width: 21px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 4px;
+  font-size: 22px;
+  height: 33px;
+}
+
+.icon-rupee::after {
+  content: "\20B9";
+  padding: 2px 4px;
+  margin-top: 6px;
+  color: #fff;
+}
+
+.brokerage-label,
+.turnover-label,
+.bep-label,
+.profit-label {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.segment-selection .segment-item:hover {
+  background-color: #639;
+}
+
+.qty-input select {
+  min-width: 100px;
+  max-width: 140px;
+  margin: 0 auto;
+  line-height: normal;
+  background: #151515;
+  outline: 0;
+  border: 0;
+  padding: 8px;
+  color: #eee;
+  border-radius: 4px;
+}
+
+.present-brok-tag,
+.total-charges-table,
+.charges-table,
+.section-title {
+  animation-name: fadeindown;
+  animation-duration: 1s;
+}
+
+@keyframes fadeindown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
