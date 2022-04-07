@@ -1,4 +1,4 @@
-import { Charges, InputTypes } from "common/Types";
+import { Category, Charges, InputTypes } from "common/Types";
 import { COMMODITY_CATEGORY, COMMODITY_SELECT_LIST } from "../../../common/Constants";
 import React, { useEffect, useState } from "react";
 import BrokerageOutputs from "../BrokerageOutputsComponent";
@@ -11,7 +11,7 @@ const getCommodityValue = (commodity: string) => {
 };
 
 const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => void;
-    equitiesInput: (arg0: InputTypes) => void; }) => {
+    equitiesInput: (arg0: InputTypes) => void; categorySelected: (arg0: Category) => void; } ) => {
 
     const [
         selectedCategory, setSelectedCategory
@@ -41,6 +41,10 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
         setSelectedCategory(selectedItem);
     };
 
+    const [
+        categorySelected, setCategorySelected
+    ] = useState<any>(selectedCategory);
+
     const calculateBrokerageValues = (qty: number, buyPrc: number, sellPrc: number, comValue: number) => {
         setQuantity(qty);
         setBuyPrice(buyPrc);
@@ -55,6 +59,8 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
             sellPrice:sellPrc,
             type: selectedCategory
         });
+        setCategorySelected(selectedCategory);
+
     };
 
     useEffect(() => {
@@ -131,7 +137,7 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
 
                                         COMMODITY_SELECT_LIST.map((item, idx) => {
                                             return (
-                                                <option key={idx} value= { item.value}>
+                                                <option key={idx} value= { getCommodityValue(item.value)}>
                                                     {item.name}
                                                 </option>
                                             );
@@ -187,7 +193,7 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
                 </div>
                 <>
                     <BrokerageOutputs 
-                        chargesBreakDown = {viewResult as Charges}
+                        chargesBreakDown = {viewResult as Charges} categorySelected = {categorySelected as Category}
                     />
                 </>
             </div>

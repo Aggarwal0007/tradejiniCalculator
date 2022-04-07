@@ -1,4 +1,4 @@
-import { Charges, InputTypes } from "../../../common/Types";
+import { Category, Charges, InputTypes } from "../../../common/Types";
 import React, { useEffect, useState } from "react";
 import BrokerageOutputs from "../BrokerageOutputsComponent";
 import { calculateCurrencyBrokerage } from "components/brokerage/BrokerageCalcUtils";
@@ -7,7 +7,7 @@ import InputText from "components/common/InputTextComponent";
 
 
 const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => void;
-    equitiesInput: (arg0: InputTypes) => void; }) => {
+    equitiesInput: (arg0: InputTypes) => void; categorySelected: (arg0: Category) => void;} ) => {
 
     const [
         selectedCategory, setSelectedCategory
@@ -37,6 +37,9 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
         viewResult, setViewResults
     ] = useState<Charges>();
 
+    const [
+        categorySelected, setCategorySelected
+    ] = useState<any>(selectedCategory);
     
     const calculateBrokerageValues = (qty: number, buyPrc: number, sellPrc: number, strikePrc: number) => {
         setQuantity(qty);
@@ -52,6 +55,7 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
             sellPrice:sellPrc,
             type: selectedCategory
         });
+        setCategorySelected(selectedCategory);
     };
 
     useEffect(() => {
@@ -174,7 +178,7 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
                 </div>
                 <>
                     <BrokerageOutputs
-                        chargesBreakDown = {viewResult as Charges}
+                        chargesBreakDown = {viewResult as Charges} categorySelected = {categorySelected as Category}
                     />
                 </>
             </div>

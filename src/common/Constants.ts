@@ -1,8 +1,12 @@
+import { getSellPrice } from "./Utils";
+
 export const SCREENS = {
     BASE:"/",
     BROKERAGE_CALCULATOR:"/brokerage-calculator",
     MARGIN_CALCULATOR:"/margin-calculator",
-    REFERRAL_CALCULATOR:"/referral-calculator"
+    REFERRAL_CALCULATOR:"/referral-calculator",
+    LOGIN:"/portal/login",
+    CONTACTUS: "/portal/contactus"
 };
 
 export const SEGMENT_LIST = [
@@ -30,20 +34,20 @@ export const COMMODITY_CATEGORY = [
 ];
 
 export const COMMODITY_SELECT_LIST = [
-    { name: "ALUMINIUM", value: "ALUMINIUM-5000" },
-    { name: "COPPER", value: "COPPER-2500" },
-    { name: "CRUDEOIL", value: "CRUDEOIL-100" },
-    { name: "GOLD", value: "GOLD-100" },
-    { name: "GOLDGUINEA", value: "GOLDGUINEA-1" },
-    { name: "GOLDM", value: "GOLDM-10" },
-    { name: "GOLDPETAL", value: "GOLDPETAL-1" },
-    { name: "LEAD", value: "LEAD-5000" },
-    { name: "NATURALGAS", value: "NATURALGAS-1250" },
-    { name: "NICKEL", value: "NICKEL-1500" },
-    { name: "SILVER", value: "SILVER-30" },
-    { name: "SILVERM", value: "SILVERM-5" },
-    { name: "SILVERMIC", value: "SILVERMIC-1" },
-    { name: "ZINC", value: "ZINC-5000" },
+    { name: "ALUMINIUM", value: "ALUMINIUM-5000", buyPrice: 119.6, sellPrice: getSellPrice(119.6) },
+    { name: "COPPER", value: "COPPER-2500", buyPrice: 119.6, sellPrice: getSellPrice(119.6) },
+    { name: "CRUDEOIL", value: "CRUDEOIL-100", buyPrice: 7073, sellPrice: getSellPrice(7073) },
+    { name: "GOLD", value: "GOLD-100", buyPrice: 767.8, sellPrice: getSellPrice(767.8) },
+    { name: "GOLDGUINEA", value: "GOLDGUINEA-1", buyPrice: 468.6, sellPrice: getSellPrice(468.6) },
+    { name: "GOLDM", value: "GOLDM-10", buyPrice: 468.6, sellPrice: getSellPrice(468.6) },
+    { name: "GOLDPETAL", value: "GOLDPETAL-1", buyPrice: 22730, sellPrice: getSellPrice(22730) },
+    { name: "LEAD", value: "LEAD-5000", buyPrice: 531.9, sellPrice: getSellPrice(531.9) },
+    { name: "NATURALGAS", value: "NATURALGAS-1250", buyPrice: 6822, sellPrice: getSellPrice(6822) },
+    { name: "NICKEL", value: "NICKEL-1500", buyPrice: 6822, sellPrice: getSellPrice(6822) },
+    { name: "SILVER", value: "SILVER-30", buyPrice: 31165, sellPrice: getSellPrice(31165) },
+    { name: "SILVERM", value: "SILVERM-5", buyPrice: 25374, sellPrice: getSellPrice(25374) },
+    { name: "SILVERMIC", value: "SILVERMIC-1", buyPrice: 31585, sellPrice: getSellPrice(31585) },
+    { name: "ZINC", value: "ZINC-5000", buyPrice: 3160, sellPrice: getSellPrice(3160) },
 ];
 
 export const CHARGE_LIST: Record<string, any> = {
@@ -103,4 +107,14 @@ export const CHARGE_LIST: Record<string, any> = {
         { name: "GST", value: "18% on Brokerage & Transaction Charges" },
         { name: "Stamp duty(w.e.f 01st Jul 2020)", value: "0.002% on Buyer - Rs.200 per Cr" },
     ],
+};
+
+export const IMAGES = {
+    LOGO:"assets/login_logo.png",
+    USER_ICON:"assets/user_icon.png",
+};
+
+export const WINDOW_STORAGE = {
+    USER_NAME:"USER_NAME",
+    LOGIN_STATUS: "LOGIN_STATUS"
 };

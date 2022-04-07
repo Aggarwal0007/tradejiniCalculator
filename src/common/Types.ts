@@ -36,3 +36,7 @@ export interface ChargesItem {
     name: string,
     value: string
 }
+
+export interface Category {
+    categorySelection: string
+} 

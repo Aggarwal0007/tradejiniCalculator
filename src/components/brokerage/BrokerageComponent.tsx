@@ -1,4 +1,4 @@
-import { Charges, InputTypes } from "../../common/Types";
+import { Category, Charges, InputTypes } from "../../common/Types";
 import React, { useEffect, useState } from "react";
 import { SEGMENT_LIST, SEGMENT_TITLE } from "../../common/Constants";
 import { brokerageURL } from "../../communicator/ServiceUrls";
@@ -51,6 +51,10 @@ function BrokerageCalculator() {
     ] = useState<Charges>();
 
     const [
+        categorySelected, setCategorySelected
+    ] = useState<Category>();
+
+    const [
         showTable, setShowTable
     ] = useState(0);
 
@@ -78,9 +82,14 @@ function BrokerageCalculator() {
         setEquitesInput(equitesIp);
     };
     
+    const getCategorySelected = (category: Category) => {
+        setCategorySelected(category);
+    };
+
     const brokerageProps = {
         inputKeys: equititesInputs as InputTypes,
-        chargesList: allCharges as Charges
+        chargesList: allCharges as Charges,
+        categorySelected: categorySelected as Category
     };
 
     return (
@@ -120,19 +129,21 @@ function BrokerageCalculator() {
                                 <EquitesCalculator 
                                     parentCBAllCharges={getCharges}
                                     equitiesInput = {getEquitesInput}
+                                    categorySelected = {getCategorySelected}
                                 /> :
                                 isConfigData && selectedSegment && selectedSegment === 
                                 SEGMENT_LIST[ 1 ].name ?
                                     <CurrenciesCalculator 
                                         parentCBAllCharges={getCharges}
                                         equitiesInput = {getEquitesInput}
+                                        categorySelected = {getCategorySelected}
                                     /> :
                                     isConfigData && selectedSegment && selectedSegment === 
                                     SEGMENT_LIST[ 2 ].name ?
                                         <CommoditiesCalculator 
                                             parentCBAllCharges={getCharges}
                                             equitiesInput = {getEquitesInput}
-
+                                            categorySelected = {getCategorySelected}
                                         /> :
                                         null
                         }

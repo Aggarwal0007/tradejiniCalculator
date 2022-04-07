@@ -6,6 +6,7 @@
   margin-right: 2px;
   font-size: 22px;
   text-indent: -9999px;
+  margin-bottom: 10px;
 }
 
 .counter-inputs {
@@ -16,6 +17,7 @@
   margin-right: 2px;
   font-size: 22px;
   text-indent: -9999px;
+  margin-bottom: 5px;
 }
 
 .digit-default {
@@ -229,10 +231,9 @@
 .icon-rupee {
   background: url("../images/icon_rupee_bg.jpg");
   letter-spacing: 0;
-  width: 21px;
   display: inline-block;
   text-align: center;
-  margin-right: 4px;
+  margin-right: 2px;
   font-size: 22px;
   height: 33px;
 }
@@ -250,6 +251,7 @@
 .profit-label {
   font-size: 18px;
   font-weight: 400;
+  width: 40%;
 }
 
 .segment-selection .segment-item:hover {
@@ -277,6 +279,16 @@
   animation-duration: 1s;
 }
 
+.brokerage-input-section {
+  width: 100%;
+}
+
+.details-output {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @keyframes fadeindown {
   0% {
     opacity: 0;
@@ -286,5 +298,20 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .brokerage-label,
+  .turnover-label,
+  .bep-label,
+  .profit-label,
+  .output-bg {
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .top-output-container {
+    display: block !important;
   }
 }

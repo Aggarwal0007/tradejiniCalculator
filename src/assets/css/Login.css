@@ -1,0 +1,29 @@
+.login-content {
+  justify-content: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-logo {
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.login-btn {
+  color: white !important;
+}
+
+.login-btn:hover {
+  background-color: #00cd97 !important;
+}
+
+/* .userText:focus .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border: 1px solid #00cd97 !important;
+} */
+
+.MuiTextField-root {
+  border: 0 !important;
+}

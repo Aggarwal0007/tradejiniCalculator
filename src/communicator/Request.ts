@@ -1,6 +1,7 @@
 export type echoType = null | string | number
 export type methodType = "POST" | "GET" | "PUT"
 
+
 class ServiceRequest {
     private reqData: Record<string, any>;
 

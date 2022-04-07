@@ -128,33 +128,18 @@
 
 .top-output-container .input-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 5px;
-  font-size: 15px;
-  flex-wrap: wrap;
-  min-width: 280px;
-  padding: 15px;
 }
 
 .top-output-container {
-  width: 100%;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.brokerage-label::after,
-.profit-label::after {
-  content: "(\20B9)";
-  padding-left: 5px;
+  padding-left: 20%;
 }
 
 .output-bg {
   /* background: #000; */
   padding: 5px 10px;
   border-radius: 5px;
+  width: 100%;
 }
 
 .actions-calc {

@@ -1,9 +1,9 @@
+import { Category, Charges } from "../../common/Types";
 import React, { useEffect, useState } from "react";
-import { Charges } from "../../common/Types";
 
-const BrokerageOutputs = (props: { chargesBreakDown: Charges; }) => {
+const BrokerageOutputs = (props: { chargesBreakDown: Charges; categorySelected: Category }) => {
 
-    const { chargesBreakDown } = props;
+    const { chargesBreakDown, categorySelected } = props;
 
     const [
         turnoverArr, setTurnoverArr
@@ -37,37 +37,21 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; }) => {
         profit, setProfit
     ] = useState<string | number>(1010);
 
-    const decimal = (item: any, field: string) => {
-        if (item.toString().includes(".")) {
-            switch (field) {
-                case "turnover":
-                    setTurnover(Number(item).toFixed(2));
-                    break;
-
-                case "brokerage":
-                    setBrokerageValue(Number(item).toFixed(2));
-                    break;
-                
-                case "bep":
-                    setBEP(Number(item).toFixed(2));
-                    break;
-
-                case "profit":
-                    setProfit(Number(item).toFixed(2));
-                    break;
-                default:
-                    break;
-            }
-        }      
-    };
 
     useEffect(() => {
         if (chargesBreakDown && chargesBreakDown.brokerage) {
-            setBrokerageValue(chargesBreakDown.brokerage);
-            setBEP(chargesBreakDown.pointBreakeven);
-            setProfit(chargesBreakDown.netProfit);
-            setTurnover(chargesBreakDown.turnOver);
-            console.log(chargesBreakDown);
+            if (categorySelected.toString() !== "CURRENCY_FUTURES" &&
+             categorySelected.toString() !== "CURRENCY_OPTIONS") {
+                setBrokerageValue(chargesBreakDown.brokerage.toFixed(2));
+                setBEP(chargesBreakDown.pointBreakeven.toFixed(2));
+                setProfit(chargesBreakDown.netProfit.toFixed(2));
+                setTurnover(chargesBreakDown.turnOver.toFixed(2));
+            } else {
+                setBrokerageValue(chargesBreakDown.brokerage.toFixed(4));
+                setBEP(chargesBreakDown.pointBreakeven.toFixed(4));
+                setProfit(chargesBreakDown.netProfit.toFixed(4));
+                setTurnover(chargesBreakDown.turnOver.toFixed(4));
+            }
         } else {
             setTurnover("0");
             setBrokerageValue("0");
@@ -85,28 +69,22 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; }) => {
     ]);
 
     useEffect(() => {
-        decimal(turnover, "turnoverVal");
         const arr = [
-
         ];
         for (let val: any = 0; val <= turnover.toString().length; val++) {
             arr.push(turnover.toString()[ val ]);
         }
-        decimal(Number(arr), "turnover");
         setTurnoverArr(arr);
     }, [
         turnover
     ]);
 
     useEffect(() => {
-        decimal(brokerageValue, "brokerage");
         const arr = [
-
         ];
         for (let val: any = 0; val <= brokerageValue.toString().length; val++) {
             arr.push(brokerageValue.toString()[ val ]);
         }
-        decimal(Number(arr), "brokerage");
         setBrokerageArr(arr);
     }, [
         brokerageValue
@@ -114,12 +92,10 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; }) => {
 
     useEffect(() => {
         const arr = [
-
         ];
         for (let val: any = 0; val <= bep.toString().length; val++) {
             arr.push(bep.toString()[ val ]);
         }
-        decimal(Number(arr), "bep");
         setBepArr(arr);
     }, [
         bep
@@ -127,12 +103,10 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; }) => {
 
     useEffect(() => {
         const arr = [
-
         ];
         for (let val: any = 0; val <= profit.toString().length; val++) {
             arr.push(profit.toString()[ val ]);
         }
-        decimal(Number(arr), "profit");
         setProfitArr(arr);
     }, [
         profit
@@ -174,37 +148,22 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; }) => {
 
     return (
         <div className="details-output">
-            <div className="top-output-container">
-                <div className="brokerage-input-section input-container">
-                    <div className="brokerage-label">Brokerage</div>
-                    <div className="brokerage-input output-bg" id="value-0">
-                        <span className="icon-rupee"></span>
-                        {brokerageArr && brokerageArr.map((item: any, key: number) => {
-                            return (
-                                <span className="field-inputs" id={item} key={key}>
-                                    {item}
-                                </span>
-                            );
-                        })}              
-                    </div>
-                </div>
-                <div className="turnover-input-section input-container">
-                    <div className="turnover-label">Turnover</div>
-                    <div className="output-bg" id="turnover-digit-0">
-                        {turnoverArr && turnoverArr.map((item: any, key: number) => {
-                            return (
-                                <span className="field-inputs" id={item} key={key}>
-                                    {item}
-                                </span>
-                            );
-                        })}
-                    </div>
+            <div className="brokerage-input-section input-container top-output-container">
+                <div className="brokerage-label">Brokerage</div>
+                <div className="brokerage-input output-bg" id="value-0">
+                    <span className="icon-rupee"></span>
+                    {brokerageArr && brokerageArr.map((item: any, key: number) => {
+                        return (
+                            <span className="field-inputs" id={item} key={key}>
+                                {item}
+                            </span>
+                        );
+                    })}              
                 </div>
             </div>
-
-            <div className="top-output-container">
-                <div className="bep-input-section input-container">
-                    <div className="bep-label">BEP</div>
+            <div className="bep-input-section input-container top-output-container">
+                <div className="bep-label">BEP</div>
+                <div className="brokerage-input-section">
                     <div className="bep-input output-bg">
                         {bepArr && bepArr.map((item: any, key: number) => {
                             return (
@@ -215,21 +174,33 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; }) => {
                         })}
                     </div>
                 </div>
-                <div className="profit-input-section input-container">
-                    <div className="profit-label">Profit</div>
-                    <div className="profit-input output-bg">
-                        <span className="icon-rupee"></span>
-                        {profitArr && profitArr.map((item: any, key: number) => {
-                            return (
-                                <span className="field-inputs" id={item} key={key}>
-                                    {item}
-                                </span>
-                            );
-                        })}
-                    </div>
+            </div>
+            <div className="turnover-input-section input-container top-output-container">
+                <div className="turnover-label">Turnover</div>
+                <div className="output-bg" id="turnover-digit-0">
+                    {turnoverArr && turnoverArr.map((item: any, key: number) => {
+                        return (
+                            <span className="field-inputs" id={item} key={key}>
+                                {item}
+                            </span>
+                        );
+                    })}
                 </div>
             </div>
 
+            <div className="profit-input-section input-container top-output-container">
+                <div className="profit-label">Profit</div>
+                <div className="profit-input output-bg">
+                    <span className="icon-rupee"></span>
+                    {profitArr && profitArr.map((item: any, key: number) => {
+                        return (
+                            <span className="field-inputs" id={item} key={key}>
+                                {item}
+                            </span>
+                        );
+                    })}
+                </div>
+            </div>
         </div>
     );
 };
