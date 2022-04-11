@@ -40,3 +40,18 @@ export interface ChargesItem {
 export interface Category {
     categorySelection: string
 } 
+
+export interface appSetingsType {
+    publicURL: string,
+    baseURL: string,
+    appVersion: string,
+    serviceURL: string,
+    apiEncryptionEnabled: boolean,
+    localStorageEncryptionEnabled: boolean
+}
+
+export interface ErrorType {
+    name: string;
+    message: string;
+    stack?: string;
+}

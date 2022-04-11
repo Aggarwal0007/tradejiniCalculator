@@ -1,11 +1,11 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { IMAGES, SCREENS } from "../../common/Constants";
 import React, { useState } from "react";
-import { getFullURL } from "common/AppSettings";
-import { loginURL } from "communicator/ServiceUrls";
-import ServiceRequest from "communicator/Request";
+
+import { ServiceRequest, useFetch } from "index";
+
+import { AUTH } from "communicator/ServiceUrls";
 import { storeLoginDetails } from "common/Bridge";
-import useFetch from "communicator/UseFetch";
 import { useNavigate } from "react-router-dom";
 
 const PortalLogin = () => {
@@ -55,7 +55,7 @@ const PortalLogin = () => {
         };
         const request = new ServiceRequest();
         request.addData(credentials);
-        fetchAPI.placePOSTRequest(getFullURL(loginURL), request, successCB, errorCB );
+        fetchAPI.placePOSTRequest(AUTH.PORTAL_LOGIN, request, successCB, errorCB );
     };
 
     return (

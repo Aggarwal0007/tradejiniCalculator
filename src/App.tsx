@@ -8,8 +8,19 @@ import MarginCalculator from "./components/margin/MarginComponent";
 import PortalLogin from "./components/portal/PortalLoginComponent";
 import ReferralCalculator from "./components/referral/ReferralComponent";
 import { SCREENS } from "./common/Constants";
+import { ServiceConfig } from "index";
 import { useConfigStore } from "state/AppConfigReducer";
 import { useSelector } from "react-redux";
+
+
+const ApiCommunicator = () => {
+    console.log("ApiCommunicator init");
+    ServiceConfig.setServiceURL(AppSettings.serviceURL);
+    ServiceConfig.setApiEncryptionEnabled(AppSettings.apiEncryptionEnabled);
+    ServiceConfig.setStorageEncryptionEnabled(AppSettings.localStorageEncryptionEnabled);
+    
+    return <></>;
+};
 
 function App() {
 
@@ -23,6 +34,7 @@ function App() {
 
     return (
         <div className="app">
+            <ApiCommunicator />
             <HashRouter basename={AppSettings.baseURL}>
                 <Routes>
                     <Route path={SCREENS.BROKERAGE_CALCULATOR} element={<BrokerageCalculator />} />

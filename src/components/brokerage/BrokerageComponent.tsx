@@ -1,16 +1,17 @@
-import { Category, Charges, InputTypes } from "../../common/Types";
+import { Category, Charges, ErrorType, InputTypes } from "../../common/Types";
 import React, { useEffect, useState } from "react";
 import { SEGMENT_LIST, SEGMENT_TITLE } from "../../common/Constants";
-import { brokerageURL } from "../../communicator/ServiceUrls";
+import { ServiceRequest, useFetch } from "index";
+
 import CommoditiesCalculator from "./commodities/CommoditiesComponent";
+import { CONFIG } from "../../communicator/ServiceUrls";
+
 import { configDetails } from "../../common/Dataconfig";
 import CurrenciesCalculator from "./currencies/CurrenciesCalculator";
 import EquitesCalculator from "./equites/EquitesCalculator";
-import { getFullURL } from "../../common/AppSettings";
 import KnowBrokerageSavings from "./KnowBrokerageSavingsComponent";
 import SeeAllCharges from "./SeeAllChargesComponent";
-import ServiceRequest from "../../communicator/Request";
-import useFetch from "../../communicator/UseFetch";
+
 
 function BrokerageCalculator() {
 
@@ -27,14 +28,14 @@ function BrokerageCalculator() {
         setIsConfigData(true);
     };
 
-    const errorCB = (error: string) => {
+    const errorCB = (error: ErrorType) => {
         console.log("configError", error);
     };
 
     const fetchBrokerageConfigDetails = () => {
         const request = new ServiceRequest();
         request.addData({});
-        fetchAPI.placeGETRequest(getFullURL(brokerageURL), request, successCB, errorCB );
+        fetchAPI.placeGETRequest(CONFIG.BROKERAGE_CONFIG, request, successCB, errorCB );
     };
 
     useEffect(() => {

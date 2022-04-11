@@ -2,17 +2,17 @@ import { Box, Button, FormControl, FormControlLabel, Grid, MenuItem, Modal,
     Popover, Select, SelectChangeEvent, styled, Switch, Typography } from "@mui/material";
 import { IMAGES, SCREENS, THEME } from "../../common/Constants";
 import React, { useState } from "react";
+
+import { ServiceRequest, useFetch } from "index";
+
 import { updateLanguage, updateTheme, useConfigStore } from "state/AppConfigReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import AppText from "common/Text";
+import { AUTH } from "communicator/ServiceUrls";
 import ContactusTable from "./ContactusTable";
-import { getFullURL } from "common/AppSettings";
 import { handleLogout } from "common/Bridge";
 import { languageOptions } from "common/language";
-import { logoutURL } from "communicator/ServiceUrls";
-import ServiceRequest from "communicator/Request";
-import useFetch from "communicator/UseFetch";
 
 const Contactus = () => {
     const fetchAPI = useFetch();
@@ -84,7 +84,7 @@ const Contactus = () => {
 
     const confirmLogout =() => {
         const request = new ServiceRequest();
-        fetchAPI.placeGETRequest(getFullURL(logoutURL), request, successCB, errorCB );
+        fetchAPI.placeGETRequest(AUTH.PORTAL_LOGOUT, request, successCB, errorCB );
         setOpenModal(!openModal);   
     };
     
