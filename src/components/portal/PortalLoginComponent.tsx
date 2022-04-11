@@ -60,7 +60,7 @@ const PortalLogin = () => {
 
     return (
         <>
-            <div className="login-content">  
+            <div className="login-content" id="login-body">  
                 <img src={IMAGES.LOGO} className="app-logo" />
                 <Container component="main" maxWidth="xs">
                     <Typography component="h1" variant="h5" align="center">

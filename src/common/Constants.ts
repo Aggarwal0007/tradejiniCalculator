@@ -116,5 +116,13 @@ export const IMAGES = {
 
 export const WINDOW_STORAGE = {
     USER_NAME:"USER_NAME",
-    LOGIN_STATUS: "LOGIN_STATUS"
+    LOGIN_STATUS: "LOGIN_STATUS",
+    APP_LANG: "APP_LANG",
+    APP_THEME: "APP_THEME",
+
+};
+
+export const THEME = {
+    LIGHT: "light",
+    DARK: "dark"
 };

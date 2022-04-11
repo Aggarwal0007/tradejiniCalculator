@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import LoginReducer from "./LoginReducer";
+import appConfigReducer from "./AppConfigReducer";
+import loginReducer from "./LoginReducer";
 
 const combinedReducer = combineReducers({
-    LoginReducer
+    loginReducer,
+    appConfigReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
@@ -13,3 +15,6 @@ const store = configureStore({
     reducer: rootReducer,
 });
 export default store;
+
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>

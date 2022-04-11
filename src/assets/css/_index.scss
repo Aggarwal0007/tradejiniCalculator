@@ -1,0 +1,14 @@
+@import "./color_dark";
+@import "./color_light";
+@import "./color_var";
+@import "./contactus_table";
+@import "./login";
+@import "./brokerage_output";
+@import "./contactus";
+@import "./referral";
+
+body #login-body,
+body #dashboard-body {
+  background: $appBg !important;
+  background-attachment: fixed;
+}

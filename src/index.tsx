@@ -1,3 +1,4 @@
+import "./assets/css/_index.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import "../src/assets/css/Global.css";
 import * as storage from "services/Storage";

@@ -24,4 +24,8 @@ export const loginSlice = createSlice({
 
 export const { storeLoginStatus } = loginSlice.actions;
 
+export const useLoginStore = (state: { loginReducer: LoginProps }) => {
+    return state.loginReducer;
+};
+
 export default loginSlice.reducer;

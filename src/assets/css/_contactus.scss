@@ -42,3 +42,12 @@
   height: 80px;
   max-height: 80px;
 }
+
+.lang-select legend {
+  width: 0 !important;
+}
+
+.lang-select .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 5px 14px !important;
+  padding-right: 32px !important;
+}

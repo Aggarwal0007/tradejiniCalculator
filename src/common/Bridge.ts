@@ -20,7 +20,7 @@ export const storeLoginDetails = (userDetails: UserDetailsPropType) => {
 export const getSession = () => {
     const state = store.getState();
     
-    if (!state.LoginReducer.loginSatus) {
+    if (!state.loginReducer.loginSatus) {
         const loginStatus = !!storage.getFromSessionStorage(WINDOW_STORAGE.LOGIN_STATUS);
         
         if (loginStatus)
@@ -29,7 +29,7 @@ export const getSession = () => {
         return loginStatus;
     }
 
-    return state.LoginReducer.loginSatus;
+    return state.loginReducer.loginSatus;
 };
 
 export const clearClientData = () => {

@@ -7,8 +7,17 @@ const getFromSessionStorage = (key: string) => {
     return value ? JSON.parse(value) : value;
 };
 
+const storeToLocalStorage = (key: string, value: any) => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+};
+
+const getFromLocalStorage = (key: string) => {
+    const value = window.localStorage.getItem(key);
+    return value ? JSON.parse(value) : value;
+};
+
 const clearSessionStorage = () => {
     window.sessionStorage.clear();
 };
 
-export { storeToSessionStorage, getFromSessionStorage, clearSessionStorage } ;
+export { storeToSessionStorage, getFromSessionStorage, storeToLocalStorage, getFromLocalStorage, clearSessionStorage } ;
