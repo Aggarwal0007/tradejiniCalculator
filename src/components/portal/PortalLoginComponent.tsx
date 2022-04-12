@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 import { ServiceRequest, useFetch } from "index";
 
+import AppText from "common/Text";
 import { AUTH } from "communicator/ServiceUrls";
 import { storeLoginDetails } from "common/Bridge";
 import { useNavigate } from "react-router-dom";
@@ -88,7 +89,7 @@ const PortalLogin = () => {
                             type="password"
                         />
                         <Button type="submit" className="login-btn"
-                            sx={{ mt:3, backgroundColor: "#00cd97" }} fullWidth>Login</Button>
+                            sx={{ mt:3, backgroundColor: "#00cd97" }} fullWidth><AppText textName="LOGIN" /></Button>
                     </Box>
                 </Container>
             </div> 

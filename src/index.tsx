@@ -1,7 +1,6 @@
 
 import "./assets/css/_index.scss";
 import "bootstrap/dist/css/bootstrap.css";
-import "../src/assets/css/Global.css";
 // import * as storage from "services/Storage";
 import { ServiceConfig, ServiceRequest, storage, useFetch } from "@iouring/reactjs-lib";
 import App from "./App";

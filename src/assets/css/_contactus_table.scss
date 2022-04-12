@@ -3,3 +3,60 @@
   display: flex;
   flex-direction: column;
 }
+
+.contactusTable-btns button,
+.contactsTable-head th {
+ background-color: #00cd97;
+ color: white;
+ border: none;
+ font-size: 14px !important;
+ padding: 5px 30px !important;
+ text-transform: capitalize !important;
+}
+
+.contactus-table button:hover {
+  background-color: #00cd97;
+}
+
+.remarks-field legend,
+.assignto-field legend {
+  display: none !important;
+  font-size: 14px !important;
+}
+
+.assignto-field .css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input,
+.remarks-field .css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input{
+  font-size: 14px !important;
+  padding: 5px 30px !important;
+}
+
+.update-btn,
+.delete-btn {
+  height: auto !important;
+  font-size: 12px !important;
+  text-transform: capitalize !important;
+  color: white !important;
+}
+
+.delete-btn {
+  background-color: #f44336 !important;
+}
+
+.update-btn {
+  background-color: #008CBA !important;
+}
+
+.deletion-animation {
+  animation-name: FadeIn;
+  animation-duration: 3s;
+  transition-timing-function: linear;
+}
+
+@keyframes FadeIn {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(1500px);
+  }
+}

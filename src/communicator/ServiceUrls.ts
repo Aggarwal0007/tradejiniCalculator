@@ -8,8 +8,8 @@ export const AUTH = {
 };
 
 export const CONTACT_US = {
-    GET_CONTACTS: "",
-    DELETE_CONTACTS:"",
+    GET_CONTACTS: "contact/get/",
+    DELETE_CONTACTS:"contact/delete/",
     INSERT_CONTACTS:"",
     UPDATE_CONTACTS:""
     
