@@ -6,12 +6,12 @@
 
 .contactusTable-btns button,
 .contactsTable-head th {
- background-color: #00cd97;
- color: white;
- border: none;
- font-size: 14px !important;
- padding: 5px 30px !important;
- text-transform: capitalize !important;
+  background-color: #00cd97;
+  color: white;
+  border: none;
+  font-size: 14px !important;
+  padding: 5px 30px !important;
+  text-transform: capitalize !important;
 }
 
 .contactus-table button:hover {
@@ -25,7 +25,7 @@
 }
 
 .assignto-field .css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input,
-.remarks-field .css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input{
+.remarks-field .css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input {
   font-size: 14px !important;
   padding: 5px 30px !important;
 }
@@ -43,19 +43,20 @@
 }
 
 .update-btn {
-  background-color: #008CBA !important;
+  background-color: #008cba !important;
 }
 
 .deletion-animation {
-  animation-name: FadeIn;
+  animation-name: fadein;
   animation-duration: 3s;
   transition-timing-function: linear;
 }
 
-@keyframes FadeIn {
+@keyframes fadein {
   0% {
-    transform: translateX(0px);
+    transform: translateX(0);
   }
+
   100% {
     transform: translateX(1500px);
   }
