@@ -11,8 +11,7 @@ export const CONTACT_US = {
     GET_CONTACTS: "contact/get/",
     DELETE_CONTACTS:"contact/delete/",
     INSERT_CONTACTS:"",
-    UPDATE_CONTACTS:""
-    
+    UPDATE_CONTACTS:"contact/update/"   
 };
 
 export const LEADFORM = {

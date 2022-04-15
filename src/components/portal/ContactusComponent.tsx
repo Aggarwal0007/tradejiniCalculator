@@ -1,13 +1,14 @@
 import { Box, Button, FormControl, FormControlLabel, Grid, MenuItem, Modal, 
     Popover, Select, SelectChangeEvent, styled, Switch, Typography } from "@mui/material";
 import { IMAGES, SCREENS, THEME } from "../../common/Constants";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+
 import React, { useState } from "react";
 
 import { ServiceRequest, useFetch } from "index";
 
 import { updateLanguage, updateTheme, useConfigStore } from "state/AppConfigReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
 import AppText from "common/Text";
 import { AUTH } from "communicator/ServiceUrls";
 import ContactusTable from "./ContactusTable";
@@ -157,10 +158,18 @@ const Contactus = () => {
     return (
         <>
             <Grid container spacing={2} className="dashboard-header">
-                <Grid item xs={6} lg={9} md={9}>
+                <Grid item xs={6} lg={2} md={2}>
                     <img src={IMAGES.LOGO} className="dashboard-logo" />
                 </Grid>
-                <Grid item xs={6} lg={3} md={3}>
+                <Grid item xs={2} lg={8} md={8} className="nav-items" sx={{ display:"inline-flex" }}>
+                    <NavLink className="nav-link"
+                        to={SCREENS.CONTACTUS}
+                    >Contact us</NavLink>
+                    <NavLink className="nav-link"
+                        to={SCREENS.LOGIN}
+                    >Lead Report</NavLink>
+                </Grid>
+                <Grid item xs={2} lg={2} md={2}>
                     <Box sx={{ m: 1, textAlign: "right" }}>
                         <Button aria-describedby={ids} variant="text" onClick={handleClick}>
                             <img src={IMAGES.USER_ICON} className="user-icon"/>

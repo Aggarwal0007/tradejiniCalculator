@@ -9,11 +9,11 @@ import { CONTACT_US } from "communicator/ServiceUrls";
 
 const ContactusTable = () => {
     const fetchAPI = useFetch();
-    const request = new ServiceRequest();
 
     const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
     type contentType ={
+        status:number,
         id:number,
         name:string,
         phone:string,
@@ -31,20 +31,14 @@ const ContactusTable = () => {
 
     const [
         idSelecetd, setIdSeleceted
-    ] = useState<number | string>( );
+    ] = useState([
+    ] as any);
 
     const [
         content, setContent
-    ] = useState<any>([
-    ]);
+    ] = useState([
+    ] as any);
 
-    // const handleClose = () => {
-    //     setAnchorEl(null);
-    // };
-
-    // const [
-    //     openDiv, setOpenDiv
-    // ] = useState<boolean>(anchorEl);
     const style = {
         position: "absolute" as "absolute",
         top: "50%",
@@ -60,7 +54,6 @@ const ContactusTable = () => {
     ] = useState<boolean>(false);
 
     const successCB = (response: { d: []; }) => {
-        console.log(response.d);
         setContent(response.d);
     };
 
@@ -69,6 +62,18 @@ const ContactusTable = () => {
     };
 
     const getData=() => {
+        const request = new ServiceRequest();
+        if (value[ 0 ] && value[ 1 ] !==null) {
+            const month =Number(value[ 0 ]?.getMonth())+1;
+            const fromDate = (`${value[ 0 ]?.getFullYear()}-0${month}-0${value[ 0 ]?.getDate()}`);
+            const month1 =Number(value[ 1 ]?.getMonth())+1;
+            const toDate = (`${value[ 1 ]?.getFullYear()}-0${month1}-0${value[ 1 ]?.getDate()}`);
+            const credentials = {
+                startDate: fromDate,
+                endDate: toDate
+            };
+            request.addData(credentials);
+        }
         fetchAPI.placeGETRequest(CONTACT_US.GET_CONTACTS, request, successCB, errorCB );
     };
       
@@ -76,6 +81,29 @@ const ContactusTable = () => {
         getData();
     }, [
     ]);
+
+    const onChangeAssignto = (inx:number, evt: string) => {
+        content[ inx ].assignto=evt;
+        setContent([
+            ...content
+        ]);
+        
+    };
+
+    const onChangeRemarks = (idVal:number, evt: string) => {
+        content[ idVal ].remarks=evt;
+        setContent([
+            ...content
+        ]);
+    };
+
+    const successUpdate=() => {
+        getData();
+    };
+    
+    const errorUpdate=() => {
+        console.log("error");
+    };
 
     const successDelete=() => {
         getData();
@@ -95,27 +123,63 @@ const ContactusTable = () => {
     };
 
     const confirmDelete =() => {
+        if (idSelecetd) {
+            document.getElementById(idSelecetd.toString())?.classList.add("deletion-animation");
+        }
+        const request = new ServiceRequest();
         request.addData(
-            { idList:JSON.stringify([
+            { idList:JSON.stringify(
                 idSelecetd
-            ]) }
+            ) }
         );
         fetchAPI.placePOSTRequest(CONTACT_US.DELETE_CONTACTS, request, successDelete, errorDelete );
         setOpenModal(!openModal);
-        console.log(idSelecetd);
-        const abc=idSelecetd;
-        if (abc)
-            document.getElementById(abc.toString())?.classList.add("deletion-animation");
+
     };
 
     const deleteContent =(ids:number) => {
-        setIdSeleceted(ids);
+        setIdSeleceted([
+            ids
+        ]);
+        setOpenModal(!openModal);
+    };
+
+    const updateContent = (selectedId:number, inx:number) => {
+        const request = new ServiceRequest();
+        const credentials = {
+            id: selectedId,
+            remarks: content[ inx ].remarks?content[ inx ].remarks:"",
+            assignTo: content [ inx ].assignto?content [ inx ].assignto:""
+        };
+        request.addData(credentials);
+        fetchAPI.placePOSTRequest(CONTACT_US.UPDATE_CONTACTS, request, successUpdate, errorUpdate );
+    };
+
+    const selecetdRow=(inx:number) => {
+        content[ inx ].status=content[ inx ].status===0?1:0;
+        setContent([
+            ...content
+        ]);
+    };
+
+    const deleteAll =() => {
+        const allId = [
+        ] as any;
+
+        const all = content.filter((item:contentType) => {
+            if (item.status===1) 
+                return item;
+            return null;
+        });
+        for (let val=0;val<all.length;val++) {
+            allId.push(all[ val ].id);
+        }
+        setIdSeleceted(allId);
         setOpenModal(!openModal);
     };
 
     return (
         <>
-          
             <div className="contactus-table" id="login-body">  
                 <Grid sx={{ display:{ xs: "grid", md: "grid", lg: "inline-flex" }, 
                     justifyContent:{ xs:"space-around", lg:"space-between" } }}>
@@ -129,15 +193,20 @@ const ContactusTable = () => {
                             startText="From"
                             endText="To"
                             value={value}
+                            className="date-field"
                             onChange={(newValue) => {
                                 setValue(newValue);
                             }}
                             renderInput={(startProps, endProps) => {
                                 return (
                                     <React.Fragment>
-                                        <TextField {...startProps} size="small" sx={{ width:"50%", m:2 }}/>
+                                        <TextField {...startProps} size="small"
+                                            sx={{ width:"50%", m:2 }}/>
                                         <Box sx={{ mx: 2 }}> to </Box>
-                                        <TextField {...endProps} size="small" sx={{ width:"50%", m:2 }}/>
+                                        <TextField {...endProps} size="small" 
+                                            sx={{ width:"50%", m:2 }}/>
+                                        <Button sx={{ backgroundColor:"#00cd97", color:"white",
+                                            textTransform:"capitalize", mr:3 }} onClick={getData}>update</Button>
                                     </React.Fragment>
                                 ); 
                             }}
@@ -149,14 +218,28 @@ const ContactusTable = () => {
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead className="contactsTable-head">
                                 <TableRow>
-                                    <TableCell>Status</TableCell>
-                                    <TableCell align="right">Name</TableCell>
-                                    <TableCell align="right">Phone No</TableCell>
-                                    <TableCell align="right">Email id</TableCell>
-                                    <TableCell align="right">Subject</TableCell>
-                                    <TableCell align="right">Assign to</TableCell>
-                                    <TableCell align="right">Remarks</TableCell>
-                                    <TableCell align="right">Actions</TableCell>
+                                    <TableCell><AppText textModule="HEADER" textName="STATUS"/></TableCell>
+                                    <TableCell align="right">
+                                        <AppText textModule="HEADER" textName="NAME"/>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <AppText textModule="HEADER" textName="PHONE_NO"/>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <AppText textModule="HEADER" textName="EMAIL_ID"/>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <AppText textModule="HEADER" textName="SUBJECT"/>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <AppText textModule="HEADER" textName="ASSIGN_TO"/>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <AppText textModule="HEADER" textName="REMARKS"/>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <AppText textModule="HEADER" textName="ACTIONS"/>
+                                    </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -168,7 +251,10 @@ const ContactusTable = () => {
                                             id={row.id.toString()}
                                         >
                                             <TableCell component="th" scope="row">
-                                                <Checkbox {...label} />
+                                                <Checkbox {...label}
+                                                    onClick={() => {
+                                                        return selecetdRow(index); 
+                                                    }} checked={ row.status===0?!true:true} />
                                             </TableCell>
                                             <TableCell align="right">{row.name}</TableCell>
                                             <TableCell align="right">{row.phone}</TableCell>
@@ -181,26 +267,34 @@ const ContactusTable = () => {
                                                 value={row.assignto}
                                                 sx={{ width:"100px" }}
                                                 size="small"
-                                            // onChange={onChangeAssignto}
+                                                onChange={(evt) => {
+                                                    return onChangeAssignto(index, evt.target.value); 
+                                                }}
                                             /></TableCell>
                                             <TableCell align="right">
                                                 <TextField
                                                     className="remarks-field"
                                                     margin="normal"
-                                                    name="assignto"
-                                                    value={row.remarks}
+                                                    name="remarks"
+                                                    defaultValue={row.remarks}
                                                     fullWidth
                                                     size="small"
-                                                    // onChange={onChangeUser}
+                                                    onChange={(evt) => {
+                                                        return onChangeRemarks(index, evt.target.value); 
+                                                    }}
                                                 />
                                             </TableCell>
                                             <TableCell align="right">
                                                 <Button className="update-btn" 
-                                                    size="small" sx={{ m:3 }} >Update</Button>
+                                                    size="small" sx={{ m:3 }} onClick={() => {
+                                                        return updateContent(row.id, index); 
+                                                    }}><AppText textModule="BUTTON" textName="UPDATE" />
+                                                </Button>
                                                 <Button size="small" className="delete-btn" 
                                                     onClick={() => {
                                                         return deleteContent(row.id); 
-                                                    }} >Delete</Button>
+                                                    }} ><AppText textModule="BUTTON" textName="DELETE" />
+                                                </Button>
                                             </TableCell>
 
                                         </TableRow>
@@ -208,6 +302,8 @@ const ContactusTable = () => {
                                 })}
                             </TableBody>
                         </Table>
+                        <Button className="delete-btn" sx={{ m:3 }} onClick={deleteAll}>
+                            <AppText textModule="BUTTON" textName="DELETE_ALL" /></Button>
                     </TableContainer>
                     <Modal
                         open={openModal}
@@ -221,6 +317,7 @@ const ContactusTable = () => {
                             </Typography>
                             <Typography id="modal-modal-title" variant="h6" component="h2">
                                 <AppText textModule="CONFIRMATION" textName="DELETE_MSG" />
+                                {idSelecetd.length} {"item?"}
                             </Typography>
                             <Box className="modal-btns" sx={{ m: 2, justifyContent: "right" }}>
                                 <Button onClick={cancel}><AppText textModule="BUTTON" textName="CANCEL" />
@@ -230,10 +327,11 @@ const ContactusTable = () => {
                             </Box>
                         </Box>
                     </Modal>
-                </Paper>
+                </Paper>                
             </div>
         </>
     );
 
 };
+
 export default ContactusTable;

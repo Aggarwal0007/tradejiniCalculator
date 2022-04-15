@@ -9,7 +9,7 @@ const hindi = {
     CONFIRMATION: {
         LOGOUT_TITLE: "लॉगआउट की पुष्टि करें!",
         LOGOUT_MSG: "क्या आप वाकई अभी लॉगआउट करना चाहते हैं?",
-        DELETE_MSG: "Are you sure you want to delete this?",
+        DELETE_MSG: "Are you sure you want to delete",
         DELETE_TITLE: "Confirm delete!",
     },
 
@@ -19,7 +19,21 @@ const hindi = {
         EXPORT: "EXPORT",
         RESTORE: "RESTORE",
         FROM: "From",
-        TO: "To"
+        TO: "To",
+        UPDATE: "अपडेट करें",
+        DELETE: "Delete",
+        DELETE_ALL: "Delete All"
+    },
+
+    HEADER: {
+        STATUS:"status",
+        NAME:"Name",
+        PHONE_NO:"Phone no",
+        EMAIL_ID:"Email id",
+        SUBJECT:"Subject",
+        ASSIGN_TO:"Assign To",
+        REMARKS:"Remarks",
+        ACTIONS:"Actions",
     }
 };
 

@@ -6,7 +6,7 @@
 
 .contactusTable-btns button,
 .contactsTable-head th {
-  background-color: #00cd97;
+  background-color: #00cd97 !important;
   color: white;
   border: none;
   font-size: 14px !important;
@@ -60,4 +60,14 @@
   100% {
     transform: translateX(1500px);
   }
+}
+
+.nav-items {
+  justify-content: end;
+  margin-top: 5px;
+}
+
+.nav-link {
+  margin-top: 10px !important;
+  text-decoration: none;
 }
