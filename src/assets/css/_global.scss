@@ -34,3 +34,105 @@ code {
   width: 100%;
   height: 100%;
 }
+
+/* Portal clean Up */
+
+.portal-home-page {
+  width: 100%;
+  height: 100%;
+  // display: flex;
+}
+
+.portal-header {
+  width: 100%;
+  height: 40px;
+  background: #f9f9f9 !important;
+  border-bottom: 1px solid #eee;
+}
+
+.portal-logo {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.portal-user-icon {
+  height: 30px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.portal-menu-list {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.portal-menu-item {
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-left: 10px;
+  font-family: sans-serif;
+}
+
+.portal-menu-item.active-menu {
+  color: #00cd97 !important;
+  border-bottom: 1px solid #00cd97;
+}
+
+.settings-avatar-btn {
+  padding: 0 !important;
+}
+
+/* Contact us screen */
+.contact-header {
+  background-color: #f9f9f9;
+  height: 40px;
+  padding: 5px;
+}
+
+.custom-btn {
+  // background: #00cd97 !important;
+  padding: 5px 10px !important;
+  margin: 5px !important;
+  color: #1976d2 !important;
+  font-size: 13px !important;
+  line-height: 23px !important;
+  border: opx !important;
+}
+
+.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.css-1tihz4g-MuiPaper-root > div > div:first-child,
+.MuiDialogContent-root.css-9yjdhh-MuiDialogContent-root > div > div:first-child {
+  display: none !important;
+}
+
+.MuiPaper-rounded.MuiPaper-elevation8.css-1smlk3z-MuiPaper-root > div > div:first-child {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 5px 10px !important;
+  width: 100px !important;
+  font-size: 12px !important;
+}
+
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+  top: -14px !important;
+}
+
+.date-range-selector {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.css-1at62qq {
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}

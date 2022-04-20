@@ -39,8 +39,13 @@
      * @param mixed  $data
      * @param string $httpHeader
      */
-    protected function sendOutput($data, $httpHeaders=array()) {
-        header_remove('Set-Cookie');
+    protected function sendOutput($data, $httpHeaders=array(), $isLoggedinModule) {
+        // if($isLoggedinModule) {
+
+        // } else {
+        //     header_remove('Set-Cookie');
+        // }
+        
  
         if (is_array($httpHeaders) && count($httpHeaders)) {
             foreach ($httpHeaders as $httpHeader) {
@@ -52,11 +57,11 @@
         exit;
     }
 
-    protected function sendSuccess($data) {
+    protected function sendSuccess($data, $isLoggedinModule = false) {
        $convertedData = json_encode($data);
        $httpHeaders = array('Content-Type: application/json', 'HTTP/1.1 200 OK');
        $res = stripslashes(json_encode(array('status' => "ok", "d" => json_decode($convertedData))));
-       $this->sendOutput($res, $httpHeaders);
+       $this->sendOutput($res, $httpHeaders, $isLoggedinModule);
     }
 
     protected function sendError($data) {

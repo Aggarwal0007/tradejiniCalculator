@@ -1,47 +1,52 @@
 <?php
 
     require __DIR__ . "/inc/Bootstrap.php";
+    cors();
 
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
     $uri = explode( '/', $uri );
 
-    cors();
- 
-    if($uri[8] === "config") {
+    $module = $uri[5];
+    $method = $uri[6];
+    $sub = $uri[7];
+
+    if($module === "config") {
 
         require PROJECT_ROOT_PATH . "/controller/api/ConfigController.php";
         $objFeedController = new ConfigController();
-        $strMethodName = $uri[9] . 'Config';
+        $strMethodName = $method . 'Config';
         $objFeedController->{$strMethodName}();
     }
 
-    else if($uri[8] === "contact") {
+    else if($module === "contact") {
 
         require PROJECT_ROOT_PATH . "/controller/api/ContactUsController.php";
         $objFeedController = new ContactUsController();
-        $strMethodName = $uri[9] . 'WebsiteContacts';
+        $strMethodName = $method . 'WebsiteContacts';
         $objFeedController->{$strMethodName}();
     } 
 
-    else if($uri[8] === "leadReport") {
+    else if($module === "leadReport") {
 
         require PROJECT_ROOT_PATH . "/controller/api/LeadReportController.php";
         $objFeedController = new LeadReportController();
-        $strMethodName = $uri[9] . 'LeadReports';
+        $strMethodName = $method . 'LeadReports';
         $objFeedController->{$strMethodName}();
     } 
 
-    else if($uri[8] === "recycle") {
+    else if($module === "recycle") {
 
         require PROJECT_ROOT_PATH . "/controller/api/RecycleController.php";
         $objFeedController = new RecycleController();
-        $strMethodName = $uri[10] . 'RecycleData';
-        $objFeedController->{$strMethodName}($uri[9]);
+        $strMethodName = $sub . 'RecycleData';
+        $objFeedController->{$strMethodName}($method);
     } 
 
 
-    else if($uri[8] === "portal_login") {
+    else if($module === "portal_login") {
+
+        session_start();
         
         require PROJECT_ROOT_PATH . "/controller/api/LoginController.php";
         $objFeedController = new LoginController();
@@ -49,7 +54,7 @@
         $objFeedController->{$strMethodName}();
     }
 
-    else if($uri[8] === "portal_logout") {
+    else if($module === "portal_logout") {
 
         session_start();
         session_destroy();

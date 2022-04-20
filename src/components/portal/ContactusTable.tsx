@@ -15,6 +15,7 @@ const ContactusTable = () => {
     type contentType ={
         status:number,
         id:number,
+        date: string,
         name:string,
         phone:string,
         email:string,
@@ -218,7 +219,8 @@ const ContactusTable = () => {
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead className="contactsTable-head">
                                 <TableRow>
-                                    <TableCell><AppText textModule="HEADER" textName="STATUS"/></TableCell>
+                                    <TableCell></TableCell>
+                                    <TableCell><AppText textModule="HEADER" textName="DATE"/></TableCell>
                                     <TableCell align="right">
                                         <AppText textModule="HEADER" textName="NAME"/>
                                     </TableCell>
@@ -256,6 +258,7 @@ const ContactusTable = () => {
                                                         return selecetdRow(index); 
                                                     }} checked={ row.status===0?!true:true} />
                                             </TableCell>
+                                            <TableCell align="right">{row.date}</TableCell>
                                             <TableCell align="right">{row.name}</TableCell>
                                             <TableCell align="right">{row.phone}</TableCell>
                                             <TableCell align="right">{row.email}</TableCell>

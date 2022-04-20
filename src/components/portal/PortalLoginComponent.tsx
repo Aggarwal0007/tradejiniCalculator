@@ -6,6 +6,7 @@ import { ServiceRequest, useFetch } from "index";
 
 import AppText from "common/Text";
 import { AUTH } from "communicator/ServiceUrls";
+import { ErrorType } from "common/Types";
 import { storeLoginDetails } from "common/Bridge";
 import { useNavigate } from "react-router-dom";
 
@@ -37,14 +38,16 @@ const PortalLogin = () => {
         setPassword(evt.target.value);
     };
 
-    const successCB = () => {
+    const successCB = (response: {status: string, d: {message: string}}) => {
+        console.log("response login", response);
         storeLoginDetails({ 
             username: user 
         });
         navigate(SCREENS.CONTACTUS, { state: user });
     };
 
-    const errorCB = () => {
+    const errorCB = (error: ErrorType) => {
+        console.log("login Error:", error.message);
         navigate(SCREENS.LOGIN);
     };
 

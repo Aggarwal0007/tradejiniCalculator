@@ -34,6 +34,7 @@ const english = {
         ASSIGN_TO:"Assign To",
         REMARKS:"Remarks",
         ACTIONS:"Actions",
+        DATE:"Date"
     }
 };
 

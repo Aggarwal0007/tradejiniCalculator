@@ -5,8 +5,10 @@ export const SCREENS = {
     BROKERAGE_CALCULATOR:"/brokerage-calculator",
     MARGIN_CALCULATOR:"/margin-calculator",
     REFERRAL_CALCULATOR:"/referral-calculator",
+    PORTAL:"/portal",
     LOGIN:"/portal/login",
-    CONTACTUS: "/portal/contactus"
+    CONTACTUS: "/portal/contact-us",
+    LEADREPORT:"/portal/lead-report"
 };
 
 export const SEGMENT_LIST = [
@@ -126,3 +128,8 @@ export const THEME = {
     LIGHT: "light",
     DARK: "dark"
 };
+
+export const PORTAL_MENULIST = [
+    { label: "CONTACT US", path: SCREENS.CONTACTUS },
+    { label: "LEAD REPORT", path: SCREENS.LEADREPORT }
+];

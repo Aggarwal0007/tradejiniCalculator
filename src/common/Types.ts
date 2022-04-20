@@ -55,3 +55,8 @@ export interface ErrorType {
     message: string;
     stack?: string;
 }
+
+export interface PORTAL_MENU_TYPE {
+    label: string,
+    path: string
+}

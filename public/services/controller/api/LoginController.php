@@ -1,7 +1,7 @@
 <?php
     
-    session_start();
-    session_destroy();
+    // session_start();
+    // session_destroy();
 
     class LoginController extends BaseController {
 
@@ -19,11 +19,12 @@
                        if ( $user == PORTAL_USERNAME && $pass == PORTAL_USERNAME_PASS)
                         {
                             
-                            session_start();
+                            // session_start();
                             $_SESSION['user'] = $user;
-                            // $responseData = json_encode(array('message' => 'Logged In'), true);
-                            $responseData = array('message' => 'Logged In');
-                        } else {
+                            $responseData = array('message' => 'Logged In-2');
+                        } 
+                        
+                        else {
                             send_unauthorized();
                         }
                       
@@ -38,7 +39,7 @@
             }
 
             if (!$strErrorDesc) {
-                $this->sendSuccess($responseData);
+                $this->sendSuccess($responseData, true);
             } else {
                 $this->sendError($strErrorDesc);
             }

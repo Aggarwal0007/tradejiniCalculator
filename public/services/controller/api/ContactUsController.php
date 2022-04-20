@@ -11,6 +11,8 @@ if ( ! isset( $_SESSION['user'] ) )
 
         public function getWebsiteContacts() {
 
+            // echo $_SESSION['user']."<br>";
+
             $strErrorDesc = '';
             $requestMethod = $_SERVER["REQUEST_METHOD"];
             

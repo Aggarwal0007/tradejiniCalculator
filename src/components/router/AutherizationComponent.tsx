@@ -1,6 +1,6 @@
-import Contactus from "../portal/ContactusComponent";
 import { getSession } from "common/Bridge";
 import { Navigate } from "react-router-dom";
+import PortalHomePage from "../portal/PortalHomePage";
 import React from "react";
 import { SCREENS } from "common/Constants";
 
@@ -13,7 +13,7 @@ const AutherizationComponent = () => {
     }
 
     return (
-        <Contactus/>
+        <PortalHomePage/>
     );
 
 };

@@ -1,9 +1,11 @@
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import React, { useEffect } from "react";
+import AppDialog from "./components/common/AppDialog";
 import { AppSettings } from "./common/AppSettings";
 import AutherizationComponent from "components/router/AutherizationComponent";
 import BrokerageCalculator from "./components/brokerage/BrokerageComponent";
-import Contactus from "components/portal/ContactusComponent";
+import Contactus from "components/portal/contactus/ContactUsBaseComponent";
+import LeadReport from "components/portal/leadReport/LeadReportBasecomponent";
 import MarginCalculator from "./components/margin/MarginComponent";
 import PortalLogin from "./components/portal/PortalLoginComponent";
 import ReferralCalculator from "./components/referral/ReferralComponent";
@@ -14,7 +16,6 @@ import { useSelector } from "react-redux";
 
 
 const ApiCommunicator = () => {
-    console.log("ApiCommunicator init");
     ServiceConfig.setServiceURL(AppSettings.serviceURL);
     ServiceConfig.setApiEncryptionEnabled(AppSettings.apiEncryptionEnabled);
     ServiceConfig.setStorageEncryptionEnabled(AppSettings.localStorageEncryptionEnabled);
@@ -35,6 +36,7 @@ function App() {
     return (
         <div className="app">
             <ApiCommunicator />
+            <AppDialog />
             <HashRouter basename={AppSettings.baseURL}>
                 <Routes>
                     <Route path={SCREENS.BROKERAGE_CALCULATOR} element={<BrokerageCalculator />} />
@@ -42,10 +44,15 @@ function App() {
                     <Route path={SCREENS.MARGIN_CALCULATOR} element={<MarginCalculator />} />
                     <Route path={SCREENS.BASE} element={<Navigate replace to={SCREENS.BROKERAGE_CALCULATOR} />} />
                     <Route path={SCREENS.LOGIN} element={<PortalLogin />} />
-                    <Route path={`${SCREENS.CONTACTUS}`} element={
+                    <Route path={`${SCREENS.PORTAL}`} element={
                         <AutherizationComponent />
                     }>
+                        
                         <Route path={SCREENS.CONTACTUS} element={<Contactus />} />
+                        <Route path={SCREENS.LEADREPORT} element={<LeadReport />} />
+                        <Route path={`${SCREENS.PORTAL}/*`} element={<Navigate to={SCREENS.LOGIN} />} />
+
+
                     </Route>
                 </Routes>  
             </HashRouter>        

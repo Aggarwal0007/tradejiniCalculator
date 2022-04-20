@@ -13,6 +13,11 @@ const rootReducer = (state: any, action: any) => {
 
 const store = configureStore({
     reducer: rootReducer,
+    middleware: (getDefaultMiddleware: (arg0: { serializableCheck: boolean; }) => any) => {
+        return getDefaultMiddleware({
+            serializableCheck: false,
+        }); 
+    },
 });
 export default store;
 
