@@ -1,5 +1,6 @@
 import { Charges, InputTypes } from "common/Types";
 import ChargeListTable from "./ChargeListTableComponent";
+import { Grid } from "@mui/material";
 import React from "react";
 import TotalChargesTable from "./TotalChargesTableComponent";
 
@@ -11,18 +12,18 @@ const SeeAllCharges = (props: { chargesList: Charges; inputKeys: InputTypes }) =
         inputKeys: props.inputKeys
     };
     return (
-        <div className="see-all-charges-container row">
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <Grid container spacing={4} justifyContent="center" className="see-all-charges-container row">
+            <Grid item xs={10} lg={5} sm={5}>
                 <TotalChargesTable
                     {...chargeProps}
                 />
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            </Grid>
+            <Grid item xs={10} lg={5} sm={5}>
                 <ChargeListTable 
                     {...chargeProps}
                 />
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     );
 };
 

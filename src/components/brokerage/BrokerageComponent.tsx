@@ -9,6 +9,7 @@ import { CONFIG } from "../../communicator/ServiceUrls";
 import { configDetails } from "../../common/Dataconfig";
 import CurrenciesCalculator from "./currencies/CurrenciesCalculator";
 import EquitesCalculator from "./equites/EquitesCalculator";
+import { Grid } from "@mui/material";
 import KnowBrokerageSavings from "./KnowBrokerageSavingsComponent";
 import SeeAllCharges from "./SeeAllChargesComponent";
 
@@ -149,8 +150,8 @@ function BrokerageCalculator() {
                                         null
                         }
                     </div>
-                    <div className="actions-calc row">
-                        <div className="action-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <Grid container spacing={4} sx={{ mt:3 }} justifyContent="center" className="actions-calc row">
+                        <Grid item xs={4} lg={4} sm={6} className="action-group">
                             <div 
                                 className={`${showTable === 1 ? "active" : "" } brokerage-savings`}
                                 onClick={() => {
@@ -159,9 +160,9 @@ function BrokerageCalculator() {
                             >
                             KNOW BROKERAGE SAVINGS
                             </div>
-                        </div>
+                        </Grid>
                         
-                        <div className="action-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <Grid item xs={4} lg={4} sm={6} className="action-group">
                             <div 
                                 className={`${showTable === 2 ? "active" : "" } see-all-charges`}
                                 onClick={ () => {
@@ -170,9 +171,9 @@ function BrokerageCalculator() {
                             >
                             SEE ALL CHARGES
                             </div>
-                        </div>
+                        </Grid>
                         
-                    </div>
+                    </Grid>
                     <div className="charge-details-section">
                         {
                             showTable === 1 ?

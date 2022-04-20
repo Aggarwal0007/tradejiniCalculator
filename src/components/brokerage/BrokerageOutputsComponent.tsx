@@ -1,5 +1,7 @@
 import { Category, Charges } from "../../common/Types";
 import React, { useEffect, useState } from "react";
+import { Grid } from "@mui/material";
+
 
 const BrokerageOutputs = (props: { chargesBreakDown: Charges; categorySelected: Category }) => {
 
@@ -148,9 +150,10 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; categorySelected: 
 
     return (
         <div className="details-output">
-            <div className="brokerage-input-section input-container top-output-container">
-                <div className="brokerage-label">Brokerage</div>
-                <div className="brokerage-input output-bg" id="value-0">
+            <Grid container justifyContent="center"
+                className="brokerage-input-section input-container top-output-container">
+                <Grid item lg={4} sm={4} className="brokerage-label">Brokerage</Grid>
+                <Grid item lg={8} sm={4} className="brokerage-input output-bg" id="value-0">
                     <span className="icon-rupee"></span>
                     {brokerageArr && brokerageArr.map((item: any, key: number) => {
                         return (
@@ -159,11 +162,12 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; categorySelected: 
                             </span>
                         );
                     })}              
-                </div>
-            </div>
-            <div className="bep-input-section input-container top-output-container">
-                <div className="bep-label">BEP</div>
-                <div className="brokerage-input-section">
+                </Grid>
+            </Grid>
+            <Grid container justifyContent="center"
+                className="bep-input-section input-container top-output-container">
+                <Grid item lg={4} sm={4} className="bep-label">BEP</Grid>
+                <Grid item lg={8} sm={4} className="brokerage-input-section">
                     <div className="bep-input output-bg">
                         {bepArr && bepArr.map((item: any, key: number) => {
                             return (
@@ -173,11 +177,12 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; categorySelected: 
                             );
                         })}
                     </div>
-                </div>
-            </div>
-            <div className="turnover-input-section input-container top-output-container">
-                <div className="turnover-label">Turnover</div>
-                <div className="output-bg" id="turnover-digit-0">
+                </Grid>
+            </Grid>
+            <Grid container justifyContent="center" 
+                className="turnover-input-section input-container top-output-container">
+                <Grid item lg={4} sm={4} className="turnover-label">Turnover</Grid>
+                <Grid item lg={8} sm={4} className="output-bg" id="turnover-digit-0">
                     {turnoverArr && turnoverArr.map((item: any, key: number) => {
                         return (
                             <span className="field-inputs" id={item} key={key}>
@@ -185,12 +190,13 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; categorySelected: 
                             </span>
                         );
                     })}
-                </div>
-            </div>
+                </Grid>
+            </Grid>
 
-            <div className="profit-input-section input-container top-output-container">
-                <div className="profit-label">Profit</div>
-                <div className="profit-input output-bg">
+            <Grid container justifyContent="center"
+                className="profit-input-section input-container top-output-container">
+                <Grid item lg={4} sm={4} className="profit-label">Profit</Grid>
+                <Grid item lg={8} sm={4} className="profit-input output-bg">
                     <span className="icon-rupee"></span>
                     {profitArr && profitArr.map((item: any, key: number) => {
                         return (
@@ -199,8 +205,8 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; categorySelected: 
                             </span>
                         );
                     })}
-                </div>
-            </div>
+                </Grid>
+            </Grid>
         </div>
     );
 };

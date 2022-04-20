@@ -246,6 +246,8 @@
 
 .charges-table .table {
   background-color: #fff;
+  border-collapse: collapse !important;
+  width: 100%;
 }
 
 .charges-table .table tr th {
@@ -255,16 +257,24 @@
   line-height: 23px;
 }
 
+.charges-table .table tr:nth-child(even) {
+  background: #f9f9f9 !important;
+}
+
 .charges-table .table tr td {
   font-size: 14px;
   font-weight: normal;
   color: #222;
   line-height: 20px;
+  border: 1px solid #eee !important;
+  padding: 10px 15px;
 }
 
 .charges-table .table th {
-  border: 1px solid #ddd !important;
+  border: 1px solid #eee !important;
   border-width: unset !important;
+  text-align: left;
+  padding: 10px 15px;
 }
 
 .table-heading {
