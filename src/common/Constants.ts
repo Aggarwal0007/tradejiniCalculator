@@ -114,6 +114,10 @@ export const CHARGE_LIST: Record<string, any> = {
 export const IMAGES = {
     LOGO:"assets/login_logo.png",
     USER_ICON:"assets/user_icon.png",
+    DELETE_ICON:"assets/delete_icon.png",
+    UPDATE_ICON:"assets/update_icon.png",
+    RECYCLE_BIN_ICON:"assets/recycle_bin_icon.png",
+    DELETE_ALL_ICON:"assets/delete_all.png"
 };
 
 export const WINDOW_STORAGE = {

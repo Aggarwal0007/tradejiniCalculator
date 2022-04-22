@@ -106,9 +106,26 @@ code {
   border: opx !important;
 }
 
+.table_buy_btn,
+.table_delete_btn {
+  // margin-right: 3px !important;
+  // margin-left: 3px !important;
+  // font-size: 11px !important;
+  // padding: 4px 8px !important;
+}
+
+// .table_delete_btn {
+//   background-color: red !important;
+// }
+
 .MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.css-1tihz4g-MuiPaper-root > div > div:first-child,
 .MuiDialogContent-root.css-9yjdhh-MuiDialogContent-root > div > div:first-child {
   display: none !important;
+}
+
+.MuiDataGrid-main > div:nth-child(3) {
+  display: none !important;
+  opacity: 0 !important;
 }
 
 .MuiPaper-rounded.MuiPaper-elevation8.css-1smlk3z-MuiPaper-root > div > div:first-child {
@@ -116,9 +133,15 @@ code {
   opacity: 0 !important;
 }
 
-.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+.contactus-table-container .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
   padding: 5px 10px !important;
   width: 100px !important;
+  font-size: 12px !important;
+}
+
+.contactus-table-container .assignto-input .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 5px 10px !important;
+  width: 200px !important;
   font-size: 12px !important;
 }
 
@@ -135,4 +158,203 @@ code {
 .css-1at62qq {
   margin-left: 5px !important;
   margin-right: 5px !important;
+}
+
+.css-3ihp42-MuiDataGrid-root .MuiDataGrid-cell:focus {
+  outline: none !important;
+}
+
+.css-3ihp42-MuiDataGrid-root .MuiDataGrid-columnHeader {
+  outline: none !important;
+}
+
+.MuiDataGrid-columnHeaders.css-f3jnds-MuiDataGrid-columnHeaders {
+  background-color: #00cd97;
+  color: #fff;
+}
+
+// .custom-recycle-btn {
+//   font-size: 12px !important;
+//   background:
+// }
+
+/* custom scrollBar css starts here */
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #00cd97;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #00cd97;
+}
+
+/* custom scrollBar css ends here */
+
+/* Loader styles starts here */
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: rgb(200 200 200 / 5%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+
+  /* transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; */
+  visibility: hidden;
+}
+
+.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.loading-div {
+  position: relative;
+}
+
+.stage {
+  display: flex;
+  justify-content: center;
+  height: 20px;
+}
+
+.dot-pulse {
+  position: relative;
+  left: -9999px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #00cd97;
+  color: #00cd97;
+  box-shadow: 9999px 0 0 -5px;
+  animation: dot-pulse 1.5s infinite linear;
+  animation-delay: 0.25s;
+}
+
+.dot-pulse::before,
+.dot-pulse::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #00cd97;
+  color: #00cd97;
+}
+
+.dot-pulse::before {
+  box-shadow: 9984px 0 0 -5px;
+  animation: dot-pulse-before 1.5s infinite linear;
+  animation-delay: 0s;
+}
+
+.dot-pulse::after {
+  box-shadow: 10014px 0 0 -5px;
+  animation: dot-pulse-after 1.5s infinite linear;
+  animation-delay: 0.5s;
+}
+
+@keyframes dot-pulse-before {
+  0% {
+    box-shadow: 9984px 0 0 -5px;
+  }
+
+  30% {
+    box-shadow: 9984px 0 0 2px;
+  }
+
+  60%,
+  100% {
+    box-shadow: 9984px 0 0 -5px;
+  }
+}
+
+@keyframes dot-pulse {
+  0% {
+    box-shadow: 9999px 0 0 -5px;
+  }
+
+  30% {
+    box-shadow: 9999px 0 0 2px;
+  }
+
+  60%,
+  100% {
+    box-shadow: 9999px 0 0 -5px;
+  }
+}
+
+@keyframes dot-pulse-after {
+  0% {
+    box-shadow: 10014px 0 0 -5px;
+  }
+
+  30% {
+    box-shadow: 10014px 0 0 2px;
+  }
+
+  60%,
+  100% {
+    box-shadow: 10014px 0 0 -5px;
+  }
+}
+
+/* Loader styles ends here */
+
+/* styles for contact us icons */
+.delete-all-icon {
+  width: 24px;
+  height: auto;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.update-icon {
+  width: 24px;
+  height: auto;
+}
+
+.delete-icon {
+  width: 24px;
+  height: auto;
+}
+
+.recycle-bin-icon {
+  width: 30px;
+  height: auto;
+}
+
+.date-range-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 276px;
+  padding: 0 15px !important;
+}
+
+.date-go-btn {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 10px !important;
+  min-width: 10px !important;
 }

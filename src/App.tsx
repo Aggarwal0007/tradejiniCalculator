@@ -6,11 +6,13 @@ import AutherizationComponent from "components/router/AutherizationComponent";
 import BrokerageCalculator from "./components/brokerage/BrokerageComponent";
 import Contactus from "components/portal/contactus/ContactUsBaseComponent";
 import LeadReport from "components/portal/leadReport/LeadReportBasecomponent";
+import LoaderBackdrop from "components/common/Loader";
 import MarginCalculator from "./components/margin/MarginComponent";
 import PortalLogin from "./components/portal/PortalLoginComponent";
 import ReferralCalculator from "./components/referral/ReferralComponent";
 import { SCREENS } from "./common/Constants";
 import { ServiceConfig } from "index";
+import SnackBar from "./components/common/SnackBar";
 import { useConfigStore } from "state/AppConfigReducer";
 import { useSelector } from "react-redux";
 
@@ -37,6 +39,8 @@ function App() {
         <div className="app">
             <ApiCommunicator />
             <AppDialog />
+            <SnackBar />
+            <LoaderBackdrop />
             <HashRouter basename={AppSettings.baseURL}>
                 <Routes>
                     <Route path={SCREENS.BROKERAGE_CALCULATOR} element={<BrokerageCalculator />} />
