@@ -12,7 +12,9 @@ const english = {
         DELETE_MSG: "Are you sure you want to delete",
         DELETE_TITLE: "Confirm delete!",
         UPDATE_TITLE:"Confirm update!",
-        UPDATE_MSG: "Are you sure you want to update?"
+        UPDATE_MSG: "Are you sure you want to update?",
+        RESTORE_TITLE:"Confirm Restore!",
+        RESTORE_MSG: "Are you sure you want to restore"
     },
 
     BUTTON: {

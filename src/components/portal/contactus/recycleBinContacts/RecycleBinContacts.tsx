@@ -1,18 +1,17 @@
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
-import { hideLoader, showLoader, showSnackBar } from "../../../state/AppConfigReducer";
-import { Paper, TextField } from "@mui/material";
-
+import { hideLoader, showLoader, showSnackBar } from "../../../../state/AppConfigReducer";
 import React, { useEffect, useState } from "react";
 import { ServiceRequest, useFetch } from "index";
 import { CONTACT_US } from "communicator/ServiceUrls";
-import CustomToolbar from "./CustomToolbarContacts";
-import DateRange from "./DateRange";
-import DeleteRecords from "./DeleteRecords";
+import CustomToolbar from "./CustomToolbarRecyclebin";
+import DateRange from "../DateRange";
+import DeleteRecords from "../DeleteRecords";
 import { ErrorType } from "common/Types";
-import UpdateRecord from "./UpdateRecord";
+import { Paper } from "@mui/material";
+import RestoreRecords from "./RestoreRecords";
 import { useDispatch } from "react-redux";
 
-const ContactusTable = (props: any) => {
+const RecycleBinContacts = (props: any) => {
 
     const fetchAPI = useFetch();
     const dispatch = useDispatch();
@@ -63,7 +62,7 @@ const ContactusTable = (props: any) => {
             request.addData({});
         }
 
-        fetchAPI.placeGETRequest(CONTACT_US.GET_CONTACTS, request, successCB, errorCB);
+        fetchAPI.placeGETRequest(CONTACT_US.GET_RECYCLE_CONTACTS, request, successCB, errorCB);
     };
 
     useEffect(() => {
@@ -80,6 +79,14 @@ const ContactusTable = (props: any) => {
     const animateRecord = (records: any) => {
         console.log("records", records);
         getData();
+    };
+
+    const getRemarks = (params: any) => {
+        return params.row.remarks ? params.row.remarks : "-";
+    };
+
+    const getAssignTo = (params: any) => {
+        return params.row.assignto ? params.row.assignto : "-";
     };
 
     const columns: GridColumns = [
@@ -141,21 +148,7 @@ const ContactusTable = (props: any) => {
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
-            renderCell: (params: any) => {
-                return (
-                    <TextField
-                        type="text"
-                        defaultValue={params.row.assignto}
-                        InputLabelProps={{ shrink: true }}
-                        onChange={(evt) => {
-                            return params.api.updateRows([
-                                { ...params.row, assignto: evt.target.value }
-                            ]);
-                        }
-                        }
-                    />
-                );
-            }
+            valueGetter: getAssignTo
         },
         {
             field: "remarks",
@@ -166,22 +159,7 @@ const ContactusTable = (props: any) => {
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
-            renderCell: (params: any) => {
-                return (
-                    <TextField
-                        type="text"
-                        className="assignto-input"
-                        defaultValue={params.row.remarks}
-                        InputLabelProps={{ shrink: true }}
-                        onChange={(evt) => {
-                            return params.api.updateRows([
-                                { ...params.row, remarks: evt.target.value }
-                            ]);
-                        }
-                        }
-                    />
-                );
-            }
+            valueGetter: getRemarks
         },
         {
             field: "actions",
@@ -196,14 +174,14 @@ const ContactusTable = (props: any) => {
                 return (
                     <>
 
-                        <UpdateRecord
-                            customClass="update_icon"
+                        <RestoreRecords
+                            customClass="restore_icon"
                             rowsSelected={[
                                 params.row
                             ]}
-                            name="Update"
+                            name="Restore"
                             variant="text"
-                            updateRowSuccess={animateRecord}
+                            restoreRowSuccess={animateRecord}
                         />
 
                         <DeleteRecords
@@ -214,7 +192,7 @@ const ContactusTable = (props: any) => {
                             name="Delete"
                             variant="text"
                             deleteRowSuccess={animateRecord}
-                            from="WebsiteContacts"
+                            from="Recycle"
                         />
                     </>
 
@@ -260,10 +238,10 @@ const ContactusTable = (props: any) => {
                             }}
                             componentsProps={{
                                 toolbar: {
-                                    deleteRows: selectedRows,
+                                    recordsSelected: selectedRows,
                                     goToAnimation: animateRecord,
                                     setDateRangeValues: updateDateRangeValues,
-                                    recycleBinModel: props.showRecycleContent
+                                    showContactUsModel: props.hideRecycleContent
                                 }
                             }}
                             onSelectionModelChange={(ids) => {
@@ -298,4 +276,4 @@ const ContactusTable = (props: any) => {
     );
 };
 
-export default ContactusTable;
+export default RecycleBinContacts;

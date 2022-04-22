@@ -12,7 +12,6 @@ import { useDispatch } from "react-redux";
 const UpdateRecord = (props: any) => {
 
     const dispatch = useDispatch();
-    // const fetchAPI = useFetch();
 
     const successCB = (response: any) => {
         dispatch(hideLoader());
@@ -75,13 +74,6 @@ const UpdateRecord = (props: any) => {
 
     return (
         <>
-            {/* <Button
-                variant= {props.variant}
-                size="small"
-                // color = {props.color}
-                className= {props.customClass}
-                
-            > */}
             <IconButton
                 onClick={() => {
                     return onClickUpdate(props.rowsSelected); 

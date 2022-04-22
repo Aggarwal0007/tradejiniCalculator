@@ -1,13 +1,31 @@
-// import ContactUsHeader from "./ContactusHeader";
+import React, { useState } from "react";
 import ContactusTable from "./ContactusTable";
-import React from "react";
+import RecycleBin from "./recycleBinContacts/RecycleBinContacts";
 
 const ContactUsBase = () => {
 
+    const [
+        openRecycle, setOpenRecycle
+    ] = useState<boolean>(false);
+
+
     return (
         <>
-            {/* <ContactUsHeader /> */}
-            <ContactusTable />
+            {
+                openRecycle ? 
+                    <RecycleBin 
+                        hideRecycleContent = {() => {
+                            setOpenRecycle(false); 
+                        }}
+                    />
+                    :
+                    <ContactusTable 
+                        showRecycleContent = {() => {
+                            setOpenRecycle(true); 
+                        }}
+                    />
+            }
+            
         </>
     );
 };

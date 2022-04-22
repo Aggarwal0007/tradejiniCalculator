@@ -26,6 +26,7 @@ const DateRange = (props: any) => {
             const fromDate = (`${startDate?.getFullYear()}-0${month}-0${startDate?.getDate()}`);
             const month1 =Number(endDate?.getMonth())+1;
             const toDate = (`${endDate?.getFullYear()}-0${month1}-0${endDate?.getDate()}`);
+
             const dateRange = {
                 startDate: fromDate,
                 endDate: toDate

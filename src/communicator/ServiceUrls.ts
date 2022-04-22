@@ -11,7 +11,10 @@ export const CONTACT_US = {
     GET_CONTACTS: "contact/get/",
     DELETE_CONTACTS:"contact/delete/",
     INSERT_CONTACTS:"",
-    UPDATE_CONTACTS:"contact/update/"   
+    UPDATE_CONTACTS:"contact/update/",
+    GET_RECYCLE_CONTACTS: "recycle/contact/get/",
+    DELETE_RECYCLE_CONTACTS: "recycle/contact/delete",
+    RESTORE_RECYCLE_CONTACTS: "recycle/contact/restore"
 };
 
 export const LEADFORM = {

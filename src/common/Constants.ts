@@ -117,7 +117,10 @@ export const IMAGES = {
     DELETE_ICON:"assets/delete_icon.png",
     UPDATE_ICON:"assets/update_icon.png",
     RECYCLE_BIN_ICON:"assets/recycle_bin_icon.png",
-    DELETE_ALL_ICON:"assets/delete_all.png"
+    DELETE_ALL_ICON:"assets/delete_all.png",
+    RESTORE_ICON:"assets/restore_icon.png",
+    RESTORE_ALL_ICON:"assets/restore_all_icon.png",
+    BACK_ICON:"assets/back_icon.png"
 };
 
 export const WINDOW_STORAGE = {

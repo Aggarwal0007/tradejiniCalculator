@@ -1,29 +1,19 @@
-import { hideLoader, showAPPDialog, showLoader, showSnackBar } from "../../../state/AppConfigReducer";
+import { hideLoader, showAPPDialog, 
+    showLoader, showSnackBar } from "../../../../state/AppConfigReducer";
 import { ServiceRequest, useFetch } from "index";
 import { CONTACT_US } from "communicator/ServiceUrls";
 import { ErrorType } from "common/Types";
 import { getText } from "common/Text";
 import { IconButton } from "@mui/material";
-import { IMAGES } from "../../../common/Constants";
+import { IMAGES } from "../../../../common/Constants";
 import React from "react";
 import { useDispatch } from "react-redux";
 
-const DeleteRecords = (props: any) => {
+const RestoreRecords = (props: any) => {
 
     const dispatch = useDispatch();
 
-    const getURL = (from: string) => {
-        let url: string = "";
-
-        if (from === "Recycle") {
-            url = CONTACT_US.DELETE_RECYCLE_CONTACTS;
-        } else if (from === "WebsiteContacts") {
-            url = CONTACT_US.DELETE_CONTACTS;
-        }
-        return url;
-    };
-
-    const getDeletedIds = (rowlist: any) => {
+    const getRestoredIds = (rowlist: any) => {
         const idList: any = [
         ];
         rowlist.map((item: any) => {
@@ -32,52 +22,53 @@ const DeleteRecords = (props: any) => {
         return idList;
     };
 
-    const successCB = (response: any, deletedRows: any) => {
+    const successCB = (response: any, restoredRows: any) => {
         dispatch(hideLoader());
-        console.log("DeleteContacts response", response, deletedRows);
+        console.log("RestoredRecords response", response, restoredRows);
         dispatch(showSnackBar({
-            message: response.d.message,
+            message: "Contact restored successfully!!",
             status: "success"
         }));
-        props.deleteRowSuccess(deletedRows);
+        props.restoreRowSuccess(restoredRows);
     };
 
     const errorCB = (error: ErrorType) => {
         dispatch(hideLoader());
-        console.log("DeleteContacts Error", error.message); 
+        console.log("RestoredRecords Error", error.message); 
         dispatch(showSnackBar({
             message: error.message,
             status: "error"
         }));
     };
 
-    const deleteRecords = (itemlist: any) => {
+    const restoreRecords = (itemlist: any) => {
         dispatch(showLoader());
         const request = new ServiceRequest();
         request.addData({
-            idList: JSON.stringify(getDeletedIds(itemlist))
+            idList: JSON.stringify(getRestoredIds(itemlist))
         });
         useFetch().placePOSTRequest(
-            getURL(props.from), 
+            CONTACT_US.RESTORE_RECYCLE_CONTACTS, 
             request, 
             (resp) => {
-                return successCB(resp, getDeletedIds(itemlist)); 
+                return successCB(resp, getRestoredIds(itemlist)); 
             }, 
             errorCB 
         );
     };
 
     
-    const onClickDelete = (deletedRow: any) => {
+    const onClickRestore = (restoredRow: any) => {
         
-        if (deletedRow.length) {
+        if (restoredRow.length) {
             dispatch(showAPPDialog({
-                title: getText("DELETE_TITLE", "CONFIRMATION"),
-                message: `${getText("DELETE_MSG", "CONFIRMATION")} ${deletedRow.length} Records ?`,
+                title: getText("RESTORE_TITLE", "CONFIRMATION"),
+                message: `${getText("RESTORE_MSG", "CONFIRMATION")} 
+                ${restoredRow.length} Record${restoredRow.length > 1 ? "s" : ""}?`,
                 buttons: [
                     { name: getText("CANCEL", "BUTTON"), className: "cancel-btn" },
                     { name: getText("OK", "BUTTON"), action: () => {
-                        return deleteRecords(deletedRow); 
+                        return restoreRecords(restoredRow); 
                     }, className: "ok-btn" }
                 ]
             }));
@@ -95,19 +86,18 @@ const DeleteRecords = (props: any) => {
         <>
             <IconButton
                 onClick={() => {
-                    return onClickDelete(props.rowsSelected); 
+                    return onClickRestore(props.rowsSelected); 
                 }}
             >
                 <img 
                     src={
-                        props.name === "Delete" ? IMAGES.DELETE_ICON : IMAGES.DELETE_ALL_ICON} 
+                        props.name === "Restore" ? IMAGES.RESTORE_ICON : IMAGES.RESTORE_ALL_ICON} 
                     className={props.customClass}
                     title={props.name}
                 />
-            </IconButton>
-
+            </IconButton>                
         </>
     );
 };
 
-export default DeleteRecords;
+export default RestoreRecords;
