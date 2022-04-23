@@ -8,7 +8,6 @@ const ContactUsBase = () => {
         openRecycle, setOpenRecycle
     ] = useState<boolean>(false);
 
-
     return (
         <>
             {

@@ -1,3 +1,4 @@
+import { DATE_RANGE, WEBSITE_CONTACTS } from "common/Types";
 import { Grid, IconButton } from "@mui/material";
 import { GridToolbarContainer, GridToolbarExport } from "@mui/x-data-grid";
 import DateRange from "./DateRange";
@@ -5,56 +6,63 @@ import DeleteRecords from "./DeleteRecords";
 import { IMAGES } from "../../../common/Constants";
 import React from "react";
 
-function CustomToolbarContacts(props: any) { 
+type PropsTypes = {
+    deleteRows: WEBSITE_CONTACTS[];
+    goToAnimation: (arg0: number[]) => void;
+    recycleBinModel: React.MouseEventHandler<HTMLButtonElement>;
+    setDateRangeValues: (arg0: DATE_RANGE) => void;
+}
 
+function CustomToolbarContacts(props: PropsTypes) {
+    
     return (
         <GridToolbarContainer>
             <Grid container>
                 <Grid item
-                    xs={12} sm={6} md={6} lg= {6}
+                    xs={12} sm={6} md={6} lg={6}
                 >
-                    <DeleteRecords 
-                        rowsSelected = {props.deleteRows}
-                        customClass = "delete-all-icon"
-                        name = "Delete All"
-                        variant = "text"
-                        deleteRowSuccess = {props.goToAnimation}
+                    <DeleteRecords
+                        rowsSelected={props.deleteRows}
+                        customClass="delete-all-icon"
+                        name="Delete All"
+                        variant="text"
+                        deleteRowSuccess={props.goToAnimation}
                         from="WebsiteContacts"
                     />
 
                     <IconButton
                         onClick={props.recycleBinModel}
                     >
-                        <img 
-                            src={IMAGES.RECYCLE_BIN_ICON} 
+                        <img
+                            src={IMAGES.RECYCLE_BIN_ICON}
                             className="recycle-bin-icon"
                             title={"Recycle Bin"}
                         />
                     </IconButton>
-                       
-                    <GridToolbarExport 
+
+                    <GridToolbarExport
                         printOptions={{ disableToolbarButton: true }}
                     />
                 </Grid>
 
-                <Grid item 
-                    xs={12} sm={6} md={6} lg= {6} 
+                <Grid item
+                    xs={12} sm={6} md={6} lg={6}
                     className="date-range-selector"
                     sx={
-                        {  
-                            display: { xs:"flex" },
-                            justifyContent:{ xs:"center", sm:"flex-end" }
+                        {
+                            display: { xs: "flex" },
+                            justifyContent: { xs: "center", sm: "flex-end" }
                         }
                     }
                 >
                     <DateRange
-                        dateRangeValues = {props.setDateRangeValues}
+                        dateRangeValues={props.setDateRangeValues}
                     />
-                    
+
                 </Grid>
-                
+
             </Grid>
-           
+
         </GridToolbarContainer>
     );
 }

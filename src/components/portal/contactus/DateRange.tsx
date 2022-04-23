@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
+import { DATE_RANGE } from "common/Types";
 import DatePicker from "../../common/DatePicker";
 
-const DateRange = (props: any) => {
+type PropsTypes = {
+    dateRangeValues: (arg0: DATE_RANGE) => void;
+}
+const DateRange = (props: PropsTypes) => {
 
     const [
         startDate, setStartDate

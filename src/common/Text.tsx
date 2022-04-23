@@ -17,7 +17,6 @@ export const getText = (textName: string, textModule?: string) => {
     
     const selectedLang = useConfigStore(store.getState()).language || languageOptions[ 0 ];
 
-    // const dictionary: Record<string, string | Record<string, string>> = dictionaryList[ selectedLang as selectedLangType ];
     const dictionary: Record<string, any> = dictionaryList[ selectedLang as selectedLangType ];
 
     if (textModule)

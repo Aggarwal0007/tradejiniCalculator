@@ -1,27 +1,17 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { ErrorType, MESSAGE_SUCCESS_RESPONSE } from "common/Types";
 import { IMAGES, SCREENS } from "../../common/Constants";
 import React, { useState } from "react";
-
 import { ServiceRequest, useFetch } from "index";
-
 import AppText from "common/Text";
 import { AUTH } from "communicator/ServiceUrls";
-import { ErrorType } from "common/Types";
 import { storeLoginDetails } from "common/Bridge";
 import { useNavigate } from "react-router-dom";
 
 const PortalLogin = () => {
     const fetchAPI = useFetch();
     const navigate = useNavigate();
-    
-    /*
-       Credentials 
-
-       username: admin
-       password: tradejini@admin
-
-       */
-    
+        
     const [
         user, setUser
     ] = useState<string>("");
@@ -38,7 +28,7 @@ const PortalLogin = () => {
         setPassword(evt.target.value);
     };
 
-    const successCB = (response: {status: string, d: {message: string}}) => {
+    const successCB = (response: MESSAGE_SUCCESS_RESPONSE) => {
         console.log("response login", response);
         storeLoginDetails({ 
             username: user 
@@ -92,7 +82,9 @@ const PortalLogin = () => {
                             type="password"
                         />
                         <Button type="submit" className="login-btn"
-                            sx={{ mt:3, backgroundColor: "#00cd97" }} fullWidth><AppText textName="LOGIN" /></Button>
+                            sx={{ mt:3, backgroundColor: "#00cd97" }} fullWidth>
+                            <AppText textName="LOGIN" />
+                        </Button>
                     </Box>
                 </Container>
             </div> 

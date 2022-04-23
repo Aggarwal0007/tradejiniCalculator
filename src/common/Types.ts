@@ -60,3 +60,28 @@ export interface PORTAL_MENU_TYPE {
     label: string,
     path: string
 }
+
+export interface WEBSITE_CONTACTS {
+    id: number,
+    name: string,
+    phone: string,
+    email: string,
+    subject: string,
+    message: string,
+    status: number,
+    date: string,
+    remarks: string | null,
+    assignto: string | null
+}
+
+export interface DATE_RANGE {
+    startDate: string,
+    endDate: string
+}
+
+export interface MESSAGE_SUCCESS_RESPONSE {
+    status: string,
+     d: { 
+         message: string; 
+        }; 
+    }

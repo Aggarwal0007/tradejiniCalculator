@@ -3,7 +3,12 @@ import { COMMODITY_CATEGORY, CURRENCY_CATEGORY, EQUITES_CATEGORY } from "common/
 import React, { useEffect, useState } from "react";
 import InputText from "components/common/InputTextComponent";
 
-const KnowBrokerageSavings = (props: { inputKeys: InputTypes; chargesList: Charges; }) => {
+type PropsTypes = { 
+    inputKeys: InputTypes;
+     chargesList: Charges; 
+    }
+
+const KnowBrokerageSavings = (props: PropsTypes) => {
 
     const { inputKeys, chargesList } = props;
     const [
@@ -71,11 +76,12 @@ const KnowBrokerageSavings = (props: { inputKeys: InputTypes; chargesList: Charg
 
         ];
         if (savingsOutput) {
-            for (let val: any = 0; val <= savingsOutput.toString().length; val++) {
+            for (let val: number = 0; val <= savingsOutput.toString().length; val++) {
                 arr.push(savingsOutput.toString()[ val ]);
             }
         }
         setSavingsArr(arr);
+        console.log("savings Array", arr);
     }, [
         savingsOutput
     ]);

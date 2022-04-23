@@ -1,3 +1,4 @@
+import { DATE_RANGE, WEBSITE_CONTACTS } from "common/Types";
 import { Grid, IconButton } from "@mui/material";
 import DateRange from "../DateRange";
 import DeleteRecords from "../DeleteRecords";
@@ -6,7 +7,17 @@ import { IMAGES } from "../../../../common/Constants";
 import React from "react";
 import RestoreRecords from "./RestoreRecords";
 
-function CustomToolbarRecycleBin(props: any) { 
+type PropsTypes = { 
+    showContactUsModel: React.MouseEventHandler<HTMLButtonElement>; 
+    recordsSelected: WEBSITE_CONTACTS[]; 
+    goToAnimation: { 
+        (arg0: number[]): void; 
+        (arg0: number[]): void;
+     };
+      setDateRangeValues: (arg0: DATE_RANGE) => void;
+    }
+    
+function CustomToolbarRecycleBin(props: PropsTypes) { 
 
     return (
         <GridToolbarContainer>

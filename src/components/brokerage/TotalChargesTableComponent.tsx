@@ -1,7 +1,11 @@
 import { Charges } from "common/Types";
 import React from "react";
 
-const TotalChargesTable = (props: { chargeList: Charges; }) => {
+type PropsTypes = { 
+    chargeList: Charges; 
+}
+
+const TotalChargesTable = (props: PropsTypes) => {
     const { chargeList } = props;
     return (
         <div className="total-charges-table">

@@ -1,14 +1,21 @@
+import { ErrorType, MESSAGE_SUCCESS_RESPONSE, WEBSITE_CONTACTS } from "common/Types";
 import { hideLoader, showAPPDialog, showLoader, showSnackBar } from "../../../state/AppConfigReducer";
 import { ServiceRequest, useFetch } from "index";
 import { CONTACT_US } from "communicator/ServiceUrls";
-import { ErrorType } from "common/Types";
 import { getText } from "common/Text";
 import { IconButton } from "@mui/material";
 import { IMAGES } from "../../../common/Constants";
 import React from "react";
 import { useDispatch } from "react-redux";
 
-const DeleteRecords = (props: any) => {
+type PropsTypes = {
+    deleteRowSuccess: (arg0: number[]) => void;
+    from: string; rowsSelected: WEBSITE_CONTACTS[]; 
+    name: string;
+    customClass: string;
+    variant: string
+}
+const DeleteRecords = (props: PropsTypes) => {
 
     const dispatch = useDispatch();
 
@@ -23,16 +30,16 @@ const DeleteRecords = (props: any) => {
         return url;
     };
 
-    const getDeletedIds = (rowlist: any) => {
-        const idList: any = [
+    const getDeletedIds = (rowlist: WEBSITE_CONTACTS[]) => {
+        const idList: number[] = [
         ];
-        rowlist.map((item: any) => {
+        rowlist.map((item: WEBSITE_CONTACTS) => {
             return idList.push(item.id);
         });
         return idList;
     };
 
-    const successCB = (response: any, deletedRows: any) => {
+    const successCB = (response: MESSAGE_SUCCESS_RESPONSE, deletedRows: number[]) => {
         dispatch(hideLoader());
         console.log("DeleteContacts response", response, deletedRows);
         dispatch(showSnackBar({
@@ -51,7 +58,7 @@ const DeleteRecords = (props: any) => {
         }));
     };
 
-    const deleteRecords = (itemlist: any) => {
+    const deleteRecords = (itemlist: WEBSITE_CONTACTS[]) => {
         dispatch(showLoader());
         const request = new ServiceRequest();
         request.addData({
@@ -68,7 +75,7 @@ const DeleteRecords = (props: any) => {
     };
 
     
-    const onClickDelete = (deletedRow: any) => {
+    const onClickDelete = (deletedRow: WEBSITE_CONTACTS[]) => {
         
         if (deletedRow.length) {
             dispatch(showAPPDialog({

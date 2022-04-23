@@ -1,4 +1,5 @@
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
+import { DATE_RANGE, ErrorType, WEBSITE_CONTACTS } from "common/Types";
 import { hideLoader, showLoader, showSnackBar } from "../../../state/AppConfigReducer";
 import { Paper, TextField } from "@mui/material";
 
@@ -8,33 +9,32 @@ import { CONTACT_US } from "communicator/ServiceUrls";
 import CustomToolbar from "./CustomToolbarContacts";
 import DateRange from "./DateRange";
 import DeleteRecords from "./DeleteRecords";
-import { ErrorType } from "common/Types";
 import UpdateRecord from "./UpdateRecord";
 import { useDispatch } from "react-redux";
 
-const ContactusTable = (props: any) => {
+const ContactusTable = (props: { showRecycleContent: Function; }) => {
 
     const fetchAPI = useFetch();
     const dispatch = useDispatch();
 
     const [
         availbleContacts, setAvailableContacts
-    ] = useState<any>([
+    ] = useState<Array<WEBSITE_CONTACTS>>([
     ]);
 
     const [
         selectedRows, setSelectedRows
-    ] = useState([
+    ] = useState<Array<WEBSITE_CONTACTS>>([
     ]);
 
     const [
         errormsg, setErrorMsg
-    ] = useState<string | null>("");
+    ] = useState<string>("");
 
-    const successCB = (response: { d: []; }) => {
+    const successCB = (response: { d: Array<WEBSITE_CONTACTS> }) => {
         dispatch(hideLoader());
         console.log("getResponse", response);
-        if (response && response.d.length === 0) {
+        if (response && response.d.length as unknown as number === 0) {
             setErrorMsg("No data available");
         } else {
             setErrorMsg("");
@@ -51,7 +51,7 @@ const ContactusTable = (props: any) => {
         }));
     };
 
-    const getData = (startDate = "", endDate = "") => {
+    const getData = (startDate: string = "", endDate: string = "") => {
         dispatch(showLoader());
         const request = new ServiceRequest();
         if (startDate && endDate) {
@@ -72,12 +72,12 @@ const ContactusTable = (props: any) => {
     ]);
 
 
-    const updateDateRangeValues = (dateValue: any) => {
+    const updateDateRangeValues = (dateValue: DATE_RANGE) => {
         console.log("dateValue", dateValue);
         getData(dateValue.startDate, dateValue.endDate);
     };
 
-    const animateRecord = (records: any) => {
+    const animateRecord = (records: number[]) => {
         console.log("records", records);
         getData();
     };
@@ -141,7 +141,7 @@ const ContactusTable = (props: any) => {
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
-            renderCell: (params: any) => {
+            renderCell: (params) => {
                 return (
                     <TextField
                         type="text"
@@ -166,7 +166,7 @@ const ContactusTable = (props: any) => {
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
-            renderCell: (params: any) => {
+            renderCell: (params) => {
                 return (
                     <TextField
                         type="text"
@@ -192,7 +192,7 @@ const ContactusTable = (props: any) => {
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
-            renderCell: (params: any) => {
+            renderCell: (params) => {
                 return (
                     <>
 
@@ -223,9 +223,9 @@ const ContactusTable = (props: any) => {
         },
     ];
 
-    const getselectedRows = (ids: any) => {
+    const getselectedRows = (ids: Iterable<unknown>) => {
         const selectedIDs = new Set(ids);
-        const selectedItems = availbleContacts.filter((row: any) => {
+        const selectedItems = availbleContacts.filter((row: WEBSITE_CONTACTS) => {
             return selectedIDs.has(row.id);
         });
         setSelectedRows(selectedItems);

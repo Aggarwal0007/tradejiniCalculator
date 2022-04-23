@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-const InputText = (props: { numbersOnly: true; ipValue: number;
-     parentCallBack: (arg0: string) => void; }) => {
+type PropsTypes = { 
+    numbersOnly: true;
+     ipValue: number;
+    parentCallBack: (arg0: string) => void; 
+}
+
+const InputText = (props: PropsTypes) => {
 
     const [
         inputValue, setInputValue

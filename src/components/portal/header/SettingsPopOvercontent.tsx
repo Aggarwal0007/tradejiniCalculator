@@ -3,8 +3,11 @@ import LogOut from "./LogOut";
 import React from "react";
 import UserDetails from "./UserDetails";
 
+type PropsTypes = { 
+    closePopOver: (arg0: boolean) => void;
+ }
 
-const SettingsPopOverContent = (props: { closePopOver: (arg0: boolean) => void; }) => {
+const SettingsPopOverContent = (props: PropsTypes) => {
     
     const closePopOver = (isClose: boolean) => {
         props.closePopOver(isClose);

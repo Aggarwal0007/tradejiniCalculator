@@ -1,28 +1,39 @@
+import { ErrorType, MESSAGE_SUCCESS_RESPONSE, WEBSITE_CONTACTS } from "common/Types";
 import { hideLoader, showAPPDialog, 
     showLoader, showSnackBar } from "../../../../state/AppConfigReducer";
 import { ServiceRequest, useFetch } from "index";
 import { CONTACT_US } from "communicator/ServiceUrls";
-import { ErrorType } from "common/Types";
 import { getText } from "common/Text";
 import { IconButton } from "@mui/material";
 import { IMAGES } from "../../../../common/Constants";
 import React from "react";
 import { useDispatch } from "react-redux";
 
-const RestoreRecords = (props: any) => {
+type propsTypes = {
+    customClass: string;
+    rowsSelected: WEBSITE_CONTACTS[]; 
+    name: string; 
+    variant: string;
+    restoreRowSuccess: (arg0: number[]) => void;
+}
+
+const RestoreRecords = (props: propsTypes) => {
 
     const dispatch = useDispatch();
 
-    const getRestoredIds = (rowlist: any) => {
-        const idList: any = [
+    const getRestoredIds = (rowlist: Array<WEBSITE_CONTACTS>) => {
+        const idList: number[]= [
         ];
-        rowlist.map((item: any) => {
+        rowlist.map((item: WEBSITE_CONTACTS) => {
             return idList.push(item.id);
         });
         return idList;
     };
 
-    const successCB = (response: any, restoredRows: any) => {
+    const successCB = (
+        response: MESSAGE_SUCCESS_RESPONSE,
+        restoredRows: number[]
+    ) => {
         dispatch(hideLoader());
         console.log("RestoredRecords response", response, restoredRows);
         dispatch(showSnackBar({
@@ -41,7 +52,7 @@ const RestoreRecords = (props: any) => {
         }));
     };
 
-    const restoreRecords = (itemlist: any) => {
+    const restoreRecords = (itemlist: Array<WEBSITE_CONTACTS>) => {
         dispatch(showLoader());
         const request = new ServiceRequest();
         request.addData({
@@ -58,13 +69,13 @@ const RestoreRecords = (props: any) => {
     };
 
     
-    const onClickRestore = (restoredRow: any) => {
+    const onClickRestore = (restoredRow: Array<WEBSITE_CONTACTS>) => {
         
         if (restoredRow.length) {
             dispatch(showAPPDialog({
                 title: getText("RESTORE_TITLE", "CONFIRMATION"),
                 message: `${getText("RESTORE_MSG", "CONFIRMATION")} 
-                ${restoredRow.length} Record${restoredRow.length > 1 ? "s" : ""}?`,
+                ${restoredRow.length} Record${restoredRow.length as unknown as number > 1 ? "s" : ""}?`,
                 buttons: [
                     { name: getText("CANCEL", "BUTTON"), className: "cancel-btn" },
                     { name: getText("OK", "BUTTON"), action: () => {

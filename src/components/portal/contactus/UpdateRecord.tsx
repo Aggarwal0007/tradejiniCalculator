@@ -1,19 +1,27 @@
-import { hideLoader, showAPPDialog, showLoader, showSnackBar } from "../../../state/AppConfigReducer";
+import { ErrorType, MESSAGE_SUCCESS_RESPONSE, WEBSITE_CONTACTS } from "common/Types";
+import { hideLoader, showAPPDialog, 
+    showLoader, showSnackBar } from "../../../state/AppConfigReducer";
 import { ServiceRequest, useFetch } from "index";
 import { CONTACT_US } from "communicator/ServiceUrls";
-import { ErrorType } from "common/Types";
 import { getText } from "common/Text";
 import { IconButton } from "@mui/material";
 import { IMAGES } from "../../../common/Constants";
 import React from "react";
 import { useDispatch } from "react-redux";
 
+type propsTypes = {
+    updateRowSuccess: Function;
+    rowsSelected: WEBSITE_CONTACTS[]; 
+    name: string | undefined; 
+    customClass: string;
+    variant: string;
+}
 
-const UpdateRecord = (props: any) => {
+const UpdateRecord = (props: propsTypes) => {
 
     const dispatch = useDispatch();
 
-    const successCB = (response: any) => {
+    const successCB = (response: MESSAGE_SUCCESS_RESPONSE) => {
         dispatch(hideLoader());
         dispatch(showSnackBar({
             message: response.d.message,
@@ -31,7 +39,7 @@ const UpdateRecord = (props: any) => {
         }));
     };
 
-    const updateRecords = (itemlist: any) => {
+    const updateRecords = (itemlist: Array<WEBSITE_CONTACTS>) => {
         dispatch(showLoader());
         const request = new ServiceRequest();
         const credentials = {
@@ -49,7 +57,7 @@ const UpdateRecord = (props: any) => {
     };
 
     
-    const onClickUpdate = (selectedRecord: any) => {
+    const onClickUpdate = (selectedRecord: Array<WEBSITE_CONTACTS>) => {
         
         if (selectedRecord.length) {
             dispatch(showAPPDialog({
@@ -68,8 +76,6 @@ const UpdateRecord = (props: any) => {
                 status: "error"
             }));
         }
-        
-
     };
 
     return (

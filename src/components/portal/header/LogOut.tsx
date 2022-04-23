@@ -1,8 +1,8 @@
 import AppText, { getText } from "common/Text";
 import { Box, Button } from "@mui/material";
+import { ErrorType, MESSAGE_SUCCESS_RESPONSE } from "common/Types";
 import { ServiceRequest, useFetch } from "index";
 import { AUTH } from "communicator/ServiceUrls";
-import { ErrorType } from "common/Types";
 import { handleLogout } from "common/Bridge";
 import React from "react";
 import { SCREENS } from "common/Constants";
@@ -10,14 +10,18 @@ import { showAPPDialog } from "../../../state/AppConfigReducer";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const LogOut = (props: { closePopOver: (arg0: boolean) => void; }) => {
+type PropsTypes = { 
+    closePopOver: (arg0: boolean) => void;
+ }
+
+const LogOut = (props: PropsTypes) => {
 
     const fetchAPI = useFetch();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     
-    const successCB = (response: any) => {
+    const successCB = (response: MESSAGE_SUCCESS_RESPONSE) => {
         console.log("logout response", response);
         handleLogout();
         navigate(SCREENS.LOGIN);

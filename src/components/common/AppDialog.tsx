@@ -24,7 +24,7 @@ const AlertDialog = () => {
         dispatch(closeAPPDialog());
     };
     
-    const onButtonClick = (actionCB: any) => {
+    const onButtonClick = (actionCB: () => void) => {
         actionCB && actionCB();
         handleClose();
     };

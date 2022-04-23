@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import { PORTAL_MENU_TYPE } from "common/Types";
 import { PORTAL_MENULIST } from "common/Constants";
 
 const PortalMenu = () => {
@@ -16,7 +17,7 @@ const PortalMenu = () => {
         locate.pathname
     ]);
 
-    const onChangeMenu = (menuItem: { label: string; path: string; }) => {
+    const onChangeMenu = (menuItem: PORTAL_MENU_TYPE) => {
         setselectedMenu(menuItem.path);
     };
 
