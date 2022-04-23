@@ -21,7 +21,7 @@ const KnowBrokerageSavings = (props: PropsTypes) => {
 
     const [
         savingsArr, setSavingsArr
-    ] = useState<any>();
+    ] = useState<string[]>();
 
     const calculateYourSavings = (brokeragePersent: number) => {
         console.log("inputKeys", inputKeys);
@@ -143,7 +143,7 @@ const KnowBrokerageSavings = (props: PropsTypes) => {
                 </div>
                 <div className="your-savings-output">
                     <span className="icon-rupee"></span>
-                    {savingsArr && savingsArr.map((item: any, key: number) => {
+                    {savingsArr && savingsArr.map((item: string, key: number) => {
                         return (
                             <span className="counter-inputs" id={item} key={key}>
                                 {item}

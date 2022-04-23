@@ -20,4 +20,10 @@ const clearSessionStorage = () => {
     window.sessionStorage.clear();
 };
 
-export { storeToSessionStorage, getFromSessionStorage, storeToLocalStorage, getFromLocalStorage, clearSessionStorage } ;
+export { 
+    storeToSessionStorage, 
+    getFromSessionStorage, 
+    storeToLocalStorage, 
+    getFromLocalStorage, 
+    clearSessionStorage
+} ;

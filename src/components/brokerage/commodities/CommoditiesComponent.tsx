@@ -5,13 +5,26 @@ import BrokerageOutputs from "../BrokerageOutputsComponent";
 import { calculateCommodityBrokerage } from "../BrokerageCalcUtils";
 import InputText from "components/common/InputTextComponent";
 
-const getCommodityValue = (commodity: string) => {
-    const value = commodity.split("-").pop();
-    return Number(value);
+const getCommodityInput = (commodity: string) => {
+    const value = commodity.split("-");
+    const values = {
+        dispValue: commodity,
+        comValue: value[ 1 ],
+        buyPrice: value[ 2 ],
+        sellPrice: value[ 3 ]
+    };
+    
+    console.log("commodityValuecommodityValue", values);
+    return values;
 };
 
-const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => void;
-    equitiesInput: (arg0: InputTypes) => void; categorySelected: (arg0: Category) => void; } ) => {
+type PropsTypes = { 
+    parentCBAllCharges: (arg0: Charges) => void;
+    equitiesInput: (arg0: InputTypes) => void; 
+    categorySelected: (arg0: Category) => void; 
+}
+
+const CommoditiesCalculator = (props: PropsTypes) => {
 
     const [
         selectedCategory, setSelectedCategory
@@ -22,20 +35,24 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
     ] = useState<number>(1);
 
     const [
+        dispCommodity, setDispCommodity
+    ] = useState<string>(getCommodityInput(COMMODITY_SELECT_LIST[ 0 ].value).dispValue);
+
+    const [
         buyPrice, setBuyPrice
-    ] = useState<number>(119.6);
+    ] = useState<number>(Number(getCommodityInput(COMMODITY_SELECT_LIST[ 0 ].value).buyPrice));
 
     const [
         sellPrice, setSellPrice
-    ] = useState<number>(121.6);
+    ] = useState<number>(Number(getCommodityInput(COMMODITY_SELECT_LIST[ 0 ].value).sellPrice));
 
     const [
         commodityValue, setCommodityValue
-    ] = useState<number>(getCommodityValue(COMMODITY_SELECT_LIST[ 0 ].value));
+    ] = useState<number>(Number(getCommodityInput(COMMODITY_SELECT_LIST[ 0 ].value).comValue));
 
     const [
         viewResult, setViewResults
-    ] = useState<Charges | null>();
+    ] = useState<Charges>();
 
     const onSelectedCategory = (selectedItem: string) => {
         setSelectedCategory(selectedItem);
@@ -43,14 +60,27 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
 
     const [
         categorySelected, setCategorySelected
-    ] = useState<any>(selectedCategory);
+    ] = useState<string>(selectedCategory);
 
-    const calculateBrokerageValues = (qty: number, buyPrc: number, sellPrc: number, comValue: number) => {
+    const calculateBrokerageValues = (
+        qty: number, 
+        buyPrc: number, 
+        sellPrc: number, 
+        comValue: number, 
+        showCommodity: string
+    ) => {
         setQuantity(qty);
         setBuyPrice(buyPrc);
         setSellPrice(sellPrc);
         setCommodityValue(comValue);
-        const result = calculateCommodityBrokerage(qty, buyPrc, sellPrc, comValue, selectedCategory);
+        setDispCommodity(showCommodity);
+        const result: Charges = calculateCommodityBrokerage(
+            qty, 
+            buyPrc, 
+            sellPrc, 
+            comValue, 
+            selectedCategory
+        );
         setViewResults(result);
         props.parentCBAllCharges(result);
         props.equitiesInput({
@@ -65,7 +95,13 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
 
     useEffect(() => {
         if (selectedCategory === COMMODITY_CATEGORY[ 0 ].name) {
-            calculateBrokerageValues(1, 119.6, 121.6, getCommodityValue(COMMODITY_SELECT_LIST[ 0 ].value));
+            calculateBrokerageValues(
+                1, 
+                Number(getCommodityInput(COMMODITY_SELECT_LIST[ 0 ].value).buyPrice),
+                Number(getCommodityInput(COMMODITY_SELECT_LIST[ 0 ].value).sellPrice),
+                Number(getCommodityInput(COMMODITY_SELECT_LIST[ 0 ].value).comValue),
+                getCommodityInput(COMMODITY_SELECT_LIST[ 0 ].value).dispValue
+            );
         }
         
     }, [
@@ -74,24 +110,35 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
 
     const onChangeQuantity = (qty: number) => {
         setQuantity(qty);        
-        calculateBrokerageValues(qty, buyPrice, sellPrice, commodityValue);
+        calculateBrokerageValues(qty, buyPrice, sellPrice, commodityValue, dispCommodity);
     };
 
     const onChangeBuyPrice = (buyPrc: number) => {
         setBuyPrice(buyPrc);
-        calculateBrokerageValues(quantity, buyPrc, sellPrice, commodityValue);
+        calculateBrokerageValues(quantity, buyPrc, sellPrice, commodityValue, dispCommodity);
 
     };
 
     const onChangeSellPrice = (sellPrc: number) => {
         setSellPrice(sellPrc);
-        calculateBrokerageValues(quantity, buyPrice, sellPrc, commodityValue);
+        calculateBrokerageValues(quantity, buyPrice, sellPrc, commodityValue, dispCommodity);
 
     };
 
     const onChangeCommodity = (evt: React.ChangeEvent<HTMLSelectElement>) => {
-        setCommodityValue(getCommodityValue(evt.target.value));
-        calculateBrokerageValues(quantity, buyPrice, sellPrice, getCommodityValue(evt.target.value));
+        console.log(":::", evt.target.value);
+        setCommodityValue(Number(getCommodityInput(evt.target.value).comValue));
+        setBuyPrice(Number(getCommodityInput(evt.target.value).buyPrice));
+        setSellPrice(Number(getCommodityInput(evt.target.value).sellPrice));
+        setDispCommodity(getCommodityInput(evt.target.value).dispValue);
+
+        calculateBrokerageValues(
+            quantity, 
+            Number(getCommodityInput(evt.target.value).buyPrice),
+            Number(getCommodityInput(evt.target.value).sellPrice),
+            Number(getCommodityInput(evt.target.value).comValue),
+            getCommodityInput(evt.target.value).dispValue
+        );
         
     };
 
@@ -127,7 +174,7 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
                         <div className="qty-label">Commodity</div>
                         <div className="qty-input">
                             <select 
-                                value = {commodityValue}
+                                value = {dispCommodity}
                                 onChange = { (evt) => {
                                     return onChangeCommodity(evt); 
                                 }}
@@ -137,7 +184,10 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
 
                                         COMMODITY_SELECT_LIST.map((item, idx) => {
                                             return (
-                                                <option key={idx} value= { getCommodityValue(item.value)}>
+                                                <option 
+                                                    key={idx} 
+                                                    value= { item.value}
+                                                >
                                                     {item.name}
                                                 </option>
                                             );
@@ -193,7 +243,8 @@ const CommoditiesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => v
                 </div>
                 <>
                     <BrokerageOutputs 
-                        chargesBreakDown = {viewResult as Charges} categorySelected = {categorySelected as Category}
+                        chargesBreakDown = {viewResult as Charges} 
+                        categorySelected = {categorySelected}
                     />
                 </>
             </div>

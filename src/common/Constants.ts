@@ -36,20 +36,34 @@ export const COMMODITY_CATEGORY = [
 ];
 
 export const COMMODITY_SELECT_LIST = [
-    { name: "ALUMINIUM", value: "ALUMINIUM-5000", buyPrice: 119.6, sellPrice: getSellPrice(119.6) },
-    { name: "COPPER", value: "COPPER-2500", buyPrice: 119.6, sellPrice: getSellPrice(119.6) },
-    { name: "CRUDEOIL", value: "CRUDEOIL-100", buyPrice: 7073, sellPrice: getSellPrice(7073) },
-    { name: "GOLD", value: "GOLD-100", buyPrice: 767.8, sellPrice: getSellPrice(767.8) },
-    { name: "GOLDGUINEA", value: "GOLDGUINEA-1", buyPrice: 468.6, sellPrice: getSellPrice(468.6) },
-    { name: "GOLDM", value: "GOLDM-10", buyPrice: 468.6, sellPrice: getSellPrice(468.6) },
-    { name: "GOLDPETAL", value: "GOLDPETAL-1", buyPrice: 22730, sellPrice: getSellPrice(22730) },
-    { name: "LEAD", value: "LEAD-5000", buyPrice: 531.9, sellPrice: getSellPrice(531.9) },
-    { name: "NATURALGAS", value: "NATURALGAS-1250", buyPrice: 6822, sellPrice: getSellPrice(6822) },
-    { name: "NICKEL", value: "NICKEL-1500", buyPrice: 6822, sellPrice: getSellPrice(6822) },
-    { name: "SILVER", value: "SILVER-30", buyPrice: 31165, sellPrice: getSellPrice(31165) },
-    { name: "SILVERM", value: "SILVERM-5", buyPrice: 25374, sellPrice: getSellPrice(25374) },
-    { name: "SILVERMIC", value: "SILVERMIC-1", buyPrice: 31585, sellPrice: getSellPrice(31585) },
-    { name: "ZINC", value: "ZINC-5000", buyPrice: 3160, sellPrice: getSellPrice(3160) },
+
+    { name: "ALUMINIUM", value: `ALUMINIUM-5000-119.6-${getSellPrice(119.6)}` },
+
+    { name: "COPPER", value: `COPPER-2500-119.6-${getSellPrice(119.6)}` },
+
+    { name: "CRUDEOIL", value: `CRUDEOIL-100-7073-${getSellPrice(7073)}` },
+
+    { name: "GOLD", value: `GOLD-100-767.8-${getSellPrice(767.8)}` },
+
+    { name: "GOLDGUINEA", value: `GOLDGUINEA-1-468.6-${getSellPrice(468.6)}` },
+
+    { name: "GOLDM", value: `GOLDM-10-468.6-${getSellPrice(468.6)}` },
+
+    { name: "GOLDPETAL", value: `GOLDPETAL-1-22730-${getSellPrice(22730)}` },
+
+    { name: "LEAD", value: `LEAD-5000-531.9-${getSellPrice(531.9)}` },
+
+    { name: "NATURALGAS", value: `NATURALGAS-1250-6822-${getSellPrice(6822)}` },
+
+    { name: "NICKEL", value: `NICKEL-1500-6822-${getSellPrice(6822)}` },
+
+    { name: "SILVER", value: `SILVER-30-31165-${getSellPrice(31165)}` },
+
+    { name: "SILVERM", value: `SILVERM-5-25374-${getSellPrice(25374)}` },
+
+    { name: "SILVERMIC", value: `SILVERMIC-1-31585-${getSellPrice(31585)}` },
+
+    { name: "ZINC", value: `ZINC-5000-3160-${getSellPrice(3160)}` }
 ];
 
 export const CHARGE_LIST: Record<string, any> = {
@@ -101,7 +115,7 @@ export const CHARGE_LIST: Record<string, any> = {
         { name: "GST", value: "18% on Brokerage & Transaction Charges" },
         { name: "Stamp duty(w.e.f 01st Jul 2020)", value: "0.0001% on Buyer - Rs. 10 Per Cr" },
     ],
-    COMMODITY_CATEGORY: [
+    COMMODITY: [
         { name: "Charges", value: "Commodity" },
         { name: "CTT", value: "0.01% on Sell Side" },
         { name: "Transaction/ Turnover Charges", value: "MCX: 350/Crore" },

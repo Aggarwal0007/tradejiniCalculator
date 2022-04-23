@@ -5,9 +5,13 @@ import { calculateCurrencyBrokerage } from "components/brokerage/BrokerageCalcUt
 import { CURRENCY_CATEGORY } from "../../../common/Constants";
 import InputText from "components/common/InputTextComponent";
 
+type PropsTypes = { 
+    parentCBAllCharges: (arg0: Charges) => void;
+    equitiesInput: (arg0: InputTypes) => void; 
+    categorySelected: (arg0: Category) => void;
+}
 
-const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => void;
-    equitiesInput: (arg0: InputTypes) => void; categorySelected: (arg0: Category) => void;} ) => {
+const CurrenciesCalculator = (props: PropsTypes ) => {
 
     const [
         selectedCategory, setSelectedCategory
@@ -39,7 +43,7 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
 
     const [
         categorySelected, setCategorySelected
-    ] = useState<any>(selectedCategory);
+    ] = useState<string>(selectedCategory);
     
     const calculateBrokerageValues = (qty: number, buyPrc: number, sellPrc: number, strikePrc: number) => {
         setQuantity(qty);
@@ -178,7 +182,8 @@ const CurrenciesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => vo
                 </div>
                 <>
                     <BrokerageOutputs
-                        chargesBreakDown = {viewResult as Charges} categorySelected = {categorySelected as Category}
+                        chargesBreakDown = {viewResult as Charges}
+                        categorySelected = {categorySelected}
                     />
                 </>
             </div>

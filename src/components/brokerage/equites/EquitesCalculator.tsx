@@ -5,8 +5,12 @@ import { calculateEquityBrokerage } from "../BrokerageCalcUtils";
 import { EQUITES_CATEGORY } from "../../../common/Constants";
 import InputText from "components/common/InputTextComponent";
 
-const EquitesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => void;
-     equitiesInput: (arg0: InputTypes) => void; categorySelected: (arg0: Category) => void; }) => {
+type PropsTypes = { 
+    parentCBAllCharges: (arg0: Charges) => void;
+    equitiesInput: (arg0: InputTypes) => void; 
+    categorySelected: (arg0: Category) => void; 
+}
+const EquitesCalculator = (props: PropsTypes) => {
 
     const [
         selectedCategory, setSelectedCategory
@@ -30,7 +34,7 @@ const EquitesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => void;
 
     const [
         categorySelected, setCategorySelected
-    ] = useState<any>(selectedCategory);
+    ] = useState<string>(selectedCategory);
 
     const calculateBrokerageValues = (qty: number, buyPrc: number, sellPrc: number) => {
         setQuantity(qty);
@@ -153,7 +157,8 @@ const EquitesCalculator = (props: { parentCBAllCharges: (arg0: Charges) => void;
                 </div>
                 <>
                     <BrokerageOutputs 
-                        chargesBreakDown = {viewResult as Charges} categorySelected = {categorySelected as Category}
+                        chargesBreakDown = {viewResult as Charges} 
+                        categorySelected = {categorySelected}
                     />
                 </>
             </div>
