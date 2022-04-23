@@ -24,6 +24,7 @@ const DatePicker = (props: {
                 <MobileDatePicker
                     label= {props.labelString}
                     value={selectedDate}
+                    maxDate={new Date()}
                     onChange= {(newValue: Date | null) => {
                         return onChangeDate(newValue); 
                     }}
