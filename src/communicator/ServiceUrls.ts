@@ -18,9 +18,11 @@ export const CONTACT_US = {
 };
 
 export const LEADFORM = {
-    GET_LEADFORM: "",
-    DELETE_LEADFORM:"",
+    GET_LEADFORM: "leadReport/get/",
+    DELETE_LEADFORM:"leadReport/delete/",
     INSERT_LEADFORM:"",
-    UPDATE_LEADFORM:""
-    
+    UPDATE_LEADFORM:"leadReport/update/",
+    GET_RECYCLE_LEADFORM: "recycle/leadReport/get/",
+    DELETE_RECYCLE_LEADFORM: "recycle/leadReport/delete",
+    RESTORE_RECYCLE_LEADFORM: "recycle/leadReport/restore"
 };

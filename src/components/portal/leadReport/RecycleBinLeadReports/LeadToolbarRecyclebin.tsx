@@ -1,24 +1,25 @@
-import { DATE_RANGE, WEBSITE_CONTACTS } from "common/Types";
+import { DATE_RANGE, LEAD_REPORT } from "common/Types";
 import { Grid, IconButton } from "@mui/material";
-import { CONTACT_US } from "communicator/ServiceUrls";
-import DateRange from "../DateRange";
-import DeleteRecords from "../DeleteRecords";
+import DateRange from "../../contactus/DateRange";
+import DeleteRecords from "../../contactus/DeleteRecords";
 import { GridToolbarContainer } from "@mui/x-data-grid";
-import { IMAGES } from "../../../../common/Constants";
+import { IMAGES } from "common/Constants";
+import { LEADFORM } from "communicator/ServiceUrls";
 import React from "react";
-import RestoreRecords from "./RestoreRecords";
+import RestoreLeadReport from "./RestoreLeadReports";
 
 type PropsTypes = { 
-    showContactUsModel: React.MouseEventHandler<HTMLButtonElement>; 
-    recordsSelected: WEBSITE_CONTACTS[]; 
+    showLeadReportModel: React.MouseEventHandler<HTMLButtonElement>; 
+    recordsSelected: LEAD_REPORT[]; 
     goToAnimation: { 
         (arg0: number[]): void; 
-        (arg0: number[]): void;
      };
       setDateRangeValues: (arg0: DATE_RANGE) => void;
     }
+
+function LeadToolbarRecyclebin(props: PropsTypes) { 
+
     
-function CustomToolbarRecycleBin(props: PropsTypes) { 
     return (
         <GridToolbarContainer>
             <Grid container>
@@ -27,7 +28,7 @@ function CustomToolbarRecycleBin(props: PropsTypes) {
                 >
 
                     <IconButton
-                        onClick={props.showContactUsModel}
+                        onClick={props.showLeadReportModel}
                     >
                         <img 
                             src={IMAGES.BACK_ICON} 
@@ -43,10 +44,9 @@ function CustomToolbarRecycleBin(props: PropsTypes) {
                         variant = "text"
                         deleteRowSuccess = {props.goToAnimation}
                         from="Recycle"
-                        url= {CONTACT_US.DELETE_RECYCLE_CONTACTS}
+                        url= {LEADFORM.DELETE_RECYCLE_LEADFORM}
                     />
-
-                    <RestoreRecords 
+                    <RestoreLeadReport 
                         rowsSelected = {props.recordsSelected}
                         customClass = "restore-all-icon"
                         name = "Restore All"
@@ -68,13 +68,12 @@ function CustomToolbarRecycleBin(props: PropsTypes) {
                     <DateRange
                         dateRangeValues = {props.setDateRangeValues}
                     />
-                    
-                </Grid>
                 
+                </Grid>
+            
             </Grid>
-           
+       
         </GridToolbarContainer>
     );
 }
-
-export default CustomToolbarRecycleBin;
+export default LeadToolbarRecyclebin;

@@ -1,7 +1,6 @@
-import { ErrorType, MESSAGE_SUCCESS_RESPONSE, WEBSITE_CONTACTS } from "common/Types";
+import { ErrorType, LEAD_REPORT, MESSAGE_SUCCESS_RESPONSE, WEBSITE_CONTACTS } from "common/Types";
 import { hideLoader, showAPPDialog, showLoader, showSnackBar } from "../../../state/AppConfigReducer";
 import { ServiceRequest, useFetch } from "index";
-import { CONTACT_US } from "communicator/ServiceUrls";
 import { getText } from "common/Text";
 import { IconButton } from "@mui/material";
 import { IMAGES } from "../../../common/Constants";
@@ -10,30 +9,24 @@ import { useDispatch } from "react-redux";
 
 type PropsTypes = {
     deleteRowSuccess: (arg0: number[]) => void;
-    from: string; rowsSelected: WEBSITE_CONTACTS[]; 
+    from: string; rowsSelected: (WEBSITE_CONTACTS[] | LEAD_REPORT[]); 
     name: string;
     customClass: string;
-    variant: string
+    variant: string;
+    url:string
 }
 const DeleteRecords = (props: PropsTypes) => {
 
     const dispatch = useDispatch();
 
-    const getURL = (from: string) => {
-        let url: string = "";
-
-        if (from === "Recycle") {
-            url = CONTACT_US.DELETE_RECYCLE_CONTACTS;
-        } else if (from === "WebsiteContacts") {
-            url = CONTACT_US.DELETE_CONTACTS;
-        }
-        return url;
+    const getURL = (urlSelected :string) => {
+        return urlSelected;
     };
 
-    const getDeletedIds = (rowlist: WEBSITE_CONTACTS[]) => {
+    const getDeletedIds = (rowlist: LEAD_REPORT[] | WEBSITE_CONTACTS[]) => {
         const idList: number[] = [
         ];
-        rowlist.map((item: WEBSITE_CONTACTS) => {
+        rowlist.map((item: (LEAD_REPORT | WEBSITE_CONTACTS)) => {
             return idList.push(item.id);
         });
         return idList;
@@ -58,14 +51,14 @@ const DeleteRecords = (props: PropsTypes) => {
         }));
     };
 
-    const deleteRecords = (itemlist: WEBSITE_CONTACTS[]) => {
+    const deleteRecords = (itemlist: LEAD_REPORT[] | WEBSITE_CONTACTS[]) => {
         dispatch(showLoader());
         const request = new ServiceRequest();
         request.addData({
-            idList: JSON.stringify(getDeletedIds(itemlist))
+            idList:JSON.stringify(getDeletedIds(itemlist))
         });
         useFetch().placePOSTRequest(
-            getURL(props.from), 
+            getURL(props.url), 
             request, 
             (resp) => {
                 return successCB(resp, getDeletedIds(itemlist)); 
@@ -75,8 +68,7 @@ const DeleteRecords = (props: PropsTypes) => {
     };
 
     
-    const onClickDelete = (deletedRow: WEBSITE_CONTACTS[]) => {
-        
+    const onClickDelete = (deletedRow: LEAD_REPORT[] | WEBSITE_CONTACTS[]) => {
         if (deletedRow.length) {
             dispatch(showAPPDialog({
                 title: getText("DELETE_TITLE", "CONFIRMATION"),

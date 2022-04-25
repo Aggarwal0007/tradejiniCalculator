@@ -1,8 +1,7 @@
-import { ErrorType, MESSAGE_SUCCESS_RESPONSE, WEBSITE_CONTACTS } from "common/Types";
+import { ErrorType, LEAD_REPORT, MESSAGE_SUCCESS_RESPONSE, WEBSITE_CONTACTS } from "common/Types";
 import { hideLoader, showAPPDialog, 
     showLoader, showSnackBar } from "../../../state/AppConfigReducer";
 import { ServiceRequest, useFetch } from "index";
-import { CONTACT_US } from "communicator/ServiceUrls";
 import { getText } from "common/Text";
 import { IconButton } from "@mui/material";
 import { IMAGES } from "../../../common/Constants";
@@ -11,10 +10,11 @@ import { useDispatch } from "react-redux";
 
 type propsTypes = {
     updateRowSuccess: Function;
-    rowsSelected: WEBSITE_CONTACTS[]; 
+    rowsSelected: WEBSITE_CONTACTS[] |LEAD_REPORT[]; 
     name: string | undefined; 
     customClass: string;
     variant: string;
+    url: string;
 }
 
 const UpdateRecord = (props: propsTypes) => {
@@ -39,7 +39,7 @@ const UpdateRecord = (props: propsTypes) => {
         }));
     };
 
-    const updateRecords = (itemlist: Array<WEBSITE_CONTACTS>) => {
+    const updateRecords = (itemlist: Array<WEBSITE_CONTACTS | LEAD_REPORT>) => {
         dispatch(showLoader());
         const request = new ServiceRequest();
         const credentials = {
@@ -49,7 +49,7 @@ const UpdateRecord = (props: propsTypes) => {
         };
         request.addData(credentials);
         useFetch().placePOSTRequest(
-            CONTACT_US.UPDATE_CONTACTS, 
+            props.url, 
             request, 
             successCB, 
             errorCB 
@@ -57,7 +57,7 @@ const UpdateRecord = (props: propsTypes) => {
     };
 
     
-    const onClickUpdate = (selectedRecord: Array<WEBSITE_CONTACTS>) => {
+    const onClickUpdate = (selectedRecord: Array<WEBSITE_CONTACTS | LEAD_REPORT>) => {
         
         if (selectedRecord.length) {
             dispatch(showAPPDialog({

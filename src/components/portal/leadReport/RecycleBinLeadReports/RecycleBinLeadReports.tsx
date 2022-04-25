@@ -1,34 +1,34 @@
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
-import { DATE_RANGE, ErrorType, WEBSITE_CONTACTS } from "common/Types";
-import { hideLoader, showLoader, showSnackBar } from "../../../../state/AppConfigReducer";
+import { DATE_RANGE, ErrorType, LEAD_REPORT } from "common/Types";
+import { hideLoader, showLoader, showSnackBar } from "state/AppConfigReducer";
 import React, { useEffect, useState } from "react";
 import { ServiceRequest, useFetch } from "index";
-import { CONTACT_US } from "communicator/ServiceUrls";
-import CustomToolbar from "./CustomToolbarRecyclebin";
-import DateRange from "../DateRange";
-import DeleteRecords from "../DeleteRecords";
+import DateRange from "../../contactus/DateRange";
+import DeleteRecords from "../../contactus/DeleteRecords";
+import { LEADFORM } from "communicator/ServiceUrls";
+import LeadToolbarRecyclebin from "./LeadToolbarRecyclebin";
 import { Paper } from "@mui/material";
-import RestoreRecords from "./RestoreRecords";
+import RestoreLeadReport from "./RestoreLeadReports";
 import { useDispatch } from "react-redux";
 
-const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
+const RecycleBinLeadReports = ( props: { hideRecycleContent: Function; }) => {
 
     const fetchAPI = useFetch();
     const dispatch = useDispatch();
 
     const [
-        availbleContacts, setAvailableContacts
-    ] = useState<WEBSITE_CONTACTS[]>([
-    ]);
-
-    const [
-        selectedRows, setSelectedRows
-    ] = useState<WEBSITE_CONTACTS[]>([
+        availbleReports, setAvailableReports
+    ] = useState<LEAD_REPORT[]>([
     ]);
 
     const [
         errormsg, setErrorMsg
     ] = useState<string | null>("");
+
+    const [
+        selectedRows, setSelectedRows
+    ] = useState<LEAD_REPORT[]>([
+    ]);
 
     const successCB = (response: { d: []; }) => {
         dispatch(hideLoader());
@@ -38,7 +38,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
         } else {
             setErrorMsg("");
         }
-        setAvailableContacts(response.d);
+        setAvailableReports(response.d);
     };
 
     const errorCB = (error: ErrorType) => {
@@ -62,7 +62,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             request.addData({});
         }
 
-        fetchAPI.placeGETRequest(CONTACT_US.GET_RECYCLE_CONTACTS, request, successCB, errorCB);
+        fetchAPI.placeGETRequest(LEADFORM.GET_RECYCLE_LEADFORM, request, successCB, errorCB);
     };
 
     useEffect(() => {
@@ -70,22 +70,29 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
     }, [
     ]);
 
+    const animateRecord = (records: number[]) => {
+        console.log("records", records);
+        getData();
+    };
 
     const updateDateRangeValues = (dateValue: DATE_RANGE) => {
         console.log("dateValue", dateValue);
         getData(dateValue.startDate, dateValue.endDate);
     };
 
-    const animateRecord = (records: number[]) => {
-        console.log("records", records);
-        getData();
+    const getselectedRows = (ids: Iterable<unknown>) => {
+        const selectedIDs = new Set(ids);
+        const selectedItems = availbleReports.filter((row: LEAD_REPORT) => {
+            return selectedIDs.has(row.id);
+        });
+        setSelectedRows(selectedItems);
     };
 
-    const getRemarks = (params: {row: WEBSITE_CONTACTS}) => {
+    const getRemarks = (params: {row: LEAD_REPORT}) => {
         return params.row.remarks ? params.row.remarks : "-";
     };
 
-    const getAssignTo = (params: {row: WEBSITE_CONTACTS}) => {
+    const getAssignTo = (params: {row: LEAD_REPORT}) => {
         return params.row.assignto ? params.row.assignto : "-";
     };
 
@@ -104,16 +111,16 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             field: "name",
             headerName: "Name",
             flex: 1.0,
-            minWidth: 150,
+            minWidth: 50,
             editable: true,
             disableColumnMenu: true,
             headerClassName: "custom-header"
         },
         {
-            field: "phone",
-            headerName: "Phone No",
+            field: "contactno",
+            headerName: "Contact",
             flex: 1.0,
-            minWidth: 80,
+            minWidth: 100,
             editable: true,
             disableColumnMenu: true,
             sortable: false,
@@ -130,10 +137,20 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             headerClassName: "custom-header"
         },
         {
-            field: "subject",
-            headerName: "Subject",
+            field: "city",
+            headerName: "City",
             flex: 1.0,
             minWidth: 150,
+            editable: true,
+            disableColumnMenu: true,
+            headerClassName: "custom-header",
+            sortable: false
+        },
+        {
+            field: "partner_id",
+            headerName: "Partner Id",
+            flex: 1.0,
+            minWidth: 50,
             editable: true,
             disableColumnMenu: true,
             headerClassName: "custom-header",
@@ -174,16 +191,6 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
                 return (
                     <>
 
-                        <RestoreRecords
-                            customClass="restore_icon"
-                            rowsSelected={[
-                                params.row
-                            ]}
-                            name="Restore"
-                            variant="text"
-                            restoreRowSuccess={animateRecord}
-                        />
-
                         <DeleteRecords
                             customClass="delete-icon"
                             rowsSelected={[
@@ -193,7 +200,16 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
                             variant="text"
                             deleteRowSuccess={animateRecord}
                             from="Recycle"
-                            url={CONTACT_US.DELETE_RECYCLE_CONTACTS}
+                            url={LEADFORM.DELETE_RECYCLE_LEADFORM}
+                        />
+                        <RestoreLeadReport
+                            customClass="restore_icon"
+                            rowsSelected={[
+                                params.row
+                            ]}
+                            name="Restore"
+                            variant="text"
+                            restoreRowSuccess={animateRecord}
                         />
                     </>
 
@@ -201,17 +217,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             }
         },
     ];
-
-    const getselectedRows = (ids: Iterable<unknown>) => {
-        const selectedIDs = new Set(ids);
-        const selectedItems = availbleContacts.filter((row: WEBSITE_CONTACTS) => {
-            return selectedIDs.has(row.id);
-        });
-        setSelectedRows(selectedItems);
-    };
-
     return (
-
         <Paper>
             <div
                 className="contactus-table-container"
@@ -220,10 +226,10 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             >
 
                 {
-                    availbleContacts && availbleContacts.length ?
+                    availbleReports && availbleReports.length ?
 
                         <DataGrid
-                            rows={availbleContacts}
+                            rows={availbleReports}
                             columns={columns}
                             // pageSize={30}
                             // autoHeight
@@ -235,15 +241,14 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
                             checkboxSelection
                             disableSelectionOnClick
                             components={{
-                                Toolbar: CustomToolbar,
+                                Toolbar: LeadToolbarRecyclebin,
                             }}
                             componentsProps={{
                                 toolbar: {
                                     recordsSelected: selectedRows,
                                     goToAnimation: animateRecord,
                                     setDateRangeValues: updateDateRangeValues,
-                                    showContactUsModel: props.hideRecycleContent,
-                                    url: CONTACT_US.GET_RECYCLE_CONTACTS
+                                    showLeadReportModel: props.hideRecycleContent,
                                 }
                             }}
                             onSelectionModelChange={(ids) => {
@@ -278,4 +283,4 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
     );
 };
 
-export default RecycleBinContacts;
+export default RecycleBinLeadReports;

@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import LeadReportTable from "./LeadReportTable";
+import RecycleBinLeadReports from "./RecycleBinLeadReports/RecycleBinLeadReports";
 
 const LeadReportBase = () => {
 
+    const [
+        openRecycle, setOpenRecycle
+    ] = useState<boolean>(false);
+
     return (
         <>
-           Lead Report
+            { openRecycle ? 
+                <RecycleBinLeadReports 
+                    hideRecycleContent = {() => {
+                        setOpenRecycle(false); 
+                    }}
+                />
+                :
+                <LeadReportTable showRecycleContent = {() => {
+                    setOpenRecycle(true); 
+                }}/>
+            }
         </>
     );
 };

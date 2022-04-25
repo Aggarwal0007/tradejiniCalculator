@@ -33,8 +33,8 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
 
     const successCB = (response: { d: Array<WEBSITE_CONTACTS> }) => {
         dispatch(hideLoader());
-        console.log("getResponse", response);
-        if (response && response.d.length as unknown as number === 0) {
+        console.log("getResponse", response, response.d.length);
+        if (response && response.d.length === 0) {
             setErrorMsg("No data available");
         } else {
             setErrorMsg("");
@@ -204,6 +204,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
                             name="Update"
                             variant="text"
                             updateRowSuccess={animateRecord}
+                            url={CONTACT_US.UPDATE_CONTACTS}
                         />
 
                         <DeleteRecords
@@ -215,6 +216,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
                             variant="text"
                             deleteRowSuccess={animateRecord}
                             from="WebsiteContacts"
+                            url={CONTACT_US.DELETE_CONTACTS}              
                         />
                     </>
 
@@ -275,7 +277,6 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
                         <>
                             {
                                 errormsg && errormsg.length ?
-
                                     <div className="no-data-container">
                                         <DateRange
                                             dateRangeValues={updateDateRangeValues}

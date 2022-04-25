@@ -73,6 +73,19 @@ export interface WEBSITE_CONTACTS {
     remarks: string | null,
     assignto: string | null
 }
+export interface LEAD_REPORT {
+    id: number,
+    name: string,
+    contactno: string,
+    email: string,
+    city: string,
+    message: string,
+    status: number,
+    date: string,
+    remarks: string | null,
+    assignto: string | null
+}
+
 
 export interface DATE_RANGE {
     startDate: string,

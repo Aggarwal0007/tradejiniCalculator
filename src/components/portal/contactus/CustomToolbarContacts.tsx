@@ -1,4 +1,4 @@
-import { DATE_RANGE, WEBSITE_CONTACTS } from "common/Types";
+import { DATE_RANGE, LEAD_REPORT, WEBSITE_CONTACTS } from "common/Types";
 import { Grid, IconButton } from "@mui/material";
 import { GridToolbarContainer, GridToolbarExport } from "@mui/x-data-grid";
 import DateRange from "./DateRange";
@@ -7,10 +7,11 @@ import { IMAGES } from "../../../common/Constants";
 import React from "react";
 
 type PropsTypes = {
-    deleteRows: WEBSITE_CONTACTS[];
+    deleteRows: WEBSITE_CONTACTS[] | LEAD_REPORT[];
     goToAnimation: (arg0: number[]) => void;
     recycleBinModel: React.MouseEventHandler<HTMLButtonElement>;
     setDateRangeValues: (arg0: DATE_RANGE) => void;
+    url:string;
 }
 
 function CustomToolbarContacts(props: PropsTypes) {
@@ -28,6 +29,7 @@ function CustomToolbarContacts(props: PropsTypes) {
                         variant="text"
                         deleteRowSuccess={props.goToAnimation}
                         from="WebsiteContacts"
+                        url={props.url}
                     />
 
                     <IconButton
