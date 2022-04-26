@@ -90,7 +90,6 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             flex: 1.0,
             minWidth: 180,
             type: "dateTime",
-            editable: true,
             headerClassName:"custom-header",
             disableColumnMenu: true,
             renderCell: (params) => {
@@ -107,8 +106,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             field: "name",
             headerName: "Name",
             flex: 1.0,
-            minWidth: 50,
-            editable: true,
+            minWidth: 50, 
             disableColumnMenu: true,
             headerClassName: "custom-header",
             renderCell: (params) => {
@@ -126,128 +124,166 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             headerName: "Contact",
             flex: 1.0,
             minWidth: 100,
-            editable: true,
             disableColumnMenu: true,
             sortable: false,
-            headerClassName: "custom-header"
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.contactno}
+                    </div>
+                );
+            }
         },
         {
             field: "email",
             headerName: "Email Id",
             flex: 1.0,
             minWidth: 150,
-            editable: true,
             disableColumnMenu: true,
             sortable: false,
-            headerClassName: "custom-header"
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.email}
+                    </div>
+                );
+            }
         },
         {
             field: "city",
             headerName: "City",
             flex: 1.0,
             minWidth: 150,
-            editable: true,
             disableColumnMenu: true,
             headerClassName: "custom-header",
-            sortable: false
+            sortable: false,
+            renderCell: (params) => {
+                return (
+                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.city}
+                    </div>
+                );
+            }
         },
         {
             field: "partner_id",
             headerName: "Partner Id",
             flex: 1.0,
             minWidth: 50,
-            editable: true,
             disableColumnMenu: true,
             headerClassName: "custom-header",
-            sortable: false
+            sortable: false,
+            renderCell: (params) => {
+                return (
+                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.partner_id}
+                    </div>
+                );
+            }
         },
         {
             field: "assignto",
             headerName: "Assign To",
-            // flex: 1.0,
             minWidth: 150,
-            // disableClickEventBubbling: true,
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <TextField
-                        type="text"
-                        defaultValue={params.row.assignto}
-                        InputLabelProps={{ shrink: true }}
-                        onChange={(evt) => {
-                            return params.api.updateRows([
-                                { ...params.row, assignto: evt.target.value }
-                            ]);
-                        }
-                        }
-                    />
+                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        <TextField
+                            type="text"
+                            defaultValue={params.row.assignto}
+                            InputLabelProps={{ shrink: true }}
+                            onChange={(evt) => {
+                                return params.api.updateRows([
+                                    { ...params.row, assignto: evt.target.value }
+                                ]);
+                            }
+                            }
+                        />
+                    </div>
                 );
             }
         },
         {
             field: "remarks",
             headerName: "Remarks",
-            // flex: 1.0,
             minWidth: 200,
-            // disableClickEventBubbling: true,
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <TextField
-                        type="text"
-                        className="assignto-input"
-                        defaultValue={params.row.remarks}
-                        InputLabelProps={{ shrink: true }}
-                        onChange={(evt) => {
-                            return params.api.updateRows([
-                                { ...params.row, remarks: evt.target.value }
-                            ]);
-                        }
-                        }
-                    />
+                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        <TextField
+                            type="text"
+                            className="assignto-input"
+                            defaultValue={params.row.remarks}
+                            InputLabelProps={{ shrink: true }}
+                            onChange={(evt) => {
+                                return params.api.updateRows([
+                                    { ...params.row, remarks: evt.target.value }
+                                ]);
+                            }
+                            }
+                        />
+                    </div>
                 );
             }
+            
         },
         {
             field: "actions",
             headerName: "Actions",
-            // flex: 1.0,
             minWidth: 100,
-            editable: true,
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <>
-                        <UpdateRecord
-                            customClass="update_icon"
-                            rowsSelected={[
-                                params.row
-                            ]}
-                            name="Update"
-                            variant="text"
-                            updateRowSuccess={animateRecord}
-                            url={LEADFORM.UPDATE_LEADFORM}
-                        />
+                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : "actions-enable"}`}>
+                        <>
+                            <UpdateRecord
+                                customClass="update_icon"
+                                rowsSelected={[
+                                    params.row
+                                ]}
+                                name="Update"
+                                variant="text"
+                                updateRowSuccess={animateRecord}
+                                url={LEADFORM.UPDATE_LEADFORM}
+                            />
 
-                        <DeleteRecords
-                            customClass="delete-icon"
-                            rowsSelected={[
-                                params.row
-                            ]}
-                            name="Delete"
-                            variant="text"
-                            deleteRowSuccess={animateRecord}
-                            from="LeadReports"
-                            url={LEADFORM.DELETE_LEADFORM}
-                        />
-                    </>
-
+                            <DeleteRecords
+                                customClass="delete-icon"
+                                rowsSelected={[
+                                    params.row
+                                ]}
+                                name="Delete"
+                                variant="text"
+                                deleteRowSuccess={animateRecord}
+                                from="LeadReports"
+                                url={LEADFORM.DELETE_LEADFORM}
+                            />
+                        </>
+                    </div>
                 );
             }
         },
@@ -285,7 +321,6 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
                             isRowSelectable={(params: GridRowParams) => {
                                 return !params.row.assignto || params.row.status === 1; 
                             }}
-
                             checkboxSelection
                             disableSelectionOnClick
                             components={{

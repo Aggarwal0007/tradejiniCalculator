@@ -1,4 +1,4 @@
-import { DataGrid, GridColumns } from "@mui/x-data-grid";
+import { DataGrid, GridColumns, GridRowParams } from "@mui/x-data-grid";
 import { DATE_RANGE, ErrorType, LEAD_REPORT } from "common/Types";
 import { hideLoader, showLoader, showSnackBar } from "state/AppConfigReducer";
 import React, { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ import { Paper } from "@mui/material";
 import RestoreLeadReport from "./RestoreLeadReports";
 import { useDispatch } from "react-redux";
 
-const RecycleBinLeadReports = ( props: { hideRecycleContent: Function; }) => {
+const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
 
     const fetchAPI = useFetch();
     const dispatch = useDispatch();
@@ -88,13 +88,13 @@ const RecycleBinLeadReports = ( props: { hideRecycleContent: Function; }) => {
         setSelectedRows(selectedItems);
     };
 
-    const getRemarks = (params: {row: LEAD_REPORT}) => {
-        return params.row.remarks ? params.row.remarks : "-";
-    };
+    // const getRemarks = (params: { row: LEAD_REPORT }) => {
+    //     return params.row.remarks ? params.row.remarks : "-";
+    // };
 
-    const getAssignTo = (params: {row: LEAD_REPORT}) => {
-        return params.row.assignto ? params.row.assignto : "-";
-    };
+    // const getAssignTo = (params: { row: LEAD_REPORT }) => {
+    //     return params.row.assignto ? params.row.assignto : "-";
+    // };
 
     const columns: GridColumns = [
         {
@@ -103,118 +103,182 @@ const RecycleBinLeadReports = ( props: { hideRecycleContent: Function; }) => {
             flex: 1.0,
             minWidth: 180,
             type: "dateTime",
-            editable: true,
             headerClassName: "custom-header",
-            disableColumnMenu: true
+            disableColumnMenu: true,
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.date}
+                    </div>
+                );
+            }
         },
         {
             field: "name",
             headerName: "Name",
             flex: 1.0,
             minWidth: 50,
-            editable: true,
             disableColumnMenu: true,
-            headerClassName: "custom-header"
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.name}
+                    </div>
+                );
+            }
         },
         {
             field: "contactno",
             headerName: "Contact",
             flex: 1.0,
             minWidth: 100,
-            editable: true,
             disableColumnMenu: true,
             sortable: false,
-            headerClassName: "custom-header"
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.contactno}
+                    </div>
+                );
+            }
         },
         {
             field: "email",
             headerName: "Email Id",
             flex: 1.0,
             minWidth: 150,
-            editable: true,
             disableColumnMenu: true,
             sortable: false,
-            headerClassName: "custom-header"
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.email}
+                    </div>
+                );
+            }
         },
         {
             field: "city",
             headerName: "City",
             flex: 1.0,
             minWidth: 150,
-            editable: true,
             disableColumnMenu: true,
             headerClassName: "custom-header",
-            sortable: false
+            sortable: false,
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.city}
+                    </div>
+                );
+            }
         },
         {
             field: "partner_id",
             headerName: "Partner Id",
             flex: 1.0,
             minWidth: 50,
-            editable: true,
             disableColumnMenu: true,
             headerClassName: "custom-header",
-            sortable: false
+            sortable: false,
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.partner_id}
+                    </div>
+                );
+            }
         },
         {
             field: "assignto",
             headerName: "Assign To",
-            // flex: 1.0,
             minWidth: 150,
-            // disableClickEventBubbling: true,
-            sortable: false,
-            disableColumnMenu: true,
-            headerClassName: "custom-header",
-            valueGetter: getAssignTo
-        },
-        {
-            field: "remarks",
-            headerName: "Remarks",
-            // flex: 1.0,
-            minWidth: 200,
-            // disableClickEventBubbling: true,
-            sortable: false,
-            disableColumnMenu: true,
-            headerClassName: "custom-header",
-            valueGetter: getRemarks
-        },
-        {
-            field: "actions",
-            headerName: "Actions",
-            // flex: 1.0,
-            minWidth: 100,
-            editable: true,
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <>
-
-                        <DeleteRecords
-                            customClass="delete-icon"
-                            rowsSelected={[
-                                params.row
-                            ]}
-                            name="Delete"
-                            variant="text"
-                            deleteRowSuccess={animateRecord}
-                            from="Recycle"
-                            url={LEADFORM.DELETE_RECYCLE_LEADFORM}
-                        />
-                        <RestoreLeadReport
-                            customClass="restore_icon"
-                            rowsSelected={[
-                                params.row
-                            ]}
-                            name="Restore"
-                            variant="text"
-                            restoreRowSuccess={animateRecord}
-                        />
-                    </>
-
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.assignto}
+                    </div>
                 );
             }
+            // valueGetter: getAssignTo
+        },
+        {
+            field: "remarks",
+            headerName: "Remarks",
+            minWidth: 200,
+            sortable: false,
+            disableColumnMenu: true,
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.remarks}
+                    </div>
+                );
+            }
+            // valueGetter: getRemarks
+        },
+        {
+            field: "actions",
+            headerName: "Actions",
+            minWidth: 100,
+            sortable: false,
+            disableColumnMenu: true,
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        <>
+
+                            <DeleteRecords
+                                customClass="delete-icon"
+                                rowsSelected={[
+                                    params.row
+                                ]}
+                                name="Delete"
+                                variant="text"
+                                deleteRowSuccess={animateRecord}
+                                from="Recycle"
+                                url={LEADFORM.DELETE_RECYCLE_LEADFORM}
+                            />
+                            <RestoreLeadReport
+                                customClass="restore_icon"
+                                rowsSelected={[
+                                    params.row
+                                ]}
+                                name="Restore"
+                                variant="text"
+                                restoreRowSuccess={animateRecord}
+                            />
+                        </>
+                    </div>
+                );
+            }
+
         },
     ];
     return (
@@ -237,7 +301,9 @@ const RecycleBinLeadReports = ( props: { hideRecycleContent: Function; }) => {
                             //     30
                             // ]}
                             hideFooter={true}
-
+                            isRowSelectable={(params: GridRowParams) => {
+                                return !params.row.assignto || params.row.status === 1; 
+                            }}
                             checkboxSelection
                             disableSelectionOnClick
                             components={{

@@ -81,13 +81,13 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
         getData();
     };
 
-    const getRemarks = (params: {row: WEBSITE_CONTACTS}) => {
-        return params.row.remarks ? params.row.remarks : "-";
-    };
+    // const getRemarks = (params: { row: WEBSITE_CONTACTS }) => {
+    //     return params.row.remarks ? params.row.remarks : "-";
+    // };
 
-    const getAssignTo = (params: {row: WEBSITE_CONTACTS}) => {
-        return params.row.assignto ? params.row.assignto : "-";
-    };
+    // const getAssignTo = (params: { row: WEBSITE_CONTACTS }) => {
+    //     return params.row.assignto ? params.row.assignto : "-";
+    // };
 
     const columns: GridColumns = [
         {
@@ -96,107 +96,161 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             flex: 1.0,
             minWidth: 180,
             type: "dateTime",
-            editable: true,
             headerClassName: "custom-header",
-            disableColumnMenu: true
+            disableColumnMenu: true,
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.date}
+                    </div>
+                );
+            }
         },
         {
             field: "name",
             headerName: "Name",
             flex: 1.0,
             minWidth: 150,
-            editable: true,
             disableColumnMenu: true,
-            headerClassName: "custom-header"
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.name}
+                    </div>
+                );
+            }
         },
         {
             field: "phone",
             headerName: "Phone No",
             flex: 1.0,
             minWidth: 80,
-            editable: true,
             disableColumnMenu: true,
             sortable: false,
-            headerClassName: "custom-header"
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.phone}
+                    </div>
+                );
+            }
         },
         {
             field: "email",
             headerName: "Email Id",
             flex: 1.0,
             minWidth: 150,
-            editable: true,
             disableColumnMenu: true,
             sortable: false,
-            headerClassName: "custom-header"
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.email}
+                    </div>
+                );
+            }
         },
         {
             field: "subject",
             headerName: "Subject",
             flex: 1.0,
             minWidth: 150,
-            editable: true,
             disableColumnMenu: true,
             headerClassName: "custom-header",
-            sortable: false
+            sortable: false,
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.subject}
+                    </div>
+                );
+            }
         },
         {
             field: "assignto",
             headerName: "Assign To",
-            // flex: 1.0,
             minWidth: 150,
-            // disableClickEventBubbling: true,
-            sortable: false,
-            disableColumnMenu: true,
-            headerClassName: "custom-header",
-            valueGetter: getAssignTo
-        },
-        {
-            field: "remarks",
-            headerName: "Remarks",
-            // flex: 1.0,
-            minWidth: 200,
-            // disableClickEventBubbling: true,
-            sortable: false,
-            disableColumnMenu: true,
-            headerClassName: "custom-header",
-            valueGetter: getRemarks
-        },
-        {
-            field: "actions",
-            headerName: "Actions",
-            // flex: 1.0,
-            minWidth: 100,
-            editable: true,
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <>
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.assignto}
+                    </div>
+                );
+            }
+        },
+        {
+            field: "remarks",
+            headerName: "Remarks",
+            minWidth: 200,
+            sortable: false,
+            disableColumnMenu: true,
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        {params.row.remarks}
+                    </div>
+                );
+            }
+            // valueGetter: getRemarks
+        },
+        {
+            field: "actions",
+            headerName: "Actions",
+            minWidth: 100,
+            sortable: false,
+            disableColumnMenu: true,
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return (
+                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                        "actions-disable"
+                        : " actions-enable"}`}>
+                        <>
 
-                        <RestoreRecords
-                            customClass="restore_icon"
-                            rowsSelected={[
-                                params.row
-                            ]}
-                            name="Restore"
-                            variant="text"
-                            restoreRowSuccess={animateRecord}
-                        />
+                            <RestoreRecords
+                                customClass="restore_icon"
+                                rowsSelected={[
+                                    params.row
+                                ]}
+                                name="Restore"
+                                variant="text"
+                                restoreRowSuccess={animateRecord}
+                            />
 
-                        <DeleteRecords
-                            customClass="delete-icon"
-                            rowsSelected={[
-                                params.row
-                            ]}
-                            name="Delete"
-                            variant="text"
-                            deleteRowSuccess={animateRecord}
-                            from="Recycle"
-                            url={CONTACT_US.DELETE_RECYCLE_CONTACTS}
-                        />
-                    </>
-
+                            <DeleteRecords
+                                customClass="delete-icon"
+                                rowsSelected={[
+                                    params.row
+                                ]}
+                                name="Delete"
+                                variant="text"
+                                deleteRowSuccess={animateRecord}
+                                from="Recycle"
+                                url={CONTACT_US.DELETE_RECYCLE_CONTACTS}
+                            />
+                        </>
+                    </div>
                 );
             }
         },
