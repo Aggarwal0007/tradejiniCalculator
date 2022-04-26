@@ -80,7 +80,6 @@
 
             if($stmt -> affected_rows > 0) {
 
-                // $result = json_encode(array('message' => 'Inserted Successfully!!'), true);
                 $result = array('message' => 'Inserted Successfully!!');
 
             } else {
@@ -136,9 +135,8 @@
         try {
             
             $stmt = $this->connection->prepare( $query );
-
             if($stmt === false) {
-
+                
                 throw New Exception("Unable to do prepared statement: " . $query);
             }
             

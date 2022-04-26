@@ -21,6 +21,9 @@ const ApiCommunicator = () => {
     ServiceConfig.setServiceURL(AppSettings.serviceURL);
     ServiceConfig.setApiEncryptionEnabled(AppSettings.apiEncryptionEnabled);
     ServiceConfig.setStorageEncryptionEnabled(AppSettings.localStorageEncryptionEnabled);
+    ServiceConfig.setStatus({
+        UNAUTHORIZED_ACCESS: "TJ_401",
+    });
     
     return <></>;
 };

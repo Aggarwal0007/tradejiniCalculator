@@ -24,13 +24,13 @@
          
       }
 
-      public function insertWebsiteContacts($name, $email, $phone, $message, $subject) {
+      public function insertWebsiteContacts($name, $email, $phone, $message, $subject, $remarks, $assignTo) {
 
         date_default_timezone_set('Asia/Kolkata');
 
         $date = date('Y-m-d H:i:s');
         
-        return $this->insert("INSERT INTO website_contact (name, phone, email, subject, message, date ) VALUES (?,?,?,?,?,?)", ["ssssss", $name, $phone, $email, $subject, $message, $date ]);
+        return $this->insert("INSERT INTO website_contact (name, phone, email, subject, message, date, remarks, assignto ) VALUES (?,?,?,?,?,?,?,?)", ["ssssssss", $name, $phone, $email, $subject, $message, $date, $remarks, $assignTo ]);
 
      }
 

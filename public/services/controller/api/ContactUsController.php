@@ -2,10 +2,10 @@
 
 session_start();
 
-if ( ! isset( $_SESSION['user'] ) )
-{
-    send_unauthorized();
-}
+// if ( ! isset( $_SESSION['user'] ) )
+// {
+//     send_unauthorized();
+// }
 
     class ContactUsController extends BaseController {
 
@@ -93,13 +93,27 @@ if ( ! isset( $_SESSION['user'] ) )
                     if(isset($_POST['message'])) {
                         $message = htmlspecialchars( $_POST["message"] );
                     } 
+
                     if(isset($_POST['subject'])) {
                         $subject = htmlspecialchars( $_POST["subject"] );
                     } 
 
+                    if(isset($_POST['remarks'])) {
+                        $remarks = htmlspecialchars( $_POST["remarks"] );
+                    } else {
+                        $remarks = "";
+                    }
+
+                    if(isset($_POST['assignTo'])) {
+                        $assignTo = htmlspecialchars( $_POST["assignTo"] );
+                    } else  {
+                        $assignTo = "";
+                    }
+
+
                     if(isset($name) && isset($email)) {
                        
-                        $responseData = $configModel->insertWebsiteContacts($name, $email, $phone, $message, $subject);
+                        $responseData = $configModel->insertWebsiteContacts($name, $email, $phone, $message, $subject, $remarks, $assignTo);
 
                         // $responseData = $configData;
                         // $responseData = json_encode($configData);

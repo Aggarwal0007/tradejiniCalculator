@@ -5,12 +5,17 @@ import React, { useState } from "react";
 import { ServiceRequest, useFetch } from "index";
 import AppText from "common/Text";
 import { AUTH } from "communicator/ServiceUrls";
+import { showSnackBar } from "../../state/AppConfigReducer";
 import { storeLoginDetails } from "common/Bridge";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 
 const PortalLogin = () => {
     const fetchAPI = useFetch();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
         
     const [
         user, setUser
@@ -38,6 +43,10 @@ const PortalLogin = () => {
 
     const errorCB = (error: ErrorType) => {
         console.log("login Error:", error.message);
+        dispatch(showSnackBar({
+            message: "Invalid credentials",
+            status: "error"
+        }));
         navigate(SCREENS.LOGIN);
     };
 

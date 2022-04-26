@@ -26,8 +26,8 @@
        
         $inSeparation = trim(str_repeat('?,', count($restoreIDs)), ',');
 
-        $st = "INSERT INTO $tbName (id, name, phone, email, subject, message, status, date, remarks, assignto)
-                SELECT id, name, phone, email, subject, message, status, date, remarks, assignto FROM $tableName WHERE id IN ($inSeparation)";
+        $st = "INSERT INTO $tbName (id, name, contactno, email, city, date, status, partner_id, remarks, assignto)
+                SELECT id, name, contactno, email, city, date, status, partner_id, remarks, assignto FROM $tableName WHERE id IN ($inSeparation)";
         
          $this->insert($st, [$params_annotation, ...$restoreIDs]);
 
