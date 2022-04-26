@@ -55,6 +55,11 @@ const DateRange = (props: PropsTypes) => {
                 props && props.dateRangeValues && props.dateRangeValues(dateRange);
             }
             
+        } else {
+            dispatch(showSnackBar({
+                message: "Please select Date Range",
+                status: "error"
+            }));
         }
         
     };
