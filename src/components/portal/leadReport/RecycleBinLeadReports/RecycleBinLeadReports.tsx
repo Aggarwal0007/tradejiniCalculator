@@ -107,7 +107,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             disableColumnMenu: true,
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.date}
@@ -124,7 +124,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.name}
@@ -142,7 +142,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.contactno}
@@ -160,7 +160,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.email}
@@ -178,7 +178,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             sortable: false,
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.city}
@@ -196,7 +196,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             sortable: false,
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.partner_id}
@@ -213,7 +213,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.assignto}
@@ -231,7 +231,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.remarks}
@@ -249,7 +249,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         <>
@@ -302,7 +302,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
                             // ]}
                             hideFooter={true}
                             isRowSelectable={(params: GridRowParams) => {
-                                return !params.row.assignto || params.row.status === 1; 
+                                return params.row.status !== 1;
                             }}
                             checkboxSelection
                             disableSelectionOnClick

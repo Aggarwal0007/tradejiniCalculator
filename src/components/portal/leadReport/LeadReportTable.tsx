@@ -94,7 +94,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             disableColumnMenu: true,
             renderCell: (params) => {
                 return (
-                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                    <div className= {`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.date}
@@ -111,7 +111,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                    <div className= {`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.name}
@@ -129,7 +129,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                    <div className= {`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.contactno}
@@ -147,7 +147,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                    <div className= {`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.email}
@@ -165,7 +165,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             sortable: false,
             renderCell: (params) => {
                 return (
-                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                    <div className= {`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.city}
@@ -183,7 +183,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             sortable: false,
             renderCell: (params) => {
                 return (
-                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                    <div className= {`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.partner_id}
@@ -200,7 +200,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                    <div className= {`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         <TextField
@@ -227,7 +227,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                    <div className= {`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         <TextField
@@ -256,7 +256,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className= {`${params.row.assignto || params.row.status === 1 ?
+                    <div className= {`${params.row.status === 1 ?
                         "actions-disable"
                         : "actions-enable"}`}>
                         <>
@@ -319,7 +319,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
                             // ]}
                             hideFooter={true}
                             isRowSelectable={(params: GridRowParams) => {
-                                return !params.row.assignto || params.row.status === 1; 
+                                return params.row.status !== 1;
                             }}
                             checkboxSelection
                             disableSelectionOnClick

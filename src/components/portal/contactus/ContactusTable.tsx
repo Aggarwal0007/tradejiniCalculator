@@ -93,7 +93,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             disableColumnMenu: true,
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.date}
@@ -110,7 +110,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.name}
@@ -128,7 +128,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.phone}
@@ -146,7 +146,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.email}
@@ -164,7 +164,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             sortable: false,
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         {params.row.subject}
@@ -181,7 +181,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         <TextField
@@ -208,7 +208,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         <TextField
@@ -238,7 +238,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <div className={`${params.row.assignto || params.row.status === 1 ?
+                    <div className={`${params.row.status === 1 ?
                         "actions-disable"
                         : " actions-enable"}`}>
                         <>
@@ -302,7 +302,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
                             // ]}
                             hideFooter={true}
                             isRowSelectable={(params: GridRowParams) => {
-                                return !params.row.assignto || params.row.status === 1;
+                                return params.row.status !== 1;
                             }}
                             checkboxSelection
                             disableSelectionOnClick
