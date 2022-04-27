@@ -1,7 +1,7 @@
 {
   "name": "tradejini-spa-website",
   "version": "0.1.0",
-  "homepage": "https://services-tradejini-dev.iouring.in/spa/build",
+  "homepage": "https://services-tradejini-dev.iouring.in/spa",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.2",

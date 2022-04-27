@@ -316,7 +316,8 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
                                     deleteRows: selectedRows,
                                     goToAnimation: animateRecord,
                                     setDateRangeValues: updateDateRangeValues,
-                                    recycleBinModel: props.showRecycleContent
+                                    recycleBinModel: props.showRecycleContent,
+                                    url: CONTACT_US.DELETE_CONTACTS
                                 }
                             }}
                             onSelectionModelChange={(ids) => {
