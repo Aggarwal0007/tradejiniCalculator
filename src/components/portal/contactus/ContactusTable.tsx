@@ -178,7 +178,8 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             minWidth: 150,
             sortable: false,
             disableColumnMenu: true,
-            headerClassName: "custom-header",
+            headerClassName: "assignto-cell",
+            cellClassName: "assignto-cell",
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
@@ -205,7 +206,8 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             minWidth: 200,
             sortable: false,
             disableColumnMenu: true,
-            headerClassName: "custom-header",
+            headerClassName: "remarks-cell",
+            cellClassName: "remarks-cell",
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?

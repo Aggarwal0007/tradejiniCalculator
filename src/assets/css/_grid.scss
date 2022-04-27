@@ -1,0 +1,118 @@
+.contactus-table-container .assignto-cell input {
+  padding: 5px 10px !important;
+  width: 100px !important;
+  font-size: 12px !important;
+}
+
+.contactus-table-container .remarks-cell input {
+  padding: 5px 10px !important;
+  width: 200px !important;
+  font-size: 12px !important;
+}
+
+.date-range-container .MuiFormControl-root input {
+  padding: 5px 10px !important;
+  width: 100px !important;
+  font-size: 12px !important;
+}
+
+.date-range-container .MuiFormLabel-filled,
+.date-range-container .Mui-focused {
+  top: 0 !important;
+}
+
+.date-range-container label {
+  top: -14px !important;
+}
+
+.MuiDataGrid-cell:focus {
+  outline: none !important;
+}
+
+.MuiDataGrid-columnHeader {
+  outline: none !important;
+}
+
+.MuiDataGrid-columnHeaders {
+  background-color: #00cd97;
+  color: #fff;
+}
+
+.date-range-selector {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.actions-disable {
+  pointer-events: none;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.actions-enable {
+  pointer-events: all;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.delete-all-icon,
+.restore-all-icon {
+  width: 24px;
+  height: auto;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.update-icon {
+  width: 24px;
+  height: auto;
+}
+
+.delete-icon,
+.back-to-contacts-icon {
+  width: 24px;
+  height: auto;
+}
+
+.recycle-bin-icon,
+.restore_icon {
+  width: 30px;
+  height: auto;
+}
+
+.date-range-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 276px;
+  padding: 0 15px !important;
+}
+
+.date-go-btn {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 10px !important;
+  min-width: 10px !important;
+}
+
+.no-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 7px;
+}
+
+.error-message {
+  font-size: 12px;
+  color: red;
+}
