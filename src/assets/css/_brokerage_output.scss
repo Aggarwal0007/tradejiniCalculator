@@ -242,7 +242,7 @@
   content: "\20B9";
   padding: 2px 4px;
   margin-top: 6px;
-  color: #fff;
+  color: $primary_font_color;
 }
 
 .brokerage-label,
@@ -255,7 +255,7 @@
 }
 
 .segment-selection .segment-item:hover {
-  background-color: #639;
+  background-color: $background_secondary_color;
 }
 
 .qty-input select {
@@ -263,11 +263,11 @@
   max-width: 140px;
   margin: 0 auto;
   line-height: normal;
-  background: #151515;
+  background: $background_tertiary_color;
   outline: 0;
   border: 0;
   padding: 8px;
-  color: #eee;
+  color: $secondary_font_color;
   border-radius: 4px;
 }
 

@@ -7,7 +7,7 @@ const language = storage.getFromLocalStorage(WINDOW_STORAGE.APP_LANG) || languag
 const theme = storage.getFromLocalStorage(WINDOW_STORAGE.APP_THEME) || THEME.LIGHT;
 
 interface snackBarPropType {
-    show: boolean
+    show: boolean 
     message: string
     status: "success" | "error" | "warning" | "info"
 }

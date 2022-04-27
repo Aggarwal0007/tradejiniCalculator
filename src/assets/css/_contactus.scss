@@ -27,7 +27,7 @@
   transform: "translate(-50%, -50%)";
   width: 400;
   background-color: "background.paper";
-  border: "2px solid #000";
+  border: 2px solid $primary-border-color;
   box-shadow: 24;
   padding: 4;
   min-width: 300px;
@@ -35,12 +35,6 @@
 
 .modal-btns {
   display: flex;
-}
-
-.dashboard-header {
-  background: #f9f9f9 !important;
-  height: 80px;
-  max-height: 80px;
 }
 
 .lang-select legend {

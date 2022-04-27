@@ -6,8 +6,8 @@
 
 .contactusTable-btns button,
 .contactsTable-head th {
-  background-color: #00cd97 !important;
-  color: white;
+  background-color: $primary_btn_color !important;
+  color: $primary_font_color;
   border: none;
   font-size: 14px !important;
   padding: 5px 30px !important;
@@ -15,7 +15,7 @@
 }
 
 .contactus-table button:hover {
-  background-color: #00cd97;
+  background-color: $primary_btn_color;
 }
 
 .remarks-field legend,
@@ -35,15 +35,7 @@
   height: auto !important;
   font-size: 12px !important;
   text-transform: capitalize !important;
-  color: white !important;
-}
-
-.delete-btn {
-  background-color: #f44336 !important;
-}
-
-.update-btn {
-  background-color: #008cba !important;
+  color: $primary_font_color !important;
 }
 
 .deletion-animation {

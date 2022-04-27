@@ -45,8 +45,8 @@ code {
 .portal-header {
   width: 100%;
   height: 40px;
-  background: #f9f9f9 !important;
-  border-bottom: 1px solid #eee;
+  background: $brokerage-primary-bg-color !important;
+  border-bottom: 1px solid $secondary_font_color;
 }
 
 .portal-logo {
@@ -70,7 +70,7 @@ code {
 }
 
 .portal-menu-item {
-  color: #000;
+  color: $primary-border-color;
   text-decoration: none;
   font-weight: 500;
   font-size: 13px;
@@ -80,8 +80,10 @@ code {
 }
 
 .portal-menu-item.active-menu {
-  color: #00cd97 !important;
-  border-bottom: 1px solid #00cd97;
+  background-color: $primary_btn_color !important;
+  color: $primary_font_color !important;
+  padding: 5px;
+  border-radius: 4px;
 }
 
 .settings-avatar-btn {
@@ -89,20 +91,6 @@ code {
 }
 
 /* Contact us screen */
-.contact-header {
-  background-color: #f9f9f9;
-  height: 40px;
-  padding: 5px;
-}
-
-.custom-btn {
-  padding: 5px 10px !important;
-  margin: 5px !important;
-  color: #1976d2 !important;
-  font-size: 13px !important;
-  line-height: 23px !important;
-  border: opx !important;
-}
 
 .MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.css-1tihz4g-MuiPaper-root > div > div:first-child,
 .MuiDialogContent-root.css-9yjdhh-MuiDialogContent-root > div > div:first-child {
@@ -155,148 +143,148 @@ code {
 }
 
 .MuiDataGrid-columnHeaders.css-f3jnds-MuiDataGrid-columnHeaders {
-  background-color: #00cd97;
-  color: #fff;
+  background-color: $primary_btn_color;
+  color: $primary_font_color;
 }
 
 /* custom scrollBar css starts here */
 
 /* width */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
+// ::-webkit-scrollbar {
+//   width: 5px;
+//   height: 5px;
+// }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+// /* Track */
+// ::-webkit-scrollbar-track {
+//   background: #f1f1f1;
+// }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #00cd97;
-}
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//   background: #00cd97;
+// }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #00cd97;
-}
+// /* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #00cd97;
+// }
 
 /* custom scrollBar css ends here */
 
 /* Loader styles starts here */
-.loader-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10000;
-  width: 100vw;
-  min-height: 100vh;
-  background-color: rgb(200 200 200 / 5%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-}
+// .loader-container {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   z-index: 10000;
+//   width: 100vw;
+//   min-height: 100vh;
+//   background-color: rgb(200 200 200 / 5%);
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   opacity: 0;
+//   visibility: hidden;
+// }
 
-.show {
-  opacity: 1;
-  visibility: visible;
-}
+// .show {
+//   opacity: 1;
+//   visibility: visible;
+// }
 
-.loading-div {
-  position: relative;
-}
+// .loading-div {
+//   position: relative;
+// }
 
-.stage {
-  display: flex;
-  justify-content: center;
-  height: 20px;
-}
+// .stage {
+//   display: flex;
+//   justify-content: center;
+//   height: 20px;
+// }
 
-.dot-pulse {
-  position: relative;
-  left: -9999px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #00cd97;
-  color: #00cd97;
-  box-shadow: 9999px 0 0 -5px;
-  animation: dot-pulse 1.5s infinite linear;
-  animation-delay: 0.25s;
-}
+// .dot-pulse {
+//   position: relative;
+//   left: -9999px;
+//   width: 10px;
+//   height: 10px;
+//   border-radius: 5px;
+//   background-color: #00cd97;
+//   color: #00cd97;
+//   box-shadow: 9999px 0 0 -5px;
+//   animation: dot-pulse 1.5s infinite linear;
+//   animation-delay: 0.25s;
+// }
 
-.dot-pulse::before,
-.dot-pulse::after {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #00cd97;
-  color: #00cd97;
-}
+// .dot-pulse::before,
+// .dot-pulse::after {
+//   content: "";
+//   display: inline-block;
+//   position: absolute;
+//   top: 0;
+//   width: 10px;
+//   height: 10px;
+//   border-radius: 5px;
+//   background-color: #00cd97;
+//   color: #00cd97;
+// }
 
-.dot-pulse::before {
-  box-shadow: 9984px 0 0 -5px;
-  animation: dot-pulse-before 1.5s infinite linear;
-  animation-delay: 0s;
-}
+// .dot-pulse::before {
+//   box-shadow: 9984px 0 0 -5px;
+//   animation: dot-pulse-before 1.5s infinite linear;
+//   animation-delay: 0s;
+// }
 
-.dot-pulse::after {
-  box-shadow: 10014px 0 0 -5px;
-  animation: dot-pulse-after 1.5s infinite linear;
-  animation-delay: 0.5s;
-}
+// .dot-pulse::after {
+//   box-shadow: 10014px 0 0 -5px;
+//   animation: dot-pulse-after 1.5s infinite linear;
+//   animation-delay: 0.5s;
+// }
 
-@keyframes dot-pulse-before {
-  0% {
-    box-shadow: 9984px 0 0 -5px;
-  }
+// @keyframes dot-pulse-before {
+//   0% {
+//     box-shadow: 9984px 0 0 -5px;
+//   }
 
-  30% {
-    box-shadow: 9984px 0 0 2px;
-  }
+//   30% {
+//     box-shadow: 9984px 0 0 2px;
+//   }
 
-  60%,
-  100% {
-    box-shadow: 9984px 0 0 -5px;
-  }
-}
+//   60%,
+//   100% {
+//     box-shadow: 9984px 0 0 -5px;
+//   }
+// }
 
-@keyframes dot-pulse {
-  0% {
-    box-shadow: 9999px 0 0 -5px;
-  }
+// @keyframes dot-pulse {
+//   0% {
+//     box-shadow: 9999px 0 0 -5px;
+//   }
 
-  30% {
-    box-shadow: 9999px 0 0 2px;
-  }
+//   30% {
+//     box-shadow: 9999px 0 0 2px;
+//   }
 
-  60%,
-  100% {
-    box-shadow: 9999px 0 0 -5px;
-  }
-}
+//   60%,
+//   100% {
+//     box-shadow: 9999px 0 0 -5px;
+//   }
+// }
 
-@keyframes dot-pulse-after {
-  0% {
-    box-shadow: 10014px 0 0 -5px;
-  }
+// @keyframes dot-pulse-after {
+//   0% {
+//     box-shadow: 10014px 0 0 -5px;
+//   }
 
-  30% {
-    box-shadow: 10014px 0 0 2px;
-  }
+//   30% {
+//     box-shadow: 10014px 0 0 2px;
+//   }
 
-  60%,
-  100% {
-    box-shadow: 10014px 0 0 -5px;
-  }
-}
+//   60%,
+//   100% {
+//     box-shadow: 10014px 0 0 -5px;
+//   }
+// }
 
 /* Loader styles ends here */
 
@@ -351,7 +339,7 @@ code {
 
 .error-message {
   font-size: 12px;
-  color: red;
+  color: $error-font-color;
 }
 
 .actions-disable {

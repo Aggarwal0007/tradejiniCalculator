@@ -13,11 +13,11 @@
 }
 
 .login-btn {
-  color: white !important;
+  color: $primary_font_color !important;
 }
 
 .login-btn:hover {
-  background-color: #00cd97 !important;
+  background-color: $primary_btn_color !important;
 }
 
 .MuiTextField-root {

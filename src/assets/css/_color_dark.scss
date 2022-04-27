@@ -1,3 +1,23 @@
 [data-theme="dark"] {
   --primary-color: linear-gradient(to bottom right, grey, grey);
+  --background-primary-color: #f1f1f1;
+  --background-secondary-color: #639;
+  --background-tertiary-color: #151515;
+  --primary-btn-color: #00cd97;
+  --primary-border-color: #000;
+  --primary-font-color: #fff;
+  --secondary-font-color: #eee;
+  --tertiary-font-color: #222;
+  --error-font-color: #f00;
+  --brokerage-primary-font-color: #d7e021;
+  --brokerage-heading-bg: #4c4b49;
+  --brokerage-primary-border: #5a5d59;
+  --brokerage-primary-bg-color: #f9f9f9;
+  --brokerage-secondary-bg-color: #a49f9c;
+  --brokerage-tertiary-bg-color: #8d8c8a;
+  --brokerage-section-bg: rgb(255 255 255 / 8%);
+  --brokerage-category-bg: rgb(255 255 255 / 10%);
+  --brokerage-category-item-bg: rgb(255 255 255 / 30%);
+  --brokerage-segment-bg: #a157b8;
+  --loader-bg: rgb(200 200 200 / 5%);
 }
