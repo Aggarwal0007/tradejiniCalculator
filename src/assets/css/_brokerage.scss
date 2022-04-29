@@ -159,6 +159,7 @@
   cursor: pointer;
   font-size: 12px;
   border-radius: 5px;
+  z-index: 2 !important;
 }
 
 .actions-calc .brokerage-savings.active,
