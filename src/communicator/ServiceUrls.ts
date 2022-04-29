@@ -1,5 +1,6 @@
 export const CONFIG = {
-    BROKERAGE_CONFIG: "config/get/?key=brokerage"
+    BROKERAGE_CONFIG: "config/get/?key=brokerage",
+    COMMODITY_CONFIG: "config/get/?key=commodity"
 };
 
 export const AUTH = {
