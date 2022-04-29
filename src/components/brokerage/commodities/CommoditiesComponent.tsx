@@ -159,18 +159,21 @@ const CommoditiesCalculator = (props: PropsTypes) => {
 
     const onChangeQuantity = (qty: number) => {
         setQuantity(qty);
-        calculateBrokerageValues(qty, buyPrice, sellPrice, commodityValue, dispCommodity);
+        if (qty !== quantity)
+            calculateBrokerageValues(qty, buyPrice, sellPrice, commodityValue, dispCommodity);
     };
 
     const onChangeBuyPrice = (buyPrc: number) => {
         setBuyPrice(buyPrc);
-        calculateBrokerageValues(quantity, buyPrc, sellPrice, commodityValue, dispCommodity);
+        if (buyPrc !== buyPrice)
+            calculateBrokerageValues(quantity, buyPrc, sellPrice, commodityValue, dispCommodity);
 
     };
 
     const onChangeSellPrice = (sellPrc: number) => {
         setSellPrice(sellPrc);
-        calculateBrokerageValues(quantity, buyPrice, sellPrc, commodityValue, dispCommodity);
+        if (sellPrc !== sellPrice)
+            calculateBrokerageValues(quantity, buyPrice, sellPrc, commodityValue, dispCommodity);
 
     };
 
@@ -275,7 +278,8 @@ const CommoditiesCalculator = (props: PropsTypes) => {
                                     return onChangeBuyPrice(Number(val));
                                 }}
                                 ipValue={buyPrice}
-                                numbersOnly={true}
+                                numbersOnly = {false}
+                                isDecimal = {true}
                             />
 
                         </div>
@@ -289,7 +293,8 @@ const CommoditiesCalculator = (props: PropsTypes) => {
                                     return onChangeSellPrice(Number(val));
                                 }}
                                 ipValue={sellPrice}
-                                numbersOnly={true}
+                                numbersOnly = {false}
+                                isDecimal = {true}
                             />
 
                         </div>

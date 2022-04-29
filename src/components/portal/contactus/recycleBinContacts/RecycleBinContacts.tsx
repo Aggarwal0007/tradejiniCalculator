@@ -332,7 +332,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
 
                 }
               
-                {availbleContacts && availbleContacts.length
+                {availbleContacts && availbleContacts.length && totalRecords > 1 
                     ? <Pagination
                         count={totalRecords}
                         color="primary"

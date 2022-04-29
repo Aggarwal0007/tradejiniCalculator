@@ -74,25 +74,26 @@ const CurrenciesCalculator = (props: PropsTypes ) => {
     ]);
 
     const onChangeQuantity = (qty: number) => {
-        setQuantity(qty);        
-        calculateBrokerageValues(qty, buyPrice, sellPrice, strikePrice);
+        setQuantity(qty);
+        if (qty !== quantity)     
+            calculateBrokerageValues(qty, buyPrice, sellPrice, strikePrice);
     };
 
     const onChangeBuyPrice = (buyPrc: number) => {
         setBuyPrice(buyPrc);
-        calculateBrokerageValues(quantity, buyPrc, sellPrice, strikePrice);
-
+        if (buyPrc !== buyPrice)
+            calculateBrokerageValues(quantity, buyPrc, sellPrice, strikePrice);
     };
 
     const onChangeSellPrice = (sellPrc: number) => {
         setSellPrice(sellPrc);
-        calculateBrokerageValues(quantity, buyPrice, sellPrc, strikePrice);
-
+        if (sellPrc !== sellPrice)
+            calculateBrokerageValues(quantity, buyPrice, sellPrc, strikePrice);
     };
 
     const onChangeStrikePrice = (strikePrc: number) => {
         setStrikePrice(strikePrc);
-        calculateBrokerageValues(quantity, buyPrice, sellPrice, strikePrc);
+        // calculateBrokerageValues(quantity, buyPrice, sellPrice, strikePrc);
 
     };
 
@@ -162,7 +163,8 @@ const CurrenciesCalculator = (props: PropsTypes ) => {
                                     return onChangeBuyPrice(Number(val)); 
                                 }}
                                 ipValue={buyPrice}
-                                numbersOnly = {true}
+                                numbersOnly = {false}
+                                isDecimal = {true}
                             />
                         </div>
                     </div>
@@ -175,7 +177,8 @@ const CurrenciesCalculator = (props: PropsTypes ) => {
                                     return onChangeSellPrice(Number(val)); 
                                 }}
                                 ipValue={sellPrice}
-                                numbersOnly = {true}
+                                numbersOnly = {false}
+                                isDecimal = {true}
                             />
                         </div>
                     </div>

@@ -41,6 +41,7 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; categorySelected: 
 
 
     useEffect(() => {
+        
         if (chargesBreakDown && chargesBreakDown.brokerage) {
             if (categorySelected.toString() !== "CURRENCY_FUTURES" &&
              categorySelected.toString() !== "CURRENCY_OPTIONS") {
@@ -49,6 +50,7 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; categorySelected: 
                 setProfit(Number(chargesBreakDown.netProfit.toFixed(2)));
                 setTurnover(Number(chargesBreakDown.turnOver.toFixed(2)));
             } else {
+                
                 setBrokerageValue(Number(chargesBreakDown.brokerage.toFixed(4)));
                 setBEP(Number(chargesBreakDown.pointBreakeven.toFixed(4)));
                 setProfit(Number(chargesBreakDown.netProfit.toFixed(4)));
