@@ -1,6 +1,5 @@
 import { DATE_RANGE, LEAD_REPORT } from "common/Types";
 import { Grid, IconButton } from "@mui/material";
-import DateRange from "../../contactus/DateRange";
 import DeleteRecords from "../../contactus/DeleteRecords";
 import { GridToolbarContainer } from "@mui/x-data-grid";
 import { IMAGES } from "common/Constants";
@@ -65,9 +64,9 @@ function LeadToolbarRecyclebin(props: PropsTypes) {
                         }
                     }
                 >
-                    <DateRange
+                    {/* <DateRange
                         dateRangeValues = {props.setDateRangeValues}
-                    />
+                    /> */}
                 
                 </Grid>
             

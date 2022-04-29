@@ -33,13 +33,15 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
 
     const successCB = (response: { d: Array<WEBSITE_CONTACTS> }) => {
         dispatch(hideLoader());
-        console.log("getResponse", response, response.d.length);
-        if (response && response.d.length === 0) {
-            setErrorMsg("No data available");
-        } else {
+        console.log("getResponse", response);
+        if (response && response.d && response.d.length>0) {
+            setAvailableContacts(response.d);
             setErrorMsg("");
-        }
-        setAvailableContacts(response.d);
+        } else {
+            setAvailableContacts([
+            ]);
+            setErrorMsg("No data available");
+        }        
     };
 
     const errorCB = (error: ErrorType) => {

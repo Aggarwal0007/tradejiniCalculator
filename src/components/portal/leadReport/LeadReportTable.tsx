@@ -35,12 +35,14 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
     const successCB = (response: { d: Array<LEAD_REPORT> }) => {
         dispatch(hideLoader());
         console.log("getResponse", response);
-        if (response && response.d.length === 0) {
-            setErrorMsg("No data available");
-        } else {
+        if (response && response.d && response.d.length>0) {
+            setAvailableReports(response.d);
             setErrorMsg("");
+        } else {
+            setAvailableReports([
+            ]);
+            setErrorMsg("No data available");
         }
-        setAvailableReports(response.d);
     };
 
     const errorCB = (error: ErrorType) => {

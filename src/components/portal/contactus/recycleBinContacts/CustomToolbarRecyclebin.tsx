@@ -1,7 +1,7 @@
 import { DATE_RANGE, WEBSITE_CONTACTS } from "common/Types";
 import { Grid, IconButton } from "@mui/material";
 import { CONTACT_US } from "communicator/ServiceUrls";
-import DateRange from "../DateRange";
+// import DateRange from "../DateRange";
 import DeleteRecords from "../DeleteRecords";
 import { GridToolbarContainer } from "@mui/x-data-grid";
 import { IMAGES } from "../../../../common/Constants";
@@ -65,9 +65,9 @@ function CustomToolbarRecycleBin(props: PropsTypes) {
                         }
                     }
                 >
-                    <DateRange
+                    {/* <DateRange
                         dateRangeValues = {props.setDateRangeValues}
-                    />
+                    /> */}
                     
                 </Grid>
                 

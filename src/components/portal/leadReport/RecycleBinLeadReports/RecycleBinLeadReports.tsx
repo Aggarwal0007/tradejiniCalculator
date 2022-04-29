@@ -1,13 +1,13 @@
 import { DataGrid, GridColumns, GridRowParams } from "@mui/x-data-grid";
 import { DATE_RANGE, ErrorType, LEAD_REPORT } from "common/Types";
 import { hideLoader, showLoader, showSnackBar } from "state/AppConfigReducer";
+import { Pagination, Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { ServiceRequest, useFetch } from "index";
 import DateRange from "../../contactus/DateRange";
 import DeleteRecords from "../../contactus/DeleteRecords";
 import { LEADFORM } from "communicator/ServiceUrls";
 import LeadToolbarRecyclebin from "./LeadToolbarRecyclebin";
-import { Paper } from "@mui/material";
 import RestoreLeadReport from "./RestoreLeadReports";
 import { useDispatch } from "react-redux";
 
@@ -30,15 +30,22 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
     ] = useState<LEAD_REPORT[]>([
     ]);
 
-    const successCB = (response: { d: []; }) => {
+    const [
+        totalRecords, setTotalRecords
+    ] = useState<number>(0);
+
+    const successCB = (response: { d: [], count:number }) => {
         dispatch(hideLoader());
         console.log("getResponse", response);
-        if (response && response.d.length === 0) {
-            setErrorMsg("No data available");
-        } else {
+        if (response && response.d && response.d.length>0) {
+            setAvailableReports(response.d);
+            setTotalRecords(Math.ceil(response.count/10));
             setErrorMsg("");
+        } else {
+            setAvailableReports([
+            ]);
+            setErrorMsg("No data available");
         }
-        setAvailableReports(response.d);
     };
 
     const errorCB = (error: ErrorType) => {
@@ -50,16 +57,15 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
         }));
     };
 
-    const getData = (startDate = "", endDate = "") => {
+    const getData = (pageNo:number = 1) => {
         dispatch(showLoader());
         const request = new ServiceRequest();
-        if (startDate && endDate) {
+        if (pageNo) {
             request.addData({
-                startDate: startDate,
-                endDate: endDate
+                pageNo: pageNo
             });
         } else {
-            request.addData({});
+            request.addData({ pageNo:1 });
         }
 
         fetchAPI.placeGETRequest(LEADFORM.GET_RECYCLE_LEADFORM, request, successCB, errorCB);
@@ -70,6 +76,10 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
     }, [
     ]);
 
+    const handleChange = (evt: any, value:number) => {
+        getData(value);
+    };
+
     const animateRecord = (records: number[]) => {
         console.log("records", records);
         getData();
@@ -77,7 +87,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
 
     const updateDateRangeValues = (dateValue: DATE_RANGE) => {
         console.log("dateValue", dateValue);
-        getData(dateValue.startDate, dateValue.endDate);
+        getData();
     };
 
     const getselectedRows = (ids: Iterable<unknown>) => {
@@ -285,7 +295,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
         <Paper>
             <div
                 className="contactus-table-container"
-                style={{ height: "92vh", width: "100%" }}
+                style={{ height: "83vh", width: "100%" }}
                 id="dataGridWrapper"
             >
 
@@ -343,6 +353,14 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
 
 
                 }
+                {setAvailableReports && setAvailableReports.length && totalRecords>1
+                    ? <Pagination
+                        className="pagination"
+                        count={totalRecords}
+                        color="primary"
+                        onChange={handleChange}
+                    />
+                    :""}
             </div>
         </Paper>
 

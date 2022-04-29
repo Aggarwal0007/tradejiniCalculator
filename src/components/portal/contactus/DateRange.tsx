@@ -30,7 +30,7 @@ const DateRange = (props: PropsTypes) => {
     };
 
     const getDateRangeValue = () => {
-        if (startDate && endDate !==null) {
+        if (startDate && endDate) {
             const month =Number(startDate?.getMonth())+1;
             const fromDate = (`${startDate?.getFullYear()}-0${month}-0${startDate?.getDate()}`);
             const month1 =Number(endDate?.getMonth())+1;

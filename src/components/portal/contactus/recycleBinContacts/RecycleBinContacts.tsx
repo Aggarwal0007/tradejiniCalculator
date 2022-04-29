@@ -1,13 +1,13 @@
 import { DataGrid, GridColumns, GridRowParams } from "@mui/x-data-grid";
 import { DATE_RANGE, ErrorType, WEBSITE_CONTACTS } from "common/Types";
 import { hideLoader, showLoader, showSnackBar } from "../../../../state/AppConfigReducer";
+import { Pagination, Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { ServiceRequest, useFetch } from "index";
 import { CONTACT_US } from "communicator/ServiceUrls";
 import CustomToolbar from "./CustomToolbarRecyclebin";
 import DateRange from "../DateRange";
 import DeleteRecords from "../DeleteRecords";
-import { Paper } from "@mui/material";
 import RestoreRecords from "./RestoreRecords";
 import { useDispatch } from "react-redux";
 
@@ -30,15 +30,22 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
         errormsg, setErrorMsg
     ] = useState<string | null>("");
 
-    const successCB = (response: { d: []; }) => {
+    const [
+        totalRecords, setTotalRecords
+    ] = useState<number>(0);
+
+    const successCB = (response: {d:[], count: number}) => {
         dispatch(hideLoader());
         console.log("getResponse", response);
-        if (response && response.d.length === 0) {
-            setErrorMsg("No data available");
-        } else {
+        if (response && response.d && response.d.length>0) {
+            setAvailableContacts(response.d);
+            setTotalRecords(Math.ceil(response.count/10));
             setErrorMsg("");
+        } else {
+            setAvailableContacts([
+            ]);
+            setErrorMsg("No data available");
         }
-        setAvailableContacts(response.d);
     };
 
     const errorCB = (error: ErrorType) => {
@@ -50,16 +57,15 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
         }));
     };
 
-    const getData = (startDate = "", endDate = "") => {
+    const getData = (pageNo:number = 1) => {
         dispatch(showLoader());
         const request = new ServiceRequest();
-        if (startDate && endDate) {
+        if (pageNo) {
             request.addData({
-                startDate: startDate,
-                endDate: endDate
+                pageNo: pageNo
             });
         } else {
-            request.addData({});
+            request.addData({ pageNo:1 });
         }
 
         fetchAPI.placeGETRequest(CONTACT_US.GET_RECYCLE_CONTACTS, request, successCB, errorCB);
@@ -70,10 +76,13 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
     }, [
     ]);
 
+    const handleChange = (evt: any, value:number) => {
+        getData(value);
+    };
 
     const updateDateRangeValues = (dateValue: DATE_RANGE) => {
         console.log("dateValue", dateValue);
-        getData(dateValue.startDate, dateValue.endDate);
+        getData();
     };
 
     const animateRecord = (records: number[]) => {
@@ -269,21 +278,15 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
         <Paper>
             <div
                 className="contactus-table-container"
-                style={{ height: "92vh", width: "100%" }}
+                style={{ height: "83vh", width: "100%" }}
                 id="dataGridWrapper"
             >
-
                 {
                     availbleContacts && availbleContacts.length ?
 
                         <DataGrid
                             rows={availbleContacts}
                             columns={columns}
-                            // pageSize={30}
-                            // autoHeight
-                            // rowsPerPageOptions={[
-                            //     30
-                            // ]}
                             hideFooter={true}
                             isRowSelectable={(params: GridRowParams) => {
                                 return params.row.status !== 1;
@@ -328,6 +331,14 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
 
 
                 }
+              
+                {availbleContacts && availbleContacts.length
+                    ? <Pagination
+                        count={totalRecords}
+                        color="primary"
+                        onChange={handleChange}
+                    />
+                    :""}
             </div>
         </Paper>
 

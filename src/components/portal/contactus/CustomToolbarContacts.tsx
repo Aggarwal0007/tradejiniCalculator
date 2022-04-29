@@ -21,6 +21,7 @@ function CustomToolbarContacts(props: PropsTypes) {
             <Grid container>
                 <Grid item
                     xs={12} sm={6} md={6} lg={6}
+                    sx={{ textAlign: { xs:"center", sm: "left", md:"left", lg:"left" } }}
                 >
                     <DeleteRecords
                         rowsSelected={props.deleteRows}
@@ -53,7 +54,8 @@ function CustomToolbarContacts(props: PropsTypes) {
                     sx={
                         {
                             display: { xs: "flex" },
-                            justifyContent: { xs: "center", sm: "flex-end" }
+                            justifyContent: { xs: "center", sm: "flex-end" },
+                            pb:1,
                         }
                     }
                 >
