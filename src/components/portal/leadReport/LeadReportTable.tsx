@@ -315,6 +315,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
                         <DataGrid
                             rows={availbleReports}
                             columns={columns}
+                            headerHeight = {40}
                             // pageSize={30}
                             // autoHeight
                             // rowsPerPageOptions={[

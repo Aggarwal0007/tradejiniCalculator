@@ -1,4 +1,4 @@
-import { DataGrid, GridColumns, GridRowParams } from "@mui/x-data-grid";
+import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { DATE_RANGE, ErrorType, LEAD_REPORT } from "common/Types";
 import { hideLoader, showLoader, showSnackBar } from "state/AppConfigReducer";
 import { Pagination, Paper } from "@mui/material";
@@ -304,15 +304,16 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
                         <DataGrid
                             rows={availbleReports}
                             columns={columns}
+                            headerHeight = {40}
                             // pageSize={30}
                             // autoHeight
                             // rowsPerPageOptions={[
                             //     30
                             // ]}
                             hideFooter={true}
-                            isRowSelectable={(params: GridRowParams) => {
-                                return params.row.status !== 1;
-                            }}
+                            // isRowSelectable={(params: GridRowParams) => {
+                            //     return params.row.status !== 1;
+                            // }}
                             checkboxSelection
                             disableSelectionOnClick
                             components={{

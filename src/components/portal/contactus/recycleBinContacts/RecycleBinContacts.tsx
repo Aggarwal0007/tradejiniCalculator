@@ -1,4 +1,4 @@
-import { DataGrid, GridColumns, GridRowParams } from "@mui/x-data-grid";
+import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { DATE_RANGE, ErrorType, WEBSITE_CONTACTS } from "common/Types";
 import { hideLoader, showLoader, showSnackBar } from "../../../../state/AppConfigReducer";
 import { Pagination, Paper } from "@mui/material";
@@ -279,9 +279,10 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
                             rows={availbleContacts}
                             columns={columns}
                             hideFooter={true}
-                            isRowSelectable={(params: GridRowParams) => {
-                                return params.row.status !== 1;
-                            }}
+                            headerHeight = {40}
+                            // isRowSelectable={(params: GridRowParams) => {
+                            //     return params.row.status !== 1;
+                            // }}
                             checkboxSelection
                             disableSelectionOnClick
                             components={{

@@ -46,11 +46,11 @@
   padding-right: 32px !important;
 }
 
-.css-wjh20t-MuiPagination-ul {
+ul.MuiPagination-ul {
   justify-content: center !important;
   padding: 15px !important;
 }
 
-.css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+ul.MuiPagination-ul .Mui-selected {
   background-color: $primary-btn-color !important;
 }

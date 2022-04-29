@@ -299,6 +299,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
                         <DataGrid
                             rows={availbleContacts}
                             columns={columns}
+                            headerHeight = {40}
                             // pageSize={30}
                             // autoHeight
                             // rowsPerPageOptions={[
