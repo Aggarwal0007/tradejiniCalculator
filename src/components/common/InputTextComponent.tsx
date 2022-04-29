@@ -29,10 +29,14 @@ const InputText = (props: PropsTypes) => {
         if (props.numbersOnly) {
             regExp = new RegExp(/^[0-9]*$/);
         }   
-        
-        if (evt.target.value === "" || regExp.test(evt.target.value)) {
-            props.parentCallBack(evt.target.value);
-            setInputValue(evt.target.value);
+        const value = evt.target.value;
+        const trimmedValue = (value.indexOf(".") >= 0) ?
+            (value.substr(0, value.indexOf(".")) + value.substr(value.indexOf("."), 5))
+            : value;
+
+        if (trimmedValue === "" || regExp.test(trimmedValue)) {
+            props.parentCallBack(trimmedValue);
+            setInputValue(trimmedValue);
         }
     };
 

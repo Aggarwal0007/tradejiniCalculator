@@ -4,12 +4,14 @@
     cors();
 
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
+    
     $uri = explode( '/', $uri );
+    
+    $key = array_search('api.php', $uri);
 
-    $module = $uri[5];
-    $method = $uri[6];
-    $sub = $uri[7];
+    $module = $uri[$key+1];
+    $method = $uri[$key+2];
+    $sub = $uri[$key+3];
 
     if($module === "config") {
 
@@ -47,7 +49,7 @@
     else if($module === "portal_login") {
 
         session_start();
-        
+
         require PROJECT_ROOT_PATH . "/controller/api/LoginController.php";
         $objFeedController = new LoginController();
         $strMethodName = "checkAuthorize";

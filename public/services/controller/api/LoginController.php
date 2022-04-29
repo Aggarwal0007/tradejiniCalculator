@@ -6,7 +6,7 @@
     class LoginController extends BaseController {
 
         public function checkAuthorize() {
-
+    
             $strErrorDesc = '';
             $requestMethod = $_SERVER["REQUEST_METHOD"];
 
@@ -39,7 +39,7 @@
             }
 
             if (!$strErrorDesc) {
-                $this->sendSuccess($responseData, true);
+                $this->sendSuccess($responseData);
             } else {
                 $this->sendError($strErrorDesc);
             }

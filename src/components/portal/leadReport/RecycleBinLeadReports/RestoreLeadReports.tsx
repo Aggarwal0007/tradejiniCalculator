@@ -34,7 +34,6 @@ const RestoreLeadReport = (props: propsTypes) => {
         restoredRows: number[]
     ) => {
         dispatch(hideLoader());
-        console.log("RestoredRecords response", response, restoredRows);
         dispatch(showSnackBar({
             message: "LeadReport restored successfully!!",
             status: "success"
@@ -44,7 +43,6 @@ const RestoreLeadReport = (props: propsTypes) => {
 
     const errorCB = (error: ErrorType) => {
         dispatch(hideLoader());
-        console.log("RestoredRecords Error", error.message); 
         dispatch(showSnackBar({
             message: error.message,
             status: "error"

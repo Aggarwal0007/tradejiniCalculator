@@ -43,7 +43,6 @@ function ReferralCalculator() {
     const onChangeqty = (evt: React.ChangeEvent<HTMLInputElement>) => {
         const reg = new RegExp("^[0-9]*$");
         const numCheck=(reg.test(evt.target.value));
-        console.log(numCheck);
         if (evt && evt.target && numCheck === true) {
             setActiveClients(Number(evt.target.value));
             calculateTradePerMonth(Number(evt.target.value), dailyTrades);

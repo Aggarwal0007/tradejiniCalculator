@@ -36,7 +36,6 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
 
     const successCB = (response: {d:[], count: number}) => {
         dispatch(hideLoader());
-        console.log("getResponse", response);
         if (response && response.d && response.d.length>0) {
             setAvailableContacts(response.d);
             setTotalRecords(Math.ceil(response.count/10));
@@ -50,7 +49,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
 
     const errorCB = (error: ErrorType) => {
         dispatch(hideLoader());
-        console.log("error");
+        console.log("error", error.message);
         dispatch(showSnackBar({
             message: error.message,
             status: "error"
@@ -90,14 +89,6 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
         getData();
     };
 
-    // const getRemarks = (params: { row: WEBSITE_CONTACTS }) => {
-    //     return params.row.remarks ? params.row.remarks : "-";
-    // };
-
-    // const getAssignTo = (params: { row: WEBSITE_CONTACTS }) => {
-    //     return params.row.assignto ? params.row.assignto : "-";
-    // };
-
     const columns: GridColumns = [
         {
             field: "date",
@@ -110,7 +101,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.date}
                     </div>
@@ -127,7 +118,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.name}
                     </div>
@@ -145,7 +136,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.phone}
                     </div>
@@ -163,7 +154,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.email}
                     </div>
@@ -181,7 +172,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.subject}
                     </div>
@@ -198,7 +189,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.assignto}
                     </div>
@@ -215,7 +206,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.remarks}
                     </div>
@@ -233,7 +224,7 @@ const RecycleBinContacts = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         <>
 

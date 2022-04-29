@@ -32,7 +32,13 @@
                     if(isset($startDate) && isset($endDate)) {
                        
                         $responseData = $configModel->getLeadReports($startDate, $endDate);
-
+                        for ($i = 0; $i < count($responseData); $i++) {
+                            if(($responseData[$i]['status'] == 1) || ($responseData[$i]['assignto'] !=null)) {
+                                
+                               $responseData[$i]['status'] = 1;
+                               // echo $responseData[$i]['status'];
+                            }
+                       }
                         // $responseData = json_encode($configData);
                     }
 

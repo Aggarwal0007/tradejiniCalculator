@@ -36,7 +36,6 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
 
     const successCB = (response: { d: [], count:number }) => {
         dispatch(hideLoader());
-        console.log("getResponse", response);
         if (response && response.d && response.d.length>0) {
             setAvailableReports(response.d);
             setTotalRecords(Math.ceil(response.count/10));
@@ -50,7 +49,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
 
     const errorCB = (error: ErrorType) => {
         dispatch(hideLoader());
-        console.log("error");
+        console.log("error", error.message);
         dispatch(showSnackBar({
             message: error.message,
             status: "error"
@@ -118,7 +117,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.date}
                     </div>
@@ -135,7 +134,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.name}
                     </div>
@@ -153,7 +152,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.contactno}
                     </div>
@@ -171,7 +170,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.email}
                     </div>
@@ -189,7 +188,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.city}
                     </div>
@@ -207,7 +206,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.partner_id}
                     </div>
@@ -224,7 +223,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.assignto}
                     </div>
@@ -242,7 +241,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         {params.row.remarks}
                     </div>
@@ -260,7 +259,7 @@ const RecycleBinLeadReports = (props: { hideRecycleContent: Function; }) => {
             renderCell: (params) => {
                 return (
                     <div className={`${params.row.status === 1 ?
-                        "actions-disable"
+                        "actions-enable"
                         : " actions-enable"}`}>
                         <>
 

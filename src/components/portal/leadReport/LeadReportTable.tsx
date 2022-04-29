@@ -34,7 +34,6 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
 
     const successCB = (response: { d: Array<LEAD_REPORT> }) => {
         dispatch(hideLoader());
-        console.log("getResponse", response);
         if (response && response.d && response.d.length>0) {
             setAvailableReports(response.d);
             setErrorMsg("");
@@ -47,7 +46,7 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
 
     const errorCB = (error: ErrorType) => {
         dispatch(hideLoader());
-        console.log("error");
+        console.log("error", error.message);
         dispatch(showSnackBar({
             message: error.message,
             status: "error"
