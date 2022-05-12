@@ -93,12 +93,24 @@ export const getTurnOver = (qty: number, buyPrice: number, sellPrice: number) =>
     return ( qty * buyPrice ) + ( qty * sellPrice );
 };
 
-export const getBrokerage = (turnOver: number, configData: ConfigData) => {
+// export const getBrokerage = (turnOver: number, configData: ConfigData) => {
+   
+//     const brokerage1 = ( (turnOver) * ( configData.brokeragePercentage * ( 1 / 100 ) ) );
+
+//     const brokerageBuy = configData.brokerageBuy > 0 ? 20 : 0;
+//     const brokerageSell = configData.brokerageSell > 0 ? 20 : 0;
+//     const brokerage2 = brokerageBuy + brokerageSell;
+//     const brokerage = brokerage2 < brokerage1 ? brokerage2 : brokerage1;
+//     return brokerage;
+// };
+
+//For getting buyprice and sell price
+
+export const getBrokerage = (turnOver: number, configData: ConfigData, buyPrice: number, sellPrc:number) => {
    
     const brokerage1 = ( (turnOver) * ( configData.brokeragePercentage * ( 1 / 100 ) ) );
-
-    const brokerageBuy = configData.brokerageBuy > 0 ? 20 : 0;
-    const brokerageSell = configData.brokerageSell > 0 ? 20 : 0;
+    const brokerageBuy = buyPrice > 0 ? 20 : 0;
+    const brokerageSell = sellPrc > 0 ? 20 : 0;
     const brokerage2 = brokerageBuy + brokerageSell;
     const brokerage = brokerage2 < brokerage1 ? brokerage2 : brokerage1;
     return brokerage;
@@ -158,7 +170,11 @@ export const calculateEquityBrokerage = (
 
     const turnOver = getTurnOver(qty, buyPrice, sellPrice );
 
-    const brokerage = getBrokerage(turnOver, configData);
+    // const brokerage = getBrokerage(turnOver, configData);
+
+    // Passing buyprice and sell price
+
+    const brokerage = getBrokerage(turnOver, configData, buyPrice, sellPrice);
 
     let STTCharges = getSTT(qty, sellPrice, configData, category, turnOver);
 
@@ -226,7 +242,11 @@ export const calculateCommodityBrokerage = (
 
     const turnOver = ( quantity * buyPrc ) + ( quantity * sellPrc );
 
-    const brokerage = getBrokerage(turnOver, configData);
+    // const brokerage = getBrokerage(turnOver, configData);
+
+    // Passing buyprice and sell price
+
+    const brokerage = getBrokerage(turnOver, configData, buyPrc, sellPrc);
 
     let STTCharges = getSTT(quantity, sellPrc, configData, category, turnOver);
 
@@ -281,7 +301,11 @@ export const calculateCurrencyBrokerage = (
 
     const turnOver = ( ( qty * buyPrc ) + ( qty * sellPrc ) ) * 1000;
 
-    const brokerage = getBrokerage(turnOver, configData);
+    // const brokerage = getBrokerage(turnOver, configData);
+    
+    // Passing buyprice and sell price
+
+    const brokerage = getBrokerage(turnOver, configData, buyPrc, sellPrc);
 
     let transactionCharges = getTransactionCharges(turnOver, configData);
 
