@@ -27,3 +27,8 @@ export const LEADFORM = {
     DELETE_RECYCLE_LEADFORM: "recycle/leadReport/delete",
     RESTORE_RECYCLE_LEADFORM: "recycle/leadReport/restore"
 };
+
+export const SPAN_CALCULATOR = {
+    GET_SPAN_CALC_RESULTS: "span_calc",
+    SYMBOL_SEARCH:"symbol_store"
+};

@@ -41,14 +41,13 @@ class ContactUsController extends BaseController
                 if (isset($startDate) && isset($endDate)) {
                     $responseData = $configModel->getWebsiteContacts($startDate, $endDate);
                     for ($i = 0; $i < count($responseData); $i++) {
-                         if(($responseData[$i]['status'] == 1) || ($responseData[$i]['assignto'] !=null)) {
-                             
+                        if (($responseData[$i]['status'] == 1) || ($responseData[$i]['assignto'] != null)) {
+
                             $responseData[$i]['status'] = 1;
                             // echo $responseData[$i]['status'];
-                         }
+                        }
                     }
                 }
-
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage() . ' Something went wrong!';
             }
@@ -105,6 +104,12 @@ class ContactUsController extends BaseController
                     $assignTo = "";
                 }
 
+                if (isset($_POST['location'])) {
+                    $location = htmlspecialchars($_POST["location"]);
+                } else {
+                    $location = "";
+                }
+
 
                 if (isset($name) && isset($email)) {
 
@@ -117,6 +122,8 @@ class ContactUsController extends BaseController
                             $this->sendMailToReferCode($message, $logoImg);
                         } else if ($subject === "Referral") {
                             $this->sendMailToReferViaEmail($name, $phone, $email, $message, $logoImg);
+                        } else if ($subject === "Partner_Lead") {
+                            $this->sendMailToBecomePartner($name, $phone, $email, $message, $location, $logoImg);
                         } else {
                             // FIX ME LATER IF NEEDED
                         }
@@ -329,6 +336,49 @@ class ContactUsController extends BaseController
 						</tr>
 					</tbody>
 				</table>';
+        mailer($subject, $message);
+    }
+
+    public function sendMailToBecomePartner($contact_name, $contact_mobile, $contact_email, $message, $location, $logoImg)
+    {
+
+        $subject = 'Tradejini';
+        $message = '<table style="background-color:#f7f7f7;font-size:13px;height:100%;width:100%" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td align="center" valign="top">
+								<table style="font-size:13px" cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<td colspan="3">
+
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3" style="border:1px solid #c7c7c7;background-color:#ffffff;padding:15px" valign="top" width="568">
+												<a href="<?php echo site_url();?>" class="logo">
+                                                <img src=' . $logoImg . ' style="width:222px;"/>
+												</a><br/><br/><br/>
+												    <h3 style="color:#663399;">Become A Partner Application</h3><br/><br/>
+													<b style="font-weight: bold;">Name     :</b>' . $contact_name . '<br><br/>	
+													<b style="font-weight: bold;">Email Id :</b>' . $contact_email . '<br><br/>	
+													<b style="font-weight: bold;">Phone    :</b>' . $contact_mobile . '<br><br/>	
+													<b style="font-weight: bold;">Location :</b>' . $location . '<br><br/>	
+													<b style="font-weight: bold;">Message  :</b>' . $message . '<br><br/>
+												<font>Team,<br/>
+													Tradejini<br/> 
+													<a href="http://tradejini.com/" target="_blank">www.Tradejini.com</a>
+												</font>
+												<font style="float: right;">help@tradejini.com</font>
+											</td>
+										</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>';
+
         mailer($subject, $message);
     }
 }

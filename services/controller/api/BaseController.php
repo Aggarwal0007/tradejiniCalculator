@@ -34,6 +34,7 @@ class BaseController
     {
         $key = htmlspecialchars($_GET["key"]);
         return $key;
+        
         // return parse_str($_SERVER['QUERY_STRING'], $query);
     }
 

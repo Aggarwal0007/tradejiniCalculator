@@ -7,12 +7,13 @@ import BrokerageCalculator from "./components/brokerage/BrokerageComponent";
 import Contactus from "components/portal/contactus/ContactUsBaseComponent";
 import LeadReport from "components/portal/leadReport/LeadReportBasecomponent";
 import LoaderBackdrop from "components/common/Loader";
-import MarginCalculator from "./components/margin/MarginComponent";
+import MarginCalculator from "./components/margin/MarginCalculatorBaseComponent";
 import PortalLogin from "./components/portal/PortalLoginComponent";
 import ReferralCalculator from "./components/referral/ReferralComponent";
 import { SCREENS } from "./common/Constants";
 import { ServiceConfig } from "index";
 import SnackBar from "./components/common/SnackBar";
+import SymbolCache from "./components/margin/symbolSearch/SymbolCache";
 import { useConfigStore } from "state/AppConfigReducer";
 import { useSelector } from "react-redux";
 
@@ -38,6 +39,11 @@ function App() {
         appTheme
     ]);
 
+    useEffect(() => {
+        SymbolCache.loadSymbolStore();
+    }, [
+    ]);
+    
     return (
         <div className="app">
             <ApiCommunicator />

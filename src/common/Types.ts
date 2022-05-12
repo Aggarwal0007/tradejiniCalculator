@@ -98,3 +98,18 @@ export interface MESSAGE_SUCCESS_RESPONSE {
          message: string; 
         }; 
     }
+
+export interface SEARCH_SYMBOL {
+    asset: string,
+    dispName: string,
+    excToken: string,
+    exchange: string,
+    expiry?: string,
+    instrument: string,
+    lot: string,
+    optType?: string,
+    strike?: string,
+    symbol: string,
+    tick?: string,
+    weekly?: string
+}

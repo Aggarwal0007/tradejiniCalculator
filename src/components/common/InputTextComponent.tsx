@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 
 type PropsTypes = { 
     numbersOnly: boolean;
-     ipValue: number | string;
+     ipValue: number | string ;
      isDecimal?: boolean;
     parentCallBack: (arg0: string) => void; 
+    className?: string;
+    placeholder?: string
 }
 
 const InputText = (props: PropsTypes) => {
@@ -44,11 +46,12 @@ const InputText = (props: PropsTypes) => {
         <>
             <input 
                 type= "text"
-                className="common-input"
+                className={`${props.className ? props.className : ""} common-input`}
                 value= {inputValue}
                 onChange={(evt) => {
                     return onChangeInput(evt); 
                 }}
+                placeholder= {props.placeholder ? props.placeholder : ""}
             />
         </>
     );

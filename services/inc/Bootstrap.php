@@ -3,6 +3,7 @@ define("PROJECT_ROOT_PATH", __DIR__ . "/../");
 // include main configuration file
 require_once PROJECT_ROOT_PATH . "/inc/Config.php";
 require_once PROJECT_ROOT_PATH . "/inc/PHPMailer.php";
+require_once PROJECT_ROOT_PATH . "/inc/CurlApi.php";
  
 // include the base controller file
 require_once PROJECT_ROOT_PATH . "/controller/api/BaseController.php";
@@ -12,6 +13,8 @@ require_once PROJECT_ROOT_PATH . "/model/ConfigModel.php";
 require_once PROJECT_ROOT_PATH . "/model/ContactUsModel.php";
 require_once PROJECT_ROOT_PATH . "/model/LeadReportModel.php";
 require_once PROJECT_ROOT_PATH . "/model/RecycleModel.php";
+require_once PROJECT_ROOT_PATH . "/model/SpanCalcModel.php";
+require_once PROJECT_ROOT_PATH . "/model/SymbolStoreModel.php";
 
 function cors() {
     

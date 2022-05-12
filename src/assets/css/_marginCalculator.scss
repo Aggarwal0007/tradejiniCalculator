@@ -1,0 +1,153 @@
+.margin-calculator-root {
+  background-color: transparent;
+}
+
+.margin-header-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.margin-calc-lotsize {
+  border: 1px solid #00cd97 !important;
+  background-color: transparent !important;
+  color: #000 !important;
+}
+
+.margin-calc-lotsize:focus {
+  outline: 2px solid #00cd97;
+}
+
+.search-input {
+  width: 280px !important;
+  padding: 8px;
+  border: 1px solid #00cd97;
+  border-radius: 4px;
+}
+
+.search-input:focus {
+  outline: 2px solid #00cd97;
+}
+
+.search-results-window {
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 300px !important;
+  height: 300px !important;
+  background: #fff !important;
+  border: 1px solid #00cd97;
+  z-index: 3;
+  border-radius: 10px;
+}
+
+.search-result-row {
+  padding: 5px 10px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.search-result-row:hover {
+  background: #00cd97;
+  color: #fff;
+}
+
+.margin-results-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.margin-results-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 30px 10px;
+  flex-direction: column;
+}
+
+.margin-result-title {
+  font-weight: 700;
+  font-size: 20px;
+  padding: 20px;
+}
+
+.margin-results-display {
+  border: 1px solid #eee;
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
+  min-width: 300px;
+}
+
+.margin-results-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.margin-results-row div {
+  padding: 5px 10px;
+}
+
+.margin-selected-symbol {
+  height: 300px;
+  width: 100%;
+}
+
+.margin-qty-section {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  margin-top: 5px;
+}
+
+.lot-size-info {
+  font-size: 14px;
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 80px;
+  font-weight: 500;
+}
+
+.symbol-search-block {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.symbol-label,
+.lots-label {
+  margin-right: 10px;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.lots-block {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.error-search-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  color: red;
+  font-weight: 400;
+}
+
+.symbol-delete {
+  height: 30px;
+}

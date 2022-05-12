@@ -1,5 +1,5 @@
 <?php
-
+    
     require __DIR__ . "/inc/Bootstrap.php";
     cors();
 
@@ -12,6 +12,8 @@
     $module = $uri[$key+1];
     $method = $uri[$key+2];
     $sub = $uri[$key+3];
+
+    
 
     if($module === "config") {
 
@@ -65,6 +67,22 @@
         $strMethodName = "logout";
         $objFeedController->{$strMethodName}();
     }
+
+    else if($module === "span_calc") {
+
+        require PROJECT_ROOT_PATH . "/controller/api/SpanCalcController.php";
+        $objFeedController = new SpanCalcController();
+        $strMethodName = 'getSpanCalcResults';
+        $objFeedController->{$strMethodName}($method);
+    } 
+
+    else if($module === "symbol_store") {
+       
+        require PROJECT_ROOT_PATH . "/controller/api/SymbolStoreController.php";
+        $objFeedController = new SymbolStoreController();
+        $strMethodName = 'getSymbolStoreVersionDetails';
+        $objFeedController->{$strMethodName}($method);
+    } 
     
     else {
 
