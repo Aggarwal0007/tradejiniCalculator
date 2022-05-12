@@ -285,11 +285,13 @@ function MarginCalculator() {
                                 >
                                     <ToggleButton
                                         value="buy"
+                                        className="action-selector"
                                     >
                                     BUY
                                     </ToggleButton>
                                     <ToggleButton
                                         value="sell"
+                                        className="action-selector"
                                     >
                                     SELL
                                     </ToggleButton>

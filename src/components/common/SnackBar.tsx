@@ -26,7 +26,10 @@ const SnackBar = () => {
                 onClose={handleClose}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
             >
-                <Alert onClose={handleClose} severity={snackBarState.status} sx={{ width: "100%" }}>
+                <Alert onClose={handleClose} 
+                    severity={snackBarState.status} 
+                    sx={{ width: "100%" }} 
+                    className="snack-message">
                     {snackBarState.message}
                 </Alert>
             </Snackbar>
