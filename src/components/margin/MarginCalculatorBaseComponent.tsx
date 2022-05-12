@@ -320,7 +320,7 @@ function MarginCalculator() {
                                 <Button
                                     variant="contained"
                                     color="primary"
-                                    className="action-btn"
+                                    className="margin-action-btn"
                                     onClick={onClickAddBtn}
                                 >
                                 ADD

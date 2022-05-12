@@ -15,6 +15,7 @@
   border: 1px solid #00cd97 !important;
   background-color: transparent !important;
   color: #000 !important;
+  box-sizing: unset !important;
 }
 
 .margin-calc-lotsize:focus {
@@ -26,6 +27,7 @@
   padding: 8px;
   border: 1px solid #00cd97;
   border-radius: 4px;
+  box-sizing: unset !important;
 }
 
 .search-input:focus {
@@ -145,9 +147,24 @@
   align-items: center;
   margin-top: 10px;
   color: red;
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 
 .symbol-delete {
-  height: 30px;
+  height: 30px !important;
+}
+
+.custom-header {
+  font-size: 14px !important;
+}
+
+.MuiDataGrid-cellContent {
+  font-size: 14px !important;
+}
+
+.margin-action-btn,
+.action-selector {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 25px !important;
 }

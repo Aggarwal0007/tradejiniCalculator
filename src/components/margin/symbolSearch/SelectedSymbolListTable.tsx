@@ -77,8 +77,7 @@ const SelectedSymbolListTable = (props: { CbtoDeleteRow: (arg0: any) => void; sy
             minWidth: 80,
             sortable: false,
             disableColumnMenu: true,
-            headerClassName: "remarks-cell",
-            cellClassName: "remarks-cell",
+            headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
                     <div className= "">
