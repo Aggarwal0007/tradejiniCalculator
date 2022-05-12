@@ -64,6 +64,7 @@ function MarginCalculator() {
         marginResults, setMarginResults
     ] = useState<MarginResults>();
 
+    
     const handleChange = (
         evt: React.MouseEvent<HTMLElement>,
         newAction: string,
@@ -104,6 +105,80 @@ function MarginCalculator() {
         }));
     };
 
+    const successCB = (response: any, symData: any) => {
+        setSymbolList(Object.assign([
+        ], symData));
+        dispatch(hideLoader());
+        console.log("symbolList Res", symData );
+        console.log("getResponse", response);  
+        setMarginResults(response.d);   
+    };
+
+    const errorCB = (error: any) => {
+        dispatch(hideLoader());
+        console.log("error");
+        dispatch(showSnackBar({
+            message: error.message,
+            status: "error"
+        }));
+    };
+
+    const getMarginResults = (isDelete = false, symsArr= [
+    ]) => {
+
+        const syms: any = Object.assign([
+        ], symsArr);
+            
+        if (!isDelete) {
+            const netQuantity: number = Number(selectedSymbol?.lot) * Number(netQty);
+
+            const totalQty: string = netQuantity as unknown as string;
+    
+            const selectedSym = {
+                "prd": "M",
+                "exch": selectedSymbol?.exchange,
+                "symname": selectedSymbol?.symbol,
+                "instname": selectedSymbol?.instrument,
+                "exd": convertExpDate(selectedSymbol?.expiry),
+                "netqty": action === "buy" ? `${totalQty}` : `-${totalQty}`,
+                "exc_id":selectedSymbol?.excToken,
+                "dispSymbol": selectedSymbol?.dispName,
+                "lotSize":selectedSymbol?.lot,
+                "dispQty": netQty
+            };
+           
+            syms.push(selectedSym);
+    
+        } else if ( !symsArr.length) {
+            setMarginResults({
+                "expo": "",
+                "expo_trade": "",
+                "request_time": "",
+                "span": "",
+                "span_trade": "",
+                "stat": ""
+            });
+            return;
+        }
+
+        dispatch(showLoader());
+        const request = new ServiceRequest();
+        request.addData({
+            actid: "DUMMY",
+            pos: JSON.stringify(isDelete ? symsArr : syms)
+        });
+    
+        
+        fetchAPI.placePOSTRequest(
+            SPAN_CALCULATOR.GET_SPAN_CALC_RESULTS,
+            request, 
+            (resp) => {
+                return successCB(resp, syms); 
+            }, 
+            errorCB
+        );
+    };
+
     const deleteSymbolRow = (selectedRow: any) => {
 
         const existingSymbolList = Object.assign([
@@ -119,26 +194,10 @@ function MarginCalculator() {
     
             setSymbolList(Object.assign([
             ], existingSymbolList));
+
+            getMarginResults(true, existingSymbolList);
         }
         
-
-    };
-
-    const successCB = (response: any, symData: any) => {
-        setSymbolList(Object.assign([
-        ], symData));
-        dispatch(hideLoader());
-        console.log("getResponse", response);  
-        setMarginResults(response.d);   
-    };
-
-    const errorCB = (error: any) => {
-        dispatch(hideLoader());
-        console.log("error");
-        dispatch(showSnackBar({
-            message: error.message,
-            status: "error"
-        }));
     };
 
     const onClickAddBtn = () => {
@@ -152,52 +211,8 @@ function MarginCalculator() {
                 return item.exc_id === selectedSymbol?.excToken; 
             });
 
-            if (found) {
-                showErrorMessage("Symbol Exists!!");
-                return;
-            }
-
-            const netQuantity: number = Number(selectedSymbol?.lot) * Number(netQty);
-
-            const totalQty: string = netQuantity as unknown as string;
-
-            dispatch(showLoader());
-            const request = new ServiceRequest();
-            const selectedSym = {
-                "prd": "M",
-                "exch": selectedSymbol?.exchange,
-                "symname": selectedSymbol?.symbol,
-                "instname": selectedSymbol?.instrument,
-                "exd": convertExpDate(selectedSymbol?.expiry),
-                "netqty": action === "buy" ? `${totalQty}` : `-${totalQty}`,
-                "exc_id":selectedSymbol?.excToken,
-                "dispSymbol": selectedSymbol?.dispName,
-                "lotSize":selectedSymbol?.lot,
-                "dispQty": netQty
-            };
-           
-            
-            const syms: any = Object.assign([
-            ], symbolList);
-
-            syms.push(selectedSym);
-
-            // setSymbolList(Object.assign([
-            // ], syms));
-            
-            request.addData({
-                actid: "DUMMY",
-                pos: JSON.stringify(syms)
-            });
-            
-            fetchAPI.placePOSTRequest(
-                SPAN_CALCULATOR.GET_SPAN_CALC_RESULTS,
-                request, 
-                (resp) => {
-                    return successCB(resp, syms); 
-                }, 
-                errorCB
-            );
+            found ? showErrorMessage("Symbol Exists!!") : getMarginResults(false, existingSymbolList);
+          
         } else {
             showErrorMessage("Please select any script"); 
         }
@@ -226,70 +241,40 @@ function MarginCalculator() {
                 </div>
             </Grid>
             <Grid item xs={12} className="margin-input-section">
-                <Grid 
-                    container
-                    className="margin-input-container"
-                    spacing={3}
-                >
-                    <Grid
-                        item
-                        xs={12}
-                        sm={12}
-                        md={5}
-                        lg={5}
-                        display="flex"
-                        alignItems="center"
-                        justifyContent={"center"}
-                        
-                    >
+                <Grid container className="margin-input-container" spacing={3}> 
+                    <Grid item xs={12} sm={12} md={6} lg={6}>
+
                         <SymbolSearch 
                             parentCB = {getSymbolInfo}
                             parentCBQuery = {clearfields}
                         />
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={7} lg={7}>
 
-                        <Grid container spacing={3}>
-
-                            <Grid item xs={12} sm={12} md={6} lg={6}
-                                display="flex"
-                                alignItems="center"
-                                justifyContent={"flexStart"}
-                                className="margin-qty-section"
-                            >
-                                <div className="lots-block">
-                                    <div className="lots-label">
-                                        No. of Lots:
-                                    </div>
-                                    <div className="lots-input">
-                                        <input 
-                                            type= "text"
-                                            className="margin-calc-lotsize common-input"
-                                            onChange={onchangeQty}
-                                            value= {netQty}
-                                            placeholder= "Net Quantity"
-                                        />
-                                        {
-                                            selectedLotSize ?
-                                                <div className="lot-size-info">
+                        <div className="lots-block">
+                            <div className="lots-label">
+                                        Lots:
+                            </div>
+                            <div className="lots-input">
+                                <input 
+                                    type= "text"
+                                    className="margin-calc-lotsize common-input"
+                                    onChange={onchangeQty}
+                                    value= {netQty}
+                                    placeholder= "No of Lots"
+                                />
+                                {
+                                    selectedLotSize ?
+                                        <div className="lot-size-info">
                                     
                                     Lot Size: {selectedLotSize}
-                                                </div>
-                                                :
-                                                null
-                                        }
-                                    </div>
-                                    
-                                </div>
-                              
-                                
-                            </Grid>
+                                        </div>
+                                        :
+                                        null
+                                }
+                            </div>      
+                        </div>
 
-                            <Grid item xs={12} sm={12} md={3} lg={3}
-                                display="flex"
-                                alignItems="center"
-                                justifyContent={"center"}
-                            >
+                        <div className="toggle-btn-blk">
+                            <div className="toggle-blk">
                                 <ToggleButtonGroup
                                     color={action === "buy" ? "success" : "error"}
                                     value={action}
@@ -309,14 +294,6 @@ function MarginCalculator() {
                                     SELL
                                     </ToggleButton>
                                 </ToggleButtonGroup>
-
-                            </Grid>
-
-                            <Grid item xs={12} sm={12} md={3} lg={3}
-                                display="flex"
-                                alignItems="center"
-                                justifyContent={"center"}
-                            >
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -325,18 +302,17 @@ function MarginCalculator() {
                                 >
                                 ADD
                                 </Button>
-                            </Grid>
-                        </Grid>
+                            </div>
+                        </div>
+                                                      
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6} lg={6}>
+                        <MarginResultsTable 
+                            marginResponse = {marginResults}
+                        />
                     </Grid>
                 </Grid>
-
             </Grid>
-
-            <Box className="margin-results-box">
-                <MarginResultsTable 
-                    marginResponse = {marginResults}
-                />
-            </Box>
             <Box className="margin-selected-symbol">
                 <SelectedSymbolListTable 
                     symbolList = {symbolList}

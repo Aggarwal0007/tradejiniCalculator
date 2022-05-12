@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 5px;
   font-weight: 700;
   font-size: 20px;
 }
@@ -15,7 +15,9 @@
   border: 1px solid #00cd97 !important;
   background-color: transparent !important;
   color: #000 !important;
-  box-sizing: unset !important;
+  box-sizing: border-box !important;
+  width: 250px !important;
+  max-width: 280px !important;
 }
 
 .margin-calc-lotsize:focus {
@@ -23,11 +25,11 @@
 }
 
 .search-input {
-  width: 280px !important;
+  width: 250px !important;
   padding: 8px;
   border: 1px solid #00cd97;
   border-radius: 4px;
-  box-sizing: unset !important;
+  box-sizing: border-box !important;
 }
 
 .search-input:focus {
@@ -38,12 +40,14 @@
   position: absolute;
   overflow-y: auto;
   overflow-x: hidden;
-  width: 300px !important;
-  height: 300px !important;
+  width: 250px !important;
+  height: 250px !important;
   background: #fff !important;
   border: 1px solid #00cd97;
   z-index: 3;
   border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 13px;
 }
 
 .search-result-row {
@@ -72,14 +76,13 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 30px 10px;
   flex-direction: column;
 }
 
 .margin-result-title {
-  font-weight: 700;
-  font-size: 20px;
-  padding: 20px;
+  font-weight: 500;
+  font-size: 16px;
+  padding-bottom: 10px;
 }
 
 .margin-results-display {
@@ -87,7 +90,7 @@
   padding: 5px 10px;
   border-radius: 10px;
   box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
-  min-width: 300px;
+  min-width: 280px;
 }
 
 .margin-results-row {
@@ -102,8 +105,9 @@
 }
 
 .margin-selected-symbol {
-  height: 300px;
+  min-height: 320px;
   width: 100%;
+  height: auto;
 }
 
 .margin-qty-section {
@@ -118,14 +122,15 @@
   font-size: 14px;
   position: absolute;
   margin-top: 5px;
-  margin-left: 80px;
+  margin-left: 170px;
   font-weight: 500;
 }
 
 .symbol-search-block {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  padding: 10px;
 }
 
 .symbol-label,
@@ -133,12 +138,25 @@
   margin-right: 10px;
   font-weight: 500;
   font-size: 13px;
+  min-width: 45px;
+  text-align: right;
 }
 
-.lots-block {
+.lots-block,
+.action-btn-blk,
+.toggle-btn-blk {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  padding: 10px;
+}
+
+.toggle-blk {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 300px;
+  margin-top: 20px;
 }
 
 .error-search-message {

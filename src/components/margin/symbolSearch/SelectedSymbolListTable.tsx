@@ -18,21 +18,21 @@ const SelectedSymbolListTable = (props: { CbtoDeleteRow: (arg0: any) => void; sy
             flex: 1.0,
             minWidth: 250,
             disableColumnMenu: true,
-            headerClassName: "custom-header"
+            headerClassName: "custom-header",
+            sortable: false
         },
         {
             field: "exch",
-            flex: 1.0,
             headerName: "Exchange",
-            minWidth: 50,
+            minWidth: 80,
             headerClassName:"custom-header",
-            disableColumnMenu: true
+            disableColumnMenu: true,
+            sortable: false
         },
         {
             field: "dispQty",
             headerName: "No of lots",
-            flex: 1.0,
-            minWidth: 50,
+            minWidth: 80,
             disableColumnMenu: true,
             sortable: false,
             headerClassName: "custom-header"
@@ -40,8 +40,7 @@ const SelectedSymbolListTable = (props: { CbtoDeleteRow: (arg0: any) => void; sy
         {
             field: "lotSize",
             headerName: "Lot Size",
-            flex: 1.0,
-            minWidth: 50,
+            minWidth: 80,
             disableColumnMenu: true,
             sortable: false,
             headerClassName: "custom-header"
@@ -49,8 +48,7 @@ const SelectedSymbolListTable = (props: { CbtoDeleteRow: (arg0: any) => void; sy
         {
             field: "Buy",
             headerName: "Buy/Sell",
-            flex: 1.0,
-            minWidth: 50,
+            minWidth: 80,
             disableColumnMenu: true,
             sortable: false,
             headerClassName: "custom-header",
@@ -65,7 +63,6 @@ const SelectedSymbolListTable = (props: { CbtoDeleteRow: (arg0: any) => void; sy
         {
             field: "instname",
             headerName: "Instrument",
-            flex: 1.0,
             minWidth: 80,
             disableColumnMenu: true,
             headerClassName: "custom-header",

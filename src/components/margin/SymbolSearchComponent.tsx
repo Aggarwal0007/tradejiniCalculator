@@ -95,7 +95,7 @@ const SymbolSearch = (props:
                 <div className="symbol-input">
                     <input 
                         className="search-input"
-                        placeholder="search TCS or TCS 26MAY or 26MAY FUT"
+                        placeholder="search TCS or TCS 26MAY"
                         onChange={(evt) => {
                             return onChangeSearch(evt); 
                         }}
