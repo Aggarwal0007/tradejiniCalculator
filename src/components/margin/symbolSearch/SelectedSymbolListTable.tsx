@@ -2,10 +2,16 @@ import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import { IMAGES } from "../../../common/Constants";
 import React from "react";
+import { RequestSymbol } from "common/Types";
 
-const SelectedSymbolListTable = (props: { CbtoDeleteRow: (arg0: any) => void; symbolList: any; }) => {
+type PropsType = {
+    CbtoDeleteRow: (arg0: RequestSymbol) => void;
+    symbolList: any;
+}
 
-    const onDeleteRow = (selectedRow: any) => {
+const SelectedSymbolListTable = (props: PropsType) => {
+
+    const onDeleteRow = (selectedRow: RequestSymbol) => {
         console.log("selectedRow", selectedRow);
         props.CbtoDeleteRow(selectedRow);
     };
@@ -54,9 +60,9 @@ const SelectedSymbolListTable = (props: { CbtoDeleteRow: (arg0: any) => void; sy
             headerClassName: "custom-header",
             renderCell: (params) => {
                 return (
-                    <>
+                    <div className="buy-label">
                         {params.row.netqty > 1 ? "Buy" : "Sell" }
-                    </>
+                    </div>
                 );
             }
         },

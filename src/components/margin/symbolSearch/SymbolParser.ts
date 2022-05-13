@@ -1,5 +1,5 @@
+import { SEARCH_SYMBOL, SymbolStoreResponse } from "../../../common/Types";
 import { splitId, splitResponse } from "./SearchUtils";
-import { SEARCH_SYMBOL } from "../../../common/Types";
 
 export default class SymbolParser {
 
@@ -12,7 +12,7 @@ export default class SymbolParser {
     //     this.allSymbols = this.allSymbols.concat(parsedData);
     // }
 
-    public static addSymbols(resData: any) {
+    public static addSymbols(resData: SymbolStoreResponse) {
         console.log("resData", resData);
         const parsedData = this.parseSymbols(resData);
         this.allSymbols = this.allSymbols.concat(parsedData);
@@ -89,7 +89,7 @@ export default class SymbolParser {
 
     // }
 
-    private static parseSymbols(resp: any) {
+    private static parseSymbols(resp: SymbolStoreResponse) {
 
         const symArrayData: Array<Array<string>> = splitResponse(resp.data, "~", "|");
 

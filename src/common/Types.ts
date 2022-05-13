@@ -113,3 +113,26 @@ export interface SEARCH_SYMBOL {
     tick?: string,
     weekly?: string
 }
+
+export interface RequestSymbol {
+    [key: string]: any;
+    prd: string,
+    exch?: string,
+    symname?: string,
+    instname?: string,
+    exd: string,
+    netqty?: string,
+    exc_id?:string,
+    dispSymbol?: string,
+    lotSize?: string,
+    dispQty:string,
+    optt?: string,
+    strprc?: string
+  }
+
+export interface SymbolStoreResponse {
+      "data": string,
+      idFormat: string,
+      name: string,
+      sortOrder: 3
+  }

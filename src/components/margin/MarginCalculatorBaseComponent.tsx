@@ -1,4 +1,5 @@
 import { Box, Button, Grid, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { ErrorType, RequestSymbol, SEARCH_SYMBOL } from "common/Types";
 import { hideLoader, showLoader, showSnackBar } from "../../state/AppConfigReducer";
 import React, { useState } from "react";
 import { ServiceRequest, useFetch } from "index";
@@ -17,32 +18,14 @@ import { useDispatch } from "react-redux";
       stat: string
  }
 
- type SymbolObj = {
-    asset: string,
-    dispName: string,
-    excToken: string,
-    exchange: string,
-    expiry: string
-    instrument: string
-    lot: string
-    optType: string
-    strike: string
-    symbol: string
-    tick: string
-    weekly: string
- }
-
 function MarginCalculator() {
 
     const fetchAPI = useFetch();
     const dispatch = useDispatch();
 
-
-    // const symbolListRef = useRef(new Array());
-
     const [
         symbolList, setSymbolList
-    ] = useState<[]>();
+    ] = useState<RequestSymbol[]>();
 
     const [
         action, setAction
@@ -58,11 +41,18 @@ function MarginCalculator() {
 
     const [
         selectedSymbol, setSelectedSymbol
-    ] = useState<SymbolObj>();
+    ] = useState<SEARCH_SYMBOL>();
 
     const [
         marginResults, setMarginResults
-    ] = useState<MarginResults>();
+    ] = useState<MarginResults>({
+        "expo": "",
+        "expo_trade": "",
+        "request_time": "",
+        "span": "",
+        "span_trade": "",
+        "stat": ""
+    });
 
     
     const handleChange = (
@@ -105,7 +95,7 @@ function MarginCalculator() {
         }));
     };
 
-    const successCB = (response: any, symData: any) => {
+    const successCB = (response: any, symData: RequestSymbol[]) => {
         setSymbolList(Object.assign([
         ], symData));
         dispatch(hideLoader());
@@ -114,7 +104,7 @@ function MarginCalculator() {
         setMarginResults(response.d);   
     };
 
-    const errorCB = (error: any) => {
+    const errorCB = (error: ErrorType) => {
         dispatch(hideLoader());
         console.log("error");
         dispatch(showSnackBar({
@@ -126,7 +116,7 @@ function MarginCalculator() {
     const getMarginResults = (isDelete = false, symsArr= [
     ]) => {
 
-        const syms: any = Object.assign([
+        const syms: RequestSymbol[] = Object.assign([
         ], symsArr);
             
         if (!isDelete) {
@@ -134,7 +124,7 @@ function MarginCalculator() {
 
             const totalQty: string = netQuantity as unknown as string;
     
-            const selectedSym = {
+            const selectedSym:RequestSymbol = {
                 "prd": "M",
                 "exch": selectedSymbol?.exchange,
                 "symname": selectedSymbol?.symbol,
@@ -147,6 +137,10 @@ function MarginCalculator() {
                 "dispQty": netQty
             };
            
+            if (selectedSymbol?.asset === "option") {
+                selectedSym.optt = selectedSymbol?.optType;
+                selectedSym.strprc = selectedSymbol?.strike;
+            }
             syms.push(selectedSym);
     
         } else if ( !symsArr.length) {
@@ -179,12 +173,12 @@ function MarginCalculator() {
         );
     };
 
-    const deleteSymbolRow = (selectedRow: any) => {
+    const deleteSymbolRow = (selectedRow: RequestSymbol) => {
 
         const existingSymbolList = Object.assign([
         ], symbolList);
 
-        const index = existingSymbolList.findIndex((item: any) => {
+        const index = existingSymbolList.findIndex((item: RequestSymbol) => {
             return item.exc_id === selectedRow.exc_id; 
         });
 
@@ -207,7 +201,7 @@ function MarginCalculator() {
             const existingSymbolList = Object.assign([
             ], symbolList);
 
-            const found = existingSymbolList.some((item: any) => {
+            const found = existingSymbolList.some((item: RequestSymbol) => {
                 return item.exc_id === selectedSymbol?.excToken; 
             });
 
@@ -219,7 +213,7 @@ function MarginCalculator() {
 
     };
 
-    const getSymbolInfo = (symDetails: any) => {
+    const getSymbolInfo = (symDetails: SEARCH_SYMBOL) => {
         if (symDetails) {
             setSelectedLotSize(symDetails.lot);
             setSelectedSymbol(symDetails);

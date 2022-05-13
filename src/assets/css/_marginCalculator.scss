@@ -192,3 +192,18 @@
 .snack-message {
   font-size: 14px !important;
 }
+
+.buy-label {
+  font-size: 14px !important;
+}
+
+@media screen and (max-width: 768px) {
+  .symbol-label,
+  .lots-label {
+    font-size: 11px;
+  }
+
+  .lot-size-info {
+    margin-left: 145px;
+  }
+}

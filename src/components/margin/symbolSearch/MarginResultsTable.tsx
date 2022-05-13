@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 type MarginResults = {
     expo: string,
@@ -9,22 +9,9 @@ type MarginResults = {
     stat: string
 }
 
-const MarginResultsTable = (props: { marginResponse: React.SetStateAction<MarginResults | undefined>; }) => {
+const MarginResultsTable = (props: { marginResponse: MarginResults }) => {
 
-    const [
-        marginResults, setMarginResults
-    ] = useState<MarginResults>();
-
-    useEffect(() => {
-
-        if (props && props.marginResponse) {
-            setMarginResults(props.marginResponse);
-        }
-    }, [
-        props.marginResponse
-    ]);
-
-    const getTotalmargin = (results: MarginResults | undefined) => {
+    const getTotalmargin = (results: MarginResults) => {
         let totalMargin = 0;
         if (results && results.expo && results.span)
             totalMargin = Number(results.expo) + Number(results.span);
@@ -49,8 +36,8 @@ const MarginResultsTable = (props: { marginResponse: React.SetStateAction<Margin
                         Span Margin
                     </div>
                     <div className="">
-                        {(marginResults && marginResults.span) ? 
-                            convertToCommaSeparator(marginResults.span)
+                        {(props.marginResponse && props.marginResponse.span) ? 
+                            convertToCommaSeparator(props.marginResponse.span)
                             : 0 }
                     </div>
                 </div>
@@ -59,8 +46,8 @@ const MarginResultsTable = (props: { marginResponse: React.SetStateAction<Margin
                         Exposure Margin
                     </div>
                     <div className="">
-                        {(marginResults && marginResults.expo) ? 
-                            convertToCommaSeparator(marginResults.expo)
+                        {(props.marginResponse && props.marginResponse.expo) ? 
+                            convertToCommaSeparator(props.marginResponse.expo)
                             : 0 }
                     </div>
                 </div>
@@ -69,7 +56,7 @@ const MarginResultsTable = (props: { marginResponse: React.SetStateAction<Margin
                         Total Margin
                     </div>
                     <div className="">
-                        {convertToCommaSeparator(getTotalmargin(marginResults) as unknown as string) }
+                        {convertToCommaSeparator(getTotalmargin(props.marginResponse) as unknown as string) }
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@ import { AppSettings } from "../../../common/AppSettings";
 import { SPAN_CALCULATOR } from "../../../communicator/ServiceUrls";
 import { storage } from "index";
 import SymbolParser from "./SymbolParser";
+import { SymbolStoreResponse } from "common/Types";
 
 
 export default class SymbolCache {
@@ -57,7 +58,7 @@ export default class SymbolCache {
         // }
 
         if (symbolStore && symbolStore.d && symbolStore.d.data) {
-            symbolStore.d.data.map((item: any) => {
+            symbolStore.d.data.map((item: SymbolStoreResponse) => {
                 return SymbolParser.addSymbols(item);
             });
         }
