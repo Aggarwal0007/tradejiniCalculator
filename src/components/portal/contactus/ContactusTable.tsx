@@ -1,7 +1,7 @@
+import { Button, Paper, Popover, TextField, Typography } from "@mui/material";
 import { DataGrid, GridColumns, GridRowParams } from "@mui/x-data-grid";
 import { DATE_RANGE, ErrorType, WEBSITE_CONTACTS } from "common/Types";
 import { hideLoader, showLoader, showSnackBar } from "../../../state/AppConfigReducer";
-import { Paper, TextField } from "@mui/material";
 
 import React, { useEffect, useState } from "react";
 import { ServiceRequest, useFetch } from "index";
@@ -30,6 +30,27 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
     const [
         errormsg, setErrorMsg
     ] = useState<string>("");
+
+    const [
+        anchorEl, setAnchorEl
+    ] = React.useState<HTMLButtonElement | null>(null);
+
+    const [
+        selectedMsgRow, setSelectedMsgRow
+    ] = useState<number>();
+
+    const handleClick = (evt: React.MouseEvent<HTMLButtonElement>, rowID: number) => {
+        setAnchorEl(evt.currentTarget);
+        console.log("rowIDDD", rowID);
+        setSelectedMsgRow(rowID);
+    };
+  
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+  
+    const opens = Boolean(anchorEl);
+    const ids = opens ? "pop-over" : "";
 
     const successCB = (response: { d: Array<WEBSITE_CONTACTS> }) => {
         dispatch(hideLoader());
@@ -124,7 +145,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             field: "phone",
             headerName: "Phone No",
             flex: 1.0,
-            minWidth: 80,
+            minWidth: 120,
             disableColumnMenu: true,
             sortable: false,
             headerClassName: "custom-header",
@@ -142,7 +163,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             field: "email",
             headerName: "Email Id",
             flex: 1.0,
-            minWidth: 150,
+            minWidth: 200,
             disableColumnMenu: true,
             sortable: false,
             headerClassName: "custom-header",
@@ -160,7 +181,7 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
             field: "subject",
             headerName: "Subject",
             flex: 1.0,
-            minWidth: 150,
+            minWidth: 120,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             sortable: false,
@@ -171,6 +192,64 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
                         : " actions-enable"}`}>
                         {params.row.subject}
                     </div>
+                );
+            }
+        },
+        {
+            field: "message",
+            headerName: "Message",
+            flex: 1.0,
+            minWidth: 260,
+            disableColumnMenu: true,
+            headerClassName: "custom-header",
+            sortable: false,
+            renderCell: (params) => {
+                return (
+                    <>
+                        <div className="msg-container">
+                            <div className="msg-content">
+                                {params.row.message}
+                            </div>
+                            <div className="msg-btn">
+                                <Button 
+                                    aria-describedby={ids}
+                                    variant="text"
+                                    size="small"
+                                    className="msg-custom-btn"
+                                    onClick={(evt) => {
+                                        return handleClick(evt, params.row.id); 
+                                    }}
+                                >
+                                        Read More
+                                </Button>
+                            </div>
+                        </div>
+                        
+                        {
+                            params.row.id === selectedMsgRow ?
+                                <Popover
+                                    id={ids}
+                                    open={opens}
+                                    anchorEl={anchorEl}
+                                    onClose={handleClose}
+                                    anchorOrigin={{
+                                        vertical: "bottom",
+                                        horizontal: "left",
+                                    }}
+                                >
+                                    <div className={`${params.row.status === 1 ?
+                                        "actions-disable"
+                                        : " actions-enable"}`}>
+                                        <Typography
+                                            sx={{ p: 2 }}>
+                                            {params.row.message}
+                                        </Typography>
+                                    </div>
+                                </Popover>
+                                :
+                                null
+                        }
+                    </>
                 );
             }
         },
@@ -276,8 +355,8 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
         },
     ];
 
-    const getselectedRows = (ids: Iterable<unknown>) => {
-        const selectedIDs = new Set(ids);
+    const getselectedRows = (idss: Iterable<unknown>) => {
+        const selectedIDs = new Set(idss);
         const selectedItems = availbleContacts.filter((row: WEBSITE_CONTACTS) => {
             return selectedIDs.has(row.id);
         });
@@ -323,8 +402,15 @@ const ContactusTable = (props: { showRecycleContent: Function; }) => {
                                     url: CONTACT_US.DELETE_CONTACTS
                                 }
                             }}
-                            onSelectionModelChange={(ids) => {
-                                return getselectedRows(ids);
+                            onSelectionModelChange={(idss) => {
+                                return getselectedRows(idss);
+                            }}
+                            initialState={{
+                                sorting: {
+                                    sortModel: [
+                                        { field: "date", sort: "desc" }
+                                    ],
+                                },
                             }}
                         />
 

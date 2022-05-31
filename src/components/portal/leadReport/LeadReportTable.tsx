@@ -342,6 +342,13 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
                             onSelectionModelChange={(ids) => {
                                 return getselectedRows(ids);
                             }}
+                            initialState={{
+                                sorting: {
+                                    sortModel: [
+                                        { field: "date", sort: "desc" }
+                                    ],
+                                },
+                            }}
                         />
 
                         :

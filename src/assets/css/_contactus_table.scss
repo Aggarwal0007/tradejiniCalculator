@@ -63,3 +63,24 @@
   margin-top: 10px !important;
   text-decoration: none;
 }
+
+.msg-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+
+  .msg-content {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .msg-btn {
+    width: 75px;
+
+    .msg-custom-btn {
+      font-size: 10px;
+    }
+  }
+}
