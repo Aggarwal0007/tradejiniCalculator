@@ -12,6 +12,7 @@ type PropsTypes = {
     from: string; rowsSelected: (WEBSITE_CONTACTS[] | LEAD_REPORT[]); 
     name: string;
     customClass: string;
+    customBtnClass?: string;
     variant: string;
     url:string
 }
@@ -69,7 +70,9 @@ const DeleteRecords = (props: PropsTypes) => {
 
     
     const onClickDelete = (deletedRow: LEAD_REPORT[] | WEBSITE_CONTACTS[]) => {
+
         if (deletedRow.length) {
+            
             dispatch(showAPPDialog({
                 title: getText("DELETE_TITLE", "CONFIRMATION"),
                 message: `${getText("DELETE_MSG", "CONFIRMATION")} ${deletedRow.length} Records ?`,
@@ -93,6 +96,7 @@ const DeleteRecords = (props: PropsTypes) => {
     return (
         <>
             <IconButton
+                className={props.customBtnClass}
                 onClick={() => {
                     return onClickDelete(props.rowsSelected); 
                 }}

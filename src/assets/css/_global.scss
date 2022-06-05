@@ -361,3 +361,13 @@ code {
 //   justify-content: flex-start;
 //   align-items: center;
 // }
+
+.hide-action {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.show-action {
+  pointer-events: all;
+  opacity: 1;
+}

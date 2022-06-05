@@ -23,11 +23,19 @@ const UpdateRecord = (props: propsTypes) => {
 
     const successCB = (response: MESSAGE_SUCCESS_RESPONSE) => {
         dispatch(hideLoader());
-        dispatch(showSnackBar({
-            message: response.d.message,
-            status: "success"
-        }));
-        props.updateRowSuccess();
+        if (response.d.message === "Unable to update.") {
+            dispatch(showSnackBar({
+                message: "Unable to update. please modify assignto / remarks",
+                status: "error"
+            })); 
+        } else {
+            dispatch(showSnackBar({
+                message: response.d.message,
+                status: "success"
+            }));
+            props.updateRowSuccess();
+        }
+        
     };
 
     const errorCB = (error: ErrorType) => {

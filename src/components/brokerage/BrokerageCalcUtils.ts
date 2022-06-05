@@ -168,13 +168,13 @@ export const calculateEquityBrokerage = (
 
     const configData = getConfigData(category);
 
-    const turnOver = getTurnOver(qty, buyPrice, sellPrice );
+    let turnOver = getTurnOver(qty, buyPrice, sellPrice );
 
     // const brokerage = getBrokerage(turnOver, configData);
 
     // Passing buyprice and sell price
 
-    const brokerage = getBrokerage(turnOver, configData, buyPrice, sellPrice);
+    let brokerage = getBrokerage(turnOver, configData, buyPrice, sellPrice);
 
     let STTCharges = getSTT(qty, sellPrice, configData, category, turnOver);
 
@@ -200,14 +200,16 @@ export const calculateEquityBrokerage = (
         pointBreakeven = (totalCharges/qty);
     }
         
+    brokerage = Number(decimalConversion(brokerage));
+    turnOver = Number(decimalConversion(turnOver));
+    STTCharges = Number(decimalConversion(STTCharges, 0));
+    transactionCharges = Number(decimalConversion(transactionCharges, 1));
     GSTCharges = Number(decimalConversion(GSTCharges));
     sebiCharges = Number(decimalConversion(sebiCharges));
-    pointBreakeven = Number(decimalConversion(pointBreakeven));
-    totalCharges = Number(decimalConversion(totalCharges));
-    transactionCharges = Number(decimalConversion(transactionCharges, 1));
     stampCharges = Number(decimalConversion(stampCharges));
+    totalCharges = Number(decimalConversion(totalCharges));
     netProfit = Number(decimalConversion(netProfit));
-    STTCharges = Number(decimalConversion(STTCharges, 0));
+    pointBreakeven = Number(decimalConversion(pointBreakeven));
 
     return {
         turnOver,
@@ -240,13 +242,13 @@ export const calculateCommodityBrokerage = (
 
     CTT = Number((CTT).toFixed(2)); 
 
-    const turnOver = ( quantity * buyPrc ) + ( quantity * sellPrc );
+    let turnOver = ( quantity * buyPrc ) + ( quantity * sellPrc );
 
     // const brokerage = getBrokerage(turnOver, configData);
 
     // Passing buyprice and sell price
 
-    const brokerage = getBrokerage(turnOver, configData, buyPrc, sellPrc);
+    let brokerage = getBrokerage(turnOver, configData, buyPrc, sellPrc);
 
     let STTCharges = getSTT(quantity, sellPrc, configData, category, turnOver);
 
@@ -274,6 +276,8 @@ export const calculateCommodityBrokerage = (
     transactionCharges = decimalConversion(transactionCharges);
     netProfit = Number(decimalConversion(netProfit));
     pointBreakeven = Number(decimalConversion(pointBreakeven));
+    brokerage = Number(decimalConversion(brokerage));
+    turnOver = Number(decimalConversion(turnOver));
 
     return {
         turnOver,
@@ -299,13 +303,13 @@ export const calculateCurrencyBrokerage = (
     
     const configData = getConfigData(category);
 
-    const turnOver = ( ( qty * buyPrc ) + ( qty * sellPrc ) ) * 1000;
+    let turnOver = ( ( qty * buyPrc ) + ( qty * sellPrc ) ) * 1000;
 
     // const brokerage = getBrokerage(turnOver, configData);
     
     // Passing buyprice and sell price
 
-    const brokerage = getBrokerage(turnOver, configData, buyPrc, sellPrc);
+    let brokerage = getBrokerage(turnOver, configData, buyPrc, sellPrc);
 
     let transactionCharges = getTransactionCharges(turnOver, configData);
 
@@ -339,6 +343,8 @@ export const calculateCurrencyBrokerage = (
     stampCharges = Number(stampCharges.toFixed(2));
     totalCharges = decimalConversion(totalCharges);
     totalCharges = Number(totalCharges.toFixed(2));
+    brokerage = Number(decimalConversion(brokerage));
+    turnOver = Number(decimalConversion(turnOver));
 
     return {
 

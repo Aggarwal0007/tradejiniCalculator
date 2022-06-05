@@ -166,6 +166,21 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; categorySelected: 
                     })}              
                 </Grid>
             </Grid>
+
+            <Grid container justifyContent="center" 
+                className="turnover-input-section input-container top-output-container">
+                <Grid item lg={4} sm={4} className="turnover-label">Turnover</Grid>
+                <Grid item lg={8} sm={4} className="output-bg" id="turnover-digit-0">
+                    {turnoverArr && turnoverArr.map((item: string, key: number) => {
+                        return (
+                            <span className="field-inputs" id={item} key={key}>
+                                {item}
+                            </span>
+                        );
+                    })}
+                </Grid>
+            </Grid>
+            
             <Grid container justifyContent="center"
                 className="bep-input-section input-container top-output-container">
                 <Grid item lg={4} sm={4} className="bep-label">BEP</Grid>
@@ -181,20 +196,7 @@ const BrokerageOutputs = (props: { chargesBreakDown: Charges; categorySelected: 
                     </div>
                 </Grid>
             </Grid>
-            <Grid container justifyContent="center" 
-                className="turnover-input-section input-container top-output-container">
-                <Grid item lg={4} sm={4} className="turnover-label">Turnover</Grid>
-                <Grid item lg={8} sm={4} className="output-bg" id="turnover-digit-0">
-                    {turnoverArr && turnoverArr.map((item: string, key: number) => {
-                        return (
-                            <span className="field-inputs" id={item} key={key}>
-                                {item}
-                            </span>
-                        );
-                    })}
-                </Grid>
-            </Grid>
-
+            
             <Grid container justifyContent="center"
                 className="profit-input-section input-container top-output-container">
                 <Grid item lg={4} sm={4} className="profit-label">Profit</Grid>

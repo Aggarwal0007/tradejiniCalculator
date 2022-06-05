@@ -84,6 +84,19 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
         getData();
     };
 
+    const hidedeleteOption = (rowData: LEAD_REPORT) => {
+        if (rowData && rowData.status === 1) return false;
+        else if (rowData && rowData.status === 0) {
+            const remarkss = rowData.remarks?.length;
+            if (remarkss) {
+                return true;
+            } 
+            return false;
+        } 
+        
+        return true;
+    };
+
     const columns: GridColumns = [
         {
             field: "date",
@@ -209,6 +222,14 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
                             type="text"
                             defaultValue={params.row.assignto}
                             InputLabelProps={{ shrink: true }}
+                            onDragOver={(evt) => {
+                                evt.preventDefault();
+                                return false; 
+                            }}
+                            onDrop={(evt) => {
+                                evt.preventDefault();
+                                return false;
+                            }}
                             onChange={(evt) => {
                                 return params.api.updateRows([
                                     { ...params.row, assignto: evt.target.value }
@@ -238,6 +259,14 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
                             className="assignto-input"
                             defaultValue={params.row.remarks}
                             InputLabelProps={{ shrink: true }}
+                            onDragOver={(evt) => {
+                                evt.preventDefault();
+                                return false; 
+                            }}
+                            onDrop={(evt) => {
+                                evt.preventDefault();
+                                return false;
+                            }}
                             onChange={(evt) => {
                                 return params.api.updateRows([
                                     { ...params.row, remarks: evt.target.value }
@@ -275,6 +304,9 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
                             />
 
                             <DeleteRecords
+                                customBtnClass={`${hidedeleteOption(params.row) ?
+                                    "show-action"
+                                    : "hide-action"}`}
                                 customClass="delete-icon"
                                 rowsSelected={[
                                     params.row
@@ -323,7 +355,8 @@ const LeadReportTable = (props: { showRecycleContent: Function; }) => {
                             // ]}
                             hideFooter={true}
                             isRowSelectable={(params: GridRowParams) => {
-                                return params.row.status !== 1;
+                                return hidedeleteOption(params.row);
+                                // return params.row.status !== 1;
                             }}
                             checkboxSelection
                             disableSelectionOnClick

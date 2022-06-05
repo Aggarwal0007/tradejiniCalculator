@@ -18,12 +18,12 @@ const SeeAllCharges = (props: PropsTypes) => {
 
     return (
         <Grid container spacing={4} justifyContent="center" className="see-all-charges-container row">
-            <Grid item xs={10} lg={5} sm={5}>
+            <Grid item xs={12} lg={6} sm={12}>
                 <TotalChargesTable
                     {...chargeProps}
                 />
             </Grid>
-            <Grid item xs={10} lg={5} sm={5}>
+            <Grid item xs={12} lg={6} sm={12}>
                 <ChargeListTable 
                     {...chargeProps}
                 />
