@@ -132,7 +132,8 @@ const KnowBrokerageSavings = (props: PropsTypes) => {
                         return onChangebrokerageValue(Number(val)); 
                     }}
                     ipValue={currentBrokerage}
-                    numbersOnly = {true}
+                    numbersOnly = {false}
+                    isDecimal= {true}
                 />
                 
                 <span className="or-text">OR</span>
