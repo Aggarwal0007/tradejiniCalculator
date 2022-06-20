@@ -23,6 +23,13 @@ export default class SymbolParser {
         if (!isNaN(Number(query))) {
             regexStr = `.*${regexStr}`;
         }
+
+        // const queryArr = query.split(" ");
+        // let regexStr = "";
+        // queryArr.forEach((item) => {
+        //     regexStr += `(?=.*${item})`;
+        // });
+
         const result: Array<SEARCH_SYMBOL> = [
         ];
 

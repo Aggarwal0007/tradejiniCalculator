@@ -136,7 +136,7 @@ const KnowBrokerageSavings = (props: PropsTypes) => {
                     isDecimal= {true}
                 />
                 
-                <span className="or-text">OR</span>
+                <span className="or-text">%</span>
             </div>
             <div className="your-savings">
                 <div className="your-savings-text">
