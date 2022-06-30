@@ -75,6 +75,34 @@ const SelectedSymbolListTable = (props: PropsType) => {
             sortable: false,
         },
         {
+            field: "span",
+            headerName: "Span",
+            minWidth: 80,
+            disableColumnMenu: true,
+            headerClassName: "custom-header",
+            sortable: false,
+        },
+        {
+            field: "expo",
+            headerName: "Exposure",
+            minWidth: 80,
+            disableColumnMenu: true,
+            headerClassName: "custom-header",
+            sortable: false,
+        },
+        {
+            field: "Total",
+            headerName: "Total",
+            minWidth: 80,
+            sortable: false,
+            disableColumnMenu: true,
+            headerClassName: "custom-header",
+            renderCell: (params) => {
+                return Number(params.row.expo) + Number(params.row.span);
+            }
+            
+        },
+        {
             field: "Actions",
             headerName: "Actions",
             minWidth: 80,

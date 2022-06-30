@@ -9,7 +9,7 @@ type MarginResults = {
     stat: string
 }
 
-const MarginResultsTable = (props: { marginResponse: MarginResults }) => {
+const MarginResultsTable = (props: { marginResponse: MarginResults, marginBenefit: number }) => {
 
     const getTotalmargin = (results: MarginResults) => {
         let totalMargin = 0;
@@ -59,6 +59,24 @@ const MarginResultsTable = (props: { marginResponse: MarginResults }) => {
                         {convertToCommaSeparator(getTotalmargin(props.marginResponse) as unknown as string) }
                     </div>
                 </div>
+                {
+
+                    props.marginBenefit > 0 ?
+
+                        <div className="margin-results-row margin-benefit">
+                            <div className="">
+                             Margin Benefit
+                            </div>
+                            <div className="">
+                                {convertToCommaSeparator(props.marginBenefit as unknown as string) }
+                            </div>
+                        </div>
+
+                        :
+                        null
+
+                }
+               
             </div>
         </div>
     );
