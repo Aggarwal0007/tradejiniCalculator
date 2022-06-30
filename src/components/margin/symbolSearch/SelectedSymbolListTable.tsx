@@ -39,7 +39,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "exch",
             headerName: "Exchange",
-            minWidth: 150,
+            minWidth: 80,
             headerClassName:"custom-header",
             disableColumnMenu: true,
             sortable: false
@@ -47,7 +47,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "dispQty",
             headerName: "No of lots",
-            minWidth: 150,
+            minWidth: 80,
             disableColumnMenu: true,
             sortable: false,
             headerClassName: "custom-header"
@@ -55,7 +55,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "lotSize",
             headerName: "Lot Size",
-            minWidth: 150,
+            minWidth: 80,
             disableColumnMenu: true,
             sortable: false,
             headerClassName: "custom-header"
@@ -63,7 +63,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "Buy",
             headerName: "Buy/Sell",
-            minWidth: 150,
+            minWidth: 80,
             disableColumnMenu: true,
             sortable: false,
             headerClassName: "custom-header",
@@ -78,7 +78,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "instname",
             headerName: "Instrument",
-            minWidth: 150,
+            minWidth: 80,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             sortable: false,
@@ -86,7 +86,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "span",
             headerName: "Span",
-            minWidth: 150,
+            minWidth: 80,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             sortable: false,
@@ -94,7 +94,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "expo",
             headerName: "Exposure",
-            minWidth: 150,
+            minWidth: 80,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             sortable: false,
@@ -102,7 +102,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "Total",
             headerName: "Total",
-            minWidth: 150,
+            minWidth: 80,
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
