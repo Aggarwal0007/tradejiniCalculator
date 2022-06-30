@@ -59,23 +59,23 @@ const MarginResultsTable = (props: { marginResponse: MarginResults, marginBenefi
                         {convertToCommaSeparator(getTotalmargin(props.marginResponse) as unknown as string) }
                     </div>
                 </div>
-                {
+               
 
-                    props.marginBenefit > 0 ?
-
-                        <div className="margin-results-row margin-benefit">
-                            <div className="">
+                <div className="margin-results-row margin-benefit">
+                    <div className="">
                              Margin Benefit
-                            </div>
-                            <div className="">
-                                {convertToCommaSeparator(props.marginBenefit as unknown as string) }
-                            </div>
-                        </div>
+                    </div>
+                    <div className="">
+                        {
+                            props.marginBenefit > 0 ?
+                                convertToCommaSeparator(props.marginBenefit as unknown as string)
+                                :
+                                0
+                        }
+                                
+                    </div>
+                </div>
 
-                        :
-                        null
-
-                }
                
             </div>
         </div>

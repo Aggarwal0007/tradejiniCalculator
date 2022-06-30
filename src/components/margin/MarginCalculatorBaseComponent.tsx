@@ -88,6 +88,10 @@ function MarginCalculator() {
     const listedScrips = useRef<ListedSyms[]>([
     ]);
 
+    const [
+        marginTotal, setTotalMargin
+    ] = useState<string>("0");
+
     const handleChange = (
         evt: React.MouseEvent<HTMLElement>,
         newAction: string,
@@ -132,8 +136,6 @@ function MarginCalculator() {
         setSymbolList(Object.assign([
         ], symData));
         dispatch(hideLoader());
-        console.log("symbolList Res", symData);
-        console.log("getResponse", response);
         setMarginResults(response.d);
     };
 
@@ -146,6 +148,26 @@ function MarginCalculator() {
         }));
     };
 
+    const apiCallForMarginResults = (isDelete: boolean, symsArr:RequestSymbol[], syms:RequestSymbol[]) => {
+        dispatch(showLoader());
+        const request = new ServiceRequest();
+        request.addData({
+            actid: "DUMMY",
+            pos: JSON.stringify(isDelete ? symsArr : syms)
+        });
+
+        symbolListRef.current = syms;
+
+        fetchAPI.placePOSTRequest(
+            SPAN_CALCULATOR.GET_SPAN_CALC_RESULTS,
+            request,
+            (resp) => {
+                return successCB(resp, syms);
+            },
+            errorCB
+        );
+    };
+
     const getMarginResults = (isDelete = false, symsArr = [
     ]) => {
 
@@ -154,9 +176,7 @@ function MarginCalculator() {
 
         if (!isDelete) {
             const netQuantity: number = Number(selectedSymbol?.lot) * Number(netQty);
-
             const totalQty: string = netQuantity as unknown as string;
-
             const selectedSym: RequestSymbol = {
                 "prd": "M",
                 "exch": selectedSymbol?.exchange,
@@ -185,28 +205,16 @@ function MarginCalculator() {
                 "span_trade": "",
                 "stat": ""
             });
+               
+            symbolListRef.current = [
+            ];
             setListedSyms([
             ]);
             return;
         }
 
-        dispatch(showLoader());
-        const request = new ServiceRequest();
-        request.addData({
-            actid: "DUMMY",
-            pos: JSON.stringify(isDelete ? symsArr : syms)
-        });
-
-        symbolListRef.current = syms;
-
-        fetchAPI.placePOSTRequest(
-            SPAN_CALCULATOR.GET_SPAN_CALC_RESULTS,
-            request,
-            (resp) => {
-                return successCB(resp, syms);
-            },
-            errorCB
-        );
+        apiCallForMarginResults(isDelete, symsArr, syms);
+        
     };
 
     const deleteSymbolRow = (selectedRow: RequestSymbol) => {
@@ -264,7 +272,7 @@ function MarginCalculator() {
         }
     };
 
-
+  
     const eachScripSuccessCB = (response: any, symData: RequestSymbol) => {
 
 
@@ -277,8 +285,6 @@ function MarginCalculator() {
             exisselectedScrips.push(symResultsInfo);
             listedScrips.current = exisselectedScrips;
             setListedSyms(exisselectedScrips);
-            console.log("symbolListRefsymbolListRef eachScripSuccessCB", exisselectedScrips);
-
         }
     };
 
@@ -292,7 +298,6 @@ function MarginCalculator() {
     };
 
     const callRequestToEachScrip = (selectedSymList: RequestSymbol[]) => {
-        console.log("symbolListRefsymbolListRef callRequestToEachScrip", selectedSymList);
         if (selectedSymList && selectedSymList.length) {
             selectedSymList.map((item: RequestSymbol) => {
                 const netQuantity: number = Number(item?.lot) * Number(netQty);
@@ -349,25 +354,35 @@ function MarginCalculator() {
     }, [
         symbolListRef.current
     ]);
-
+ 
     useEffect(() => {
-        let totalMargin = 0;
-        console.log(" listedSyms", listedSyms);
+
         if (listedSyms && listedSyms.length) {
-            listedSyms.map((item: ListedSyms) => {
-                totalMargin = totalMargin + Number(item.expo) + Number(item.span);
-                return totalMargin;
-            });
-        }
-
-        const scripMarignTotal = Number(totalMargin.toFixed(2));
-        const multiScripMarginTotal = Number(marginResults.expo) + Number(marginResults.span);
-
-        const MarginBenefit = scripMarignTotal - multiScripMarginTotal;
-
-        setMarginBenefit(MarginBenefit);
+            let totalMargin: number = 0;
+            if (listedSyms && listedSyms.length) {
+                listedSyms.map((item: ListedSyms) => {
+                    totalMargin = totalMargin + Number(item.expo) + Number(item.span);
+                    return totalMargin;
+                });
+            }
+            const scripMarignTotal =parseFloat(totalMargin.toFixed(2));
+            const multiScripMarginTotal = Number(marginResults.expo) + Number(marginResults.span);
+    
+            const MarginBenefit = scripMarignTotal - parseFloat(multiScripMarginTotal.toFixed(2));
+            console.log(
+                "multiScripMarginTotal", 
+                `${scripMarignTotal + multiScripMarginTotal} = ${MarginBenefit}`
+            );
+        
+            setMarginBenefit(MarginBenefit);
+            setTotalMargin(parseFloat(scripMarignTotal as unknown as string).toFixed(2));
+        } else {
+            setMarginBenefit(0);
+            setTotalMargin("0");
+        } 
+         
     }, [
-        listedSyms
+        listedSyms, marginResults
     ]);
     return (
         <Grid container className="margin-calculator-root">
@@ -457,7 +472,18 @@ function MarginCalculator() {
                     symbolList={listedSyms}
                     CbtoDeleteRow={deleteSymbolRow}
                 />
-            </Box>
+            </Box> 
+            {
+                Number(marginTotal) > 0 ?
+                    <div className="total-margin-display">
+                        <div className="value-display">
+            Total Margin:  {marginTotal}
+                        </div>
+          
+                    </div>
+                    :
+                    null
+            }
         </Grid>
     );
 }

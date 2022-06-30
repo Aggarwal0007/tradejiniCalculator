@@ -14,6 +14,12 @@ export {
     useFetch
 };
 
+
+console.log = () => {
+    return null;
+};
+   
+
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>

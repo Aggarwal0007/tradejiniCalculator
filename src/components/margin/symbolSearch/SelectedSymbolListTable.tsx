@@ -16,13 +16,22 @@ const SelectedSymbolListTable = (props: PropsType) => {
         props.CbtoDeleteRow(selectedRow);
     };
     
+    const getTotalMargin = (params: any) => {
+        let totalMargin = 0;
+        if (params && params.row && params.row.expo && params.row.span) {
+            totalMargin = Number(params.row.expo) + Number(params.row.span);
+        }
+
+        return parseFloat(totalMargin as unknown as string).toFixed(2);
+    };
+
     const columns: GridColumns = [
         
         {
             field: "dispSymbol",
             headerName: "Symbol",
             flex: 1.0,
-            minWidth: 250,
+            minWidth: 200,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             sortable: false
@@ -30,7 +39,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "exch",
             headerName: "Exchange",
-            minWidth: 80,
+            minWidth: 150,
             headerClassName:"custom-header",
             disableColumnMenu: true,
             sortable: false
@@ -38,7 +47,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "dispQty",
             headerName: "No of lots",
-            minWidth: 80,
+            minWidth: 150,
             disableColumnMenu: true,
             sortable: false,
             headerClassName: "custom-header"
@@ -46,7 +55,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "lotSize",
             headerName: "Lot Size",
-            minWidth: 80,
+            minWidth: 150,
             disableColumnMenu: true,
             sortable: false,
             headerClassName: "custom-header"
@@ -54,7 +63,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "Buy",
             headerName: "Buy/Sell",
-            minWidth: 80,
+            minWidth: 150,
             disableColumnMenu: true,
             sortable: false,
             headerClassName: "custom-header",
@@ -69,7 +78,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "instname",
             headerName: "Instrument",
-            minWidth: 80,
+            minWidth: 150,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             sortable: false,
@@ -77,7 +86,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "span",
             headerName: "Span",
-            minWidth: 80,
+            minWidth: 150,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             sortable: false,
@@ -85,7 +94,7 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "expo",
             headerName: "Exposure",
-            minWidth: 80,
+            minWidth: 150,
             disableColumnMenu: true,
             headerClassName: "custom-header",
             sortable: false,
@@ -93,13 +102,14 @@ const SelectedSymbolListTable = (props: PropsType) => {
         {
             field: "Total",
             headerName: "Total",
-            minWidth: 80,
+            minWidth: 150,
             sortable: false,
             disableColumnMenu: true,
             headerClassName: "custom-header",
-            renderCell: (params) => {
-                return Number(params.row.expo) + Number(params.row.span);
-            }
+            valueGetter: getTotalMargin,
+            // renderCell: (params) => {
+            //     return parseFloat(Number(params.row.expo) + Number(params.row.span)).toFixed(2);
+            // }
             
         },
         {

@@ -213,3 +213,17 @@
   border: 1px solid #00cd97;
   border-radius: 5px;
 }
+
+.total-margin-display {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 20px;
+
+  .value-display {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
+  }
+}
