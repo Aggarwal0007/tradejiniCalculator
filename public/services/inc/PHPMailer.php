@@ -11,18 +11,27 @@ function mailer($subject, $message)
 {
 
     $phpmailer = new PHPMailer(true);
-    $phpmailer->isSMTP();
-    $phpmailer->isHTML(true);
-    $phpmailer->Host       = SMTP_HOST;
-    $phpmailer->Port       = SMTP_PORT;
-    // $phpmailer->SMTPSecure = 'tls';
-    $phpmailer->SMTPAuth   = SMTP_AUTH;
-    $phpmailer->Username   = SMTP_USERNAME;
-    $phpmailer->Password   = SMTP_PASSWORD;
-    $phpmailer->From       = SMTP_FROM;
-    $phpmailer->FromName   = SMTP_FROM_NAME;
-    $phpmailer->addAddress(SMTP_TO_ADDRESS, SMTP_TO_NAME);
-    $phpmailer->Subject = $subject;
-    $phpmailer->Body = $message;
-    $phpmailer->send();
+
+    try {
+        $phpmailer->isSMTP();
+        $phpmailer->isHTML(true);
+        $phpmailer->Host       = SMTP_HOST;
+        $phpmailer->Port       = SMTP_PORT;
+        $phpmailer->SMTPAuth   = SMTP_AUTH;
+        // $phpmailer->SMTPSecure = 'tls';
+        $phpmailer->Username   = SMTP_USERNAME;
+        $phpmailer->Password   = SMTP_PASSWORD;
+        $phpmailer->From       = SMTP_FROM;
+        $phpmailer->FromName   = SMTP_FROM_NAME;
+        $phpmailer->addAddress(SMTP_TO_ADDRESS, SMTP_TO_NAME);
+        $phpmailer->Subject = $subject;
+        $phpmailer->Body = $message;
+        $phpmailer->send();
+    }
+    catch (phpmailerException $e) {
+        echo $e->errorMessage(); //Pretty error messages from PHPMailer
+      } catch (Exception $e) {
+        echo $e->getMessage(); //Boring error messages from anything else!
+      }
+   
 }

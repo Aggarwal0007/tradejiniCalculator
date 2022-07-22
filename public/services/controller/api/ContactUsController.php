@@ -114,7 +114,7 @@ class ContactUsController extends BaseController
                 if (isset($name) && isset($email)) {
 
                     $responseData = $configModel->insertWebsiteContacts($name, $email, $phone, $message, $subject, $remarks, $assignTo);
-
+                    
                     if ($responseData['message'] == "Inserted Successfully!!") {
                         if ($subject === "ContactUs") {
                             $this->sendMailToContactUs($name, $phone, $email, $message, $logoImg);
@@ -295,6 +295,7 @@ class ContactUsController extends BaseController
 						</tr>
 					</tbody>
 				</table>';
+
         mailer($subject, $message);
     }
 

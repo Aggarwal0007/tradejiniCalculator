@@ -1,7 +1,6 @@
 {
   "name": "tradejini-spa-website",
   "version": "0.1.0",
-  "homepage": "https://services-tradejini-dev.iouring.in/spa",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.2",
@@ -37,6 +36,7 @@
     "start": "env-cmd .env.development react-scripts start",
     "build": "react-scripts build",
     "build:dev": "env-cmd .env.dev react-scripts build",
+    "build:preprod": "env-cmd .env.preprod react-scripts build",
     "build:development": "env-cmd .env.development react-scripts build",
     "build-dist": "cd build && copy static\\js\\*.js main.js && copy static\\css\\*.css main.css",
     "test": "react-scripts test",

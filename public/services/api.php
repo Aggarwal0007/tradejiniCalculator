@@ -24,7 +24,6 @@
     }
 
     else if($module === "contact") {
-
         require PROJECT_ROOT_PATH . "/controller/api/ContactUsController.php";
         $objFeedController = new ContactUsController();
         $strMethodName = $method . 'WebsiteContacts';

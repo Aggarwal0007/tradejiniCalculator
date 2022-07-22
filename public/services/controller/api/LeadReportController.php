@@ -45,7 +45,7 @@ class LeadReportController extends BaseController
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage() . ' Something went wrong!';
             }
-        } else {
+        } else { 
             $strErrorDesc = 'Method not supported';
         }
 

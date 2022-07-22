@@ -15,14 +15,16 @@ class SymbolStoreModel extends SearchDataBase
 
       $resContent = $this->select("SELECT DATA FROM CACHE_DATA where NAME= ?", ["s", "scripcache"]);
       $resContentArr = $resContent[0]["DATA"];
+      $resContentArr = str_replace('\n', "|", $resContentArr);
       $resData = json_decode($resContentArr);
+      
       $isUpdated = true;
   
     } else {
+      
       $isUpdated = false;
       $resData = [];
     }
-
 
     $respData = array(
       "version" => $currentVersion,

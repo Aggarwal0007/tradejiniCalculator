@@ -34,29 +34,6 @@ export default class SymbolCache {
     static async loadSymbolStore() {
 
         const symbolStore = await this.getSymbolStore();
-
-        // if (symbolStore && symbolStore.d && symbolStore.d.updated) {
-        //     storage.storeToLocalStorage("search_version", symbolStore.d.version);
-        //     if (symbolStore.d.data) {
-        //         console.log("stoargae update");
-        //         storage.storeToLocalStorage("search_results_one", symbolStore.d.data[ 0 ]);
-        //         storage.storeToLocalStorage("search_results_two", JSON.stringify(symbolStore.d.data[ 1 ]));
-        //     }   
-        // } else {
-        //     const searchResults = storage.getFromLocalStorage("search_results");
-        //     console.log("searchResults test", searchResults);
-        // }
-        // if (symbolStore && symbolStore.d && symbolStore.d.updated) {
-        //     storage.storeToLocalStorage("search_version", symbolStore.d.version);
-        //     storage.storeToLocalStorage("search_values", )
-        //     SymbolParser.addSymbols(symbolStore.d.future && symbolStore.d.future);
-        // }
-
-        // console.log("symbolStore new", symbolStore);
-        // if (symbolStore && symbolStore.d) {
-        //     SymbolParser.addSymbols(symbolStore.d.future);
-        // }
-
         if (symbolStore && symbolStore.d && symbolStore.d.data) {
             symbolStore.d.data.map((item: SymbolStoreResponse) => {
                 return SymbolParser.addSymbols(item);
