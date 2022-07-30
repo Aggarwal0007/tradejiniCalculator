@@ -18,7 +18,7 @@ function mailer($subject, $message)
         $phpmailer->Host       = SMTP_HOST;
         $phpmailer->Port       = SMTP_PORT;
         $phpmailer->SMTPAuth   = SMTP_AUTH;
-        // $phpmailer->SMTPSecure = 'tls';
+        $phpmailer->SMTPSecure = 'tls';
         $phpmailer->Username   = SMTP_USERNAME;
         $phpmailer->Password   = SMTP_PASSWORD;
         $phpmailer->From       = SMTP_FROM;

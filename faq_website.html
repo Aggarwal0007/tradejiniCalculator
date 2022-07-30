@@ -1,0 +1,338 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="./custom.css"> -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+
+        var treeViewData = [
+    
+            { 'Id': "all_faq", 'Title': 'All FAQ', 'ParentId': 0, 'hasChildren': false, 'icon_url': "/wp-content/uploads/2022/06/faq_icon_logo.png" },
+            { 'Id': "acc_open", 'Title': 'Account Opening', 'ParentId': 0, 'hasChildren': true, 'icon_url': "/wp-content/uploads/2022/06/account_open_faq_logo.png" },
+            { 'Id': "pricing", 'Title': 'Pricing', 'ParentId': 0, 'hasChildren': false, 'icon_url': "/wp-content/uploads/2022/06/pricing_faq_logo.png" },
+            { 'Id': "technology", 'Title': 'Technology', 'ParentId': 0, 'hasChildren': true, 'icon_url': "/wp-content/uploads/2022/06/technology_faq_logo.png" },
+            { 'Id': "segment", 'Title': 'Segments', 'ParentId': 0, 'hasChildren': true, 'icon_url': "/wp-content/uploads/2022/06/segments_faq_logo.png" },
+            { 'Id': "fund_transfer", 'Title': 'Fund Transfer', 'ParentId': 0, 'hasChildren': true, 'icon_url': "/wp-content/uploads/2022/06/fund_transfer_faq_logo.png" },
+            { 'Id': "margin", 'Title': 'Margins', 'ParentId': 0, 'hasChildren': false, 'icon_url': "/wp-content/uploads/2022/06/leverage_faq_logo.png" },
+            { 'Id': "order_types", 'Title': 'Order Types', 'ParentId': 0, 'hasChildren': false, 'icon_url': "/wp-content/uploads/2022/06/order_types_faq_logo.png" },
+            { 'Id': "settlement", 'Title': 'Settlement Cycles', 'ParentId': 0, 'hasChildren': false, 'icon_url': "/wp-content/uploads/2022/06/settlement_cycle_faq_logo.png" },
+            { 'Id': "ipo", 'Title': 'IPO', 'ParentId': 0, 'hasChildren': false, 'icon_url': "/wp-content/uploads/2022/06/ipo_faq_logo.png" },
+            { 'Id': "acc_details", 'Title': 'Account Details', 'ParentId': 0, 'hasChildren': false, 'icon_url': "/wp-content/uploads/2022/06/account_details_faq_logo.png" },
+            { 'Id': "referral", 'Title': 'Refferals', 'ParentId': 0, 'hasChildren': false, 'icon_url': "/wp-content/uploads/2022/06/referral_faq_logo.png" },
+    
+    
+            { 'Id': "general", 'Title': 'General', 'ParentId': "acc_open" },
+            { 'Id': "individual", 'Title': 'Individual', 'ParentId': "acc_open" },
+            { 'Id': "nri", 'Title': 'NRI', 'ParentId': "acc_open" },
+            { 'Id': "huf", 'Title': 'HUF', 'ParentId': "acc_open" },
+            { 'Id': "ptnrship", 'Title': 'Partnership', 'ParentId': "acc_open" },
+            { 'Id': "llp", 'Title': 'LLP', 'ParentId': "acc_open" },
+            { 'Id': "minor", 'Title': 'PMS', 'ParentId': "acc_open" },
+            { 'Id': "corporate", 'Title': 'Corporate', 'ParentId': "acc_open" },
+    
+    
+            { 'Id': "back_ofc", 'Title': 'Back Office', 'ParentId': "technology" },
+            { 'Id': "tr_platform", 'Title': 'Trading Platform', 'ParentId': "technology" },
+            { 'Id': "dk_web", 'Title': 'Desktop & Web', 'ParentId': "technology" },
+            { 'Id': "mobile", 'Title': 'Mobile', 'ParentId': "technology" },
+            { 'Id': "add_on", 'Title': 'Add-On', 'ParentId': "technology" },
+    
+    
+            { 'Id': "equity", 'Title': 'Equity', 'ParentId': "segment" },
+            { 'Id': "derivatves", 'Title': 'Derivatives', 'ParentId': "segment" },
+    
+    
+            { 'Id': "pay_in", 'Title': 'Pay In', 'ParentId': "fund_transfer" },
+            { 'Id': "pay_out", 'Title': 'Pay Out', 'ParentId': "fund_transfer" }
+        ];
+    
+        var parentMenuList = getMenus(0);
+    
+    
+        function getMenus(parentmenu) {
+            if (treeViewData) {
+                let menus = treeViewData.filter((item) => {
+                    if (item.ParentId === parentmenu) {
+                        return item
+                    }
+                })
+                return menus;
+            }
+            else return null;
+        }
+    
+        function getSubMenus(parentMenuId) {
+    
+            let submenuList = getMenus(parentMenuId);
+            let subMenuDynamicHtml = "";
+            var selectedClass = "sel";
+    
+    
+            if (submenuList && submenuList.length) {
+                submenuList.map((item, idx) => {
+                    subMenuDynamicHtml += '<li data-id="' + item.Id + '"><div class="sub-menu-item ' + item.Id + '" data-id="' + item.Id + '" >' + item.Title + '</div></li>';
+                })
+    
+                subList = '<ul class="sub-menu-ul">' + subMenuDynamicHtml + '</ul>';
+    
+                return subList;
+            }
+    
+            else return "";
+        }
+    
+    
+        $(document).ready(function () {
+            let menuDynamicHtml = "";
+            let selectedClass = "sel";
+    
+            parentMenuList.map((item, idx) => {
+                // menuDynamicHtml += '<li data-id="' + item.Id + '"><div class="menu-item ' + item.Id + '" data-id="' + item.Id + '" >' + item.Title + '<i class="fa fa-caret-down"></i></div> ' + getSubMenus(item.Id) + ' </li>';
+                menuDynamicHtml += '<li data-id="' + item.Id + '"><div class="menu-item ' + item.Id + '" data-id="' + item.Id + '" data-hasChildren="' + item.hasChildren + '">' + '<img class="ul-img" src=' + item.icon_url + ' />' + item.Title + `${item.hasChildren ? '<i class="fa fa-caret-down"></i>' : ""}` + '</div> ' + getSubMenus(item.Id) + ' </li>';
+            })
+    
+            $(".main-menu-list").html(menuDynamicHtml)
+    
+            $(".sub-menu-item").click(function () {
+                $(".results").hide();
+                $(".mobile-menu-list").hide();
+                $(".sub-menu-item").removeClass("active-sub-menu");
+                let selectedId = $(this).attr("data-id");
+                $(`.${selectedId}`).show();
+                $(this).addClass("active-sub-menu");
+            })
+    
+            $(".menu-item").click(function () {
+                $(".results").hide();
+                $(".sub-menu-ul").hide();
+                $(".menu-item").removeClass("active-parent-menu");
+                $(".sub-menu-item").removeClass("active-sub-menu");
+                $(this).addClass("active-parent-menu");
+                let selectedId = $(this).attr("data-id");
+                let hasChildren = $(this).attr("data-hasChildren");
+                let firstChildElm = $(`.${selectedId}`).next().find("li:first");
+                if (hasChildren === "true") {
+                    $(`.${selectedId}`).next().show()
+                    let childItem = firstChildElm.attr("data-id");
+                    $(`.${childItem}`).show()
+                    $(`.${childItem}`).addClass("active-sub-menu");
+                } else {
+                    $(".results").hide();
+                    let selectedId = $(this).attr("data-id");
+                    $(`.${selectedId}`).show();
+                    $(".mobile-menu-list").hide();
+    
+                }
+            })
+    
+            $(".mobile-menu-icon").click(function () {
+                $(".mobile-menu-list").show();
+                // $(".mobile-menu-list ul.main-menu-list li:first").find("div").addClass("active-parent-menu");
+            })
+    
+            $(".desktop-menu-list ul.main-menu-list li:first").find("div").addClass("active-parent-menu");
+            $("ul.main-menu-list li:first").find("div").addClass("active-parent-menu");
+            $(".results.all_faq").show()
+        });
+    
+    </script>
+    
+    <style>
+        .main-menu-list {
+            list-style-type: none;
+            font-size: 15px;
+            border: 1px solid #ECECEC;
+            font-weight: 400;
+            line-height: 27px;
+        }
+
+        .main-menu-list .menu-item {
+            padding: 15px;
+        }
+
+        .sub-menu-ul {
+            display: none;
+        }
+
+        .sub-menu-ul {
+            background-color: #F7F7F7;
+            list-style-type: none;
+            padding: 10px;
+            margin: 0 !important;
+            /* width: 100%; */
+        }
+
+        .sub-menu-ul li {
+            text-align: left;
+            background-color: #F7F7F7;
+            padding: 10px 0px;
+            cursor: pointer;
+        }
+
+        .sub-menu-ul li .sub-menu-item {
+            padding-left: 40px;
+        }
+
+        .menu-item.active-parent-menu {
+            background-color: #01CD98;
+            color: #fff;
+        }
+
+        .sub-menu-item.active-sub-menu {
+            color: #01CD97;
+            font-weight: bold;
+            border-left: 4px solid #01CD97;
+        }
+
+        .sub-menu-ul li .sub-menu-item:hover {
+            color: #01CD97;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .main-menu-list li .menu-item:hover {
+            background-color: #01CD98;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .fa.fa-caret-down {
+            float: right;
+        }
+
+        .ul-img {
+            /* margin-bottom: -7px; */
+            margin-right: 10px;
+        }
+
+        .menu-item.active-parent-menu .ul-img,
+        .main-menu-list li .menu-item:hover .ul-img {
+            filter: brightness(200%);
+        }
+
+        .mobile-menu-icon {
+            display: none;
+        }
+
+        @media only screen and (min-width: 600px) {
+            .mobile-menu-icon {
+                display: none;
+            }
+
+            .mobile-menu-list {
+                display: none;
+            }
+
+            /* .desktop-menu-list {
+        display: block;
+    }
+    .mobile-menu-list {
+        display: none;
+    } */
+        }
+
+        @media only screen and (max-width: 600px) {
+            .mobile-menu-icon {
+                display: block;
+            }
+
+            .faq_img {
+                display: none;
+            }
+
+            .desktop-menu-list {
+                display: none;
+            }
+
+            .mobile-menu-list {
+                display: none;
+            }
+
+        }
+
+        /* .desktop-menu-list {
+    display: none;
+}
+
+.mobile-menu-list {
+    display: none;
+} */
+
+        .results {
+            display: none;
+        }
+
+        .faq_img {
+            padding-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mobile-menu-icon">&#9776; Menu</div>
+    <div class="mobile-menu-list">
+        <ul class="main-menu-list"></ul>
+    </div>
+    <div class="desktop-menu-list">
+        <ul class="main-menu-list"></ul>
+    </div>
+    <div class="faq_img">
+        <img src="/wp-content/uploads/2022/06/down_image.png" alt="FAQ Image" />
+    </div>
+    <!-- <ul class="main-menu-list"></ul> -->
+
+    <!-- <div class="results all_faq">
+        All FAQ
+    </div>
+
+    <div class="results general">
+        General
+    </div>
+
+    <div class="results individual">
+        Individual
+    </div>
+
+    <div class="results nri">
+        NRI
+    </div>
+
+    <div class="results ptnrship">
+        Partnership
+    </div>
+
+    <div class="results llp">
+        LLP
+    </div>
+
+    <div class="results huf">
+        HUF
+    </div>
+
+    <div class="results minor">
+        Minor
+    </div>
+
+    <div class="results Corporate">
+        Corporate
+    </div>
+
+    <div class="results pricing">
+        Pricing
+    </div>
+
+
+    <div class="results referral">
+        referral
+    </div> -->
+</body>
+
+
+</html>

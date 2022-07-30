@@ -21,7 +21,6 @@ class SymbolStoreModel extends SearchDataBase
       $isUpdated = true;
   
     } else {
-      
       $isUpdated = false;
       $resData = [];
     }

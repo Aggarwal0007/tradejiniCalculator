@@ -37,6 +37,7 @@
     "build": "react-scripts build",
     "build:dev": "env-cmd .env.dev react-scripts build",
     "build:preprod": "env-cmd .env.preprod react-scripts build",
+    "build:prod": "env-cmd .env.prod react-scripts build",
     "build:development": "env-cmd .env.development react-scripts build",
     "build-dist": "cd build && copy static\\js\\*.js main.js && copy static\\css\\*.css main.css",
     "test": "react-scripts test",
