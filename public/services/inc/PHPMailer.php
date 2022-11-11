@@ -25,7 +25,7 @@ function mailer($subject, $message)
         $phpmailer->FromName   = SMTP_FROM_NAME;
         $phpmailer->addAddress(SMTP_TO_ADDRESS, SMTP_TO_NAME);
         $phpmailer->Subject = $subject;
-        $phpmailer->Body = $message;
+        $phpmailer->Body = $message; 
         $phpmailer->send();
     }
     catch (phpmailerException $e) {

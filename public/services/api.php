@@ -6,7 +6,7 @@
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     
     $uri = explode( '/', $uri );
-    
+            
     $key = array_search('api.php', $uri);
 
     $module = $uri[$key+1];
@@ -14,7 +14,6 @@
     $sub = $uri[$key+3];
 
     
-
     if($module === "config") {
 
         require PROJECT_ROOT_PATH . "/controller/api/ConfigController.php";

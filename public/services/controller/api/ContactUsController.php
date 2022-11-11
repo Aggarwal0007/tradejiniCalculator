@@ -47,6 +47,7 @@ class ContactUsController extends BaseController
                             // echo $responseData[$i]['status'];
                         }
                     }
+                    // $responseData = json_encode($responseData);
                 }
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage() . ' Something went wrong!';

@@ -93,10 +93,10 @@ class LeadReportController extends BaseController
 
                         $data = <<<DATA
                                 {
-                                    "LeadName": $name,
-                                    "MobileNo": $contactno,
-                                    "EmailId": $email,
-                                    "Refferedby": $partner_id,
+                                    "LeadName": "$name",
+                                    "MobileNo": "$contactno",
+                                    "EmailId": "$email",
+                                    "Refferedby": "$partner_id",
                                     "callback": ""
                                 }
                                 DATA;
