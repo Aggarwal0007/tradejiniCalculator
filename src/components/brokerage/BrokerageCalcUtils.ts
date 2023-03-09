@@ -1,6 +1,7 @@
+import { CURRENCY_CATEGORY, EQUITES_CATEGORY } from "../../common/Constants";
+
 import { ConfigData } from "../../common/Types";
 import { configDetails } from "../../common/Dataconfig";
-import { EQUITES_CATEGORY } from "../../common/Constants";
 
 const getConfigData = (category: string) => {
     const dataResponse:Record<string, ConfigData> = configDetails.getBrokerageDetails();
@@ -106,13 +107,22 @@ export const getTurnOver = (qty: number, buyPrice: number, sellPrice: number) =>
 
 //For getting buyprice and sell price
 
-export const getBrokerage = (turnOver: number, configData: ConfigData, buyPrice: number, sellPrc:number) => {
+export const getBrokerage = (
+    turnOver: number, 
+    configData: ConfigData, 
+    buyPrice: number,
+    sellPrc:number, 
+    category: string=""
+) => {
    
     const brokerage1 = ( (turnOver) * ( configData.brokeragePercentage * ( 1 / 100 ) ) );
     const brokerageBuy = buyPrice > 0 ? 20 : 0;
     const brokerageSell = sellPrc > 0 ? 20 : 0;
     const brokerage2 = brokerageBuy + brokerageSell;
     const brokerage = brokerage2 < brokerage1 ? brokerage2 : brokerage1;
+    if (category === EQUITES_CATEGORY[ 3 ].name || category === CURRENCY_CATEGORY[ 1 ].name) {
+        return brokerage2;
+    } 
     return brokerage;
 };
 
@@ -174,7 +184,7 @@ export const calculateEquityBrokerage = (
 
     // Passing buyprice and sell price
 
-    let brokerage = getBrokerage(turnOver, configData, buyPrice, sellPrice);
+    let brokerage = getBrokerage(turnOver, configData, buyPrice, sellPrice, category);
 
     let STTCharges = getSTT(qty, sellPrice, configData, category, turnOver);
 
@@ -248,7 +258,7 @@ export const calculateCommodityBrokerage = (
 
     // Passing buyprice and sell price
 
-    let brokerage = getBrokerage(turnOver, configData, buyPrc, sellPrc);
+    let brokerage = getBrokerage(turnOver, configData, buyPrc, sellPrc, category);
 
     let STTCharges = getSTT(quantity, sellPrc, configData, category, turnOver);
 
@@ -309,7 +319,7 @@ export const calculateCurrencyBrokerage = (
     
     // Passing buyprice and sell price
 
-    let brokerage = getBrokerage(turnOver, configData, buyPrc, sellPrc);
+    let brokerage = getBrokerage(turnOver, configData, buyPrc, sellPrc, category);
 
     let transactionCharges = getTransactionCharges(turnOver, configData);
 

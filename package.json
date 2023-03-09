@@ -5,7 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
-    "@iouring/reactjs-lib": "^0.0.8",
+    "@iouring/reactjs-lib": "^0.0.59",
     "@mui/lab": "^5.0.0-alpha.76",
     "@mui/material": "^5.5.3",
     "@mui/x-data-grid": "^5.9.0",
