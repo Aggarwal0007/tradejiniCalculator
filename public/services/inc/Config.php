@@ -34,7 +34,6 @@ define("SMTP_PASSWORD", "Contact#2016");
 define("SMTP_FROM", "contact@tradejini.com");  
 define("SMTP_FROM_NAME", "Tradejini");
 define("SMTP_TO_ADDRESS", "contact@tradejini.com");
-// define("SMTP_TO_ADDRESS", "harish.lv@iouring.com");
 define("SMTP_TO_NAME", "Tradejini");
 define("SMTP_LOGO", "https://tradejini.com/spa");
 
