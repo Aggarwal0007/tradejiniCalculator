@@ -155,6 +155,11 @@ export const getSEBICharges = (turnOver: number, configData:ConfigData) => {
     return sebiCharges;
 };
 
+export const getIPFTCharges = (turnOver: number, configData:ConfigData) => {
+    const ipftCharges = ( ( configData.ipft ) * ( turnOver / 10000000 ) );
+    return ipftCharges;
+};
+
 export const getGSTCharges = (
     transactionCharges: number, 
     brokerage:number, 
@@ -192,12 +197,16 @@ export const calculateEquityBrokerage = (
 
     let sebiCharges = getSEBICharges(turnOver, configData);
 
+    let ipftCharges = getIPFTCharges(turnOver, configData);
+
     let GSTCharges = getGSTCharges(transactionCharges, brokerage, configData);
 
     let stampCharges = getStampCharges(qty, buyPrice, configData);
 
     let totalCharges: number = Number(brokerage) + Number(STTCharges.toFixed(1)) + transactionCharges +
     GSTCharges + sebiCharges + stampCharges;
+
+    if (ipftCharges) totalCharges += ipftCharges;
 
     const totalSellValue: number = ( qty * sellPrice ) - ( qty * buyPrice );
 
@@ -216,6 +225,7 @@ export const calculateEquityBrokerage = (
     transactionCharges = Number(decimalConversion(transactionCharges, 1));
     GSTCharges = Number(decimalConversion(GSTCharges));
     sebiCharges = Number(decimalConversion(sebiCharges));
+    ipftCharges = Number(decimalConversion(ipftCharges));
     stampCharges = Number(decimalConversion(stampCharges));
     totalCharges = Number(decimalConversion(totalCharges));
     netProfit = Number(decimalConversion(netProfit));
@@ -228,6 +238,7 @@ export const calculateEquityBrokerage = (
         transactionCharges,
         GSTCharges,
         sebiCharges,
+        ipftCharges,
         stampCharges,
         totalCharges,
         netProfit,
@@ -266,6 +277,8 @@ export const calculateCommodityBrokerage = (
 
     let sebiCharges = getSEBICharges(turnOver, configData);
 
+    let ipftCharges = getIPFTCharges(turnOver, configData);
+
     let GSTCharges = ( configData.gstPercentage ) * ( brokerage + transactionCharges + sebiCharges );
 
     let stampCharges = getStampCharges(quantity, buyPrc, configData);
@@ -273,6 +286,8 @@ export const calculateCommodityBrokerage = (
     // const swach = ((0.05*(1/100))*(brokerage + transactionCharges)); 
 
     let totalCharges = brokerage + transactionCharges + GSTCharges + CTT + sebiCharges + stampCharges;
+
+    if (ipftCharges) totalCharges += ipftCharges;
 
     let pointBreakeven = ( totalCharges / quantity );
     
@@ -288,6 +303,8 @@ export const calculateCommodityBrokerage = (
     pointBreakeven = Number(decimalConversion(pointBreakeven));
     brokerage = Number(decimalConversion(brokerage));
     turnOver = Number(decimalConversion(turnOver));
+    ipftCharges = Number(decimalConversion(ipftCharges));
+
 
     return {
         turnOver,
@@ -300,7 +317,8 @@ export const calculateCommodityBrokerage = (
         pointBreakeven,
         netProfit,
         CTT, 
-        STTCharges
+        STTCharges,
+        ipftCharges
     };
 };
 
@@ -325,6 +343,8 @@ export const calculateCurrencyBrokerage = (
 
     let sebiCharges = getSEBICharges(turnOver, configData);
 
+    let ipftCharges = getIPFTCharges(turnOver, configData);
+
     let GSTCharges = ( configData.gstPercentage ) * ( brokerage + transactionCharges );
 
     let stampCharges = getStampCharges(qty, buyPrc, configData);
@@ -332,6 +352,8 @@ export const calculateCurrencyBrokerage = (
     // const swach = ((0.05*(1/100))*(brokerage + transactionCharges)); 
 
     let totalCharges = brokerage + transactionCharges + GSTCharges + sebiCharges + stampCharges;
+
+    if (ipftCharges) totalCharges += ipftCharges;
 
     let pointBreakeven = ( totalCharges / ( qty * 1000 ) );
 
@@ -355,6 +377,7 @@ export const calculateCurrencyBrokerage = (
     totalCharges = Number(totalCharges.toFixed(2));
     brokerage = Number(decimalConversion(brokerage));
     turnOver = Number(decimalConversion(turnOver));
+    ipftCharges = Number(decimalConversion(ipftCharges));
 
     return {
 
@@ -367,7 +390,8 @@ export const calculateCurrencyBrokerage = (
         totalCharges,
         pointBreakeven,
         netProfit,
-        pipsBreakeven
+        pipsBreakeven,
+        ipftCharges
     };
 	
 };

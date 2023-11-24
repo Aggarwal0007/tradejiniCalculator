@@ -18,7 +18,8 @@ export interface Charges {
     netProfit: number,
     CTT?: number,
     pipsBreakeven?: number,
-    STTCharges?: number
+    STTCharges?: number,
+    ipftCharges?: number
 }
 
 export interface ConfigData {
@@ -29,7 +30,8 @@ export interface ConfigData {
         transactionCharges: number,
         sebi: number,
         gstPercentage: number,
-        stampCharge: number
+        stampCharge: number,
+        ipft: number
 }
 
 export interface ChargesItem {

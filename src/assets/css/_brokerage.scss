@@ -309,6 +309,10 @@
   justify-content: flex-start;
   align-items: center;
   padding: 5px 10px;
+
+  &.hide {
+    display: none !important;
+  }
 }
 
 .item-name {

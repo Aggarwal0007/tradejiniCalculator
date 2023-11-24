@@ -70,39 +70,43 @@ export const CHARGE_LIST: Record<string, any> = {
     EQUITY_INTRADAY: [
         { name: "Charges", value: "Equity Intraday" },
         { name: "STT/CTT", value: "0.025% on the Sell Side" },
-        { name: "Transaction/ Turnover Charges", value: "NSE: 345/Crore BSE: 275/Crore" },
+        { name: "Transaction/ Turnover Charges", value: "NSE 325/Crore BSE 375/Crore" },
         { name: "SEBI Charges", value: "Rs 10/- Per Crore Turnover" },
         { name: "GST", value: "18% on Brokerage & Exchange Transaction Charges" },
         { name: "Stamp duty(w.e.f 01st Jul 2020)", value: "0.003% on Buyer - Rs.300 Per Cr" },
+        { name: "IPFT", value: "NSE 10/Crore" }
     ],
     EQUITY_DELIVERY: [
         { name: "Charges", value: "Equity Delivery" },
         { name: "STT/CTT", value: "0.1% on the Buy and Sell" },
-        { name: "Transaction/ Turnover Charges", value: "NSE: 345/Crore & BSE: 275/Crore" },
+        { name: "Transaction/ Turnover Charges", value: "NSE 325/Crore BSE 375/Crore" },
         { name: "SEBI Charges", value: "Rs 10/- Per Crore Turnover" },
         { name: "GST", value: "18% on Brokerage & Exchange Transaction Charges" },
         { name: "Stamp duty(w.e.f 01st Jul 2020)", value: "0.015% on Buyer - Rs.1500 per Cr" },
+        { name: "IPFT", value: "NSE 10/Crore" }
     ],
     EQUITY_FUTURES: [
         { name: "Charges", value: "Equity Futures" },
-        { name: "STT/CTT", value: "0.01% on Sell Side" },
-        { name: "Transaction/ Turnover Charges", value: "NSE: 200/Crore BSE: 200/Crore" },
+        { name: "STT/CTT", value: "0.0125% on Sell Side" },
+        { name: "Transaction/ Turnover Charges", value: "NSE: 190/Crore BSE: 0/Crore" },
         { name: "SEBI Charges", value: "Rs 10/- Per Crore Turnover" },
         { name: "GST", value: "18% on Brokerage & Exchange Transaction Charges" },
         { name: "Stamp duty(w.e.f 01st Jul 2020)", value: "0.002% on Buyer - Rs.200 per Cr" },
+        { name: "IPFT", value: "NSE 10/Crore" }
     ],
     EQUITY_OPTIONS: [
         { name: "Charges", value: "Equity Options" },
-        { name: "STT/CTT", value: "0.05% on Sell Side(on Premium)" },
-        { name: "Transaction/ Turnover Charges", value: "NSE: 5300/Crore BSE: 2500/Crore" },
+        { name: "STT/CTT", value: "0.0625% on the Sell Side  (on Premium)" },
+        { name: "Transaction/ Turnover Charges", value: "NSE: 5000/Crore BSE: 3750/Crore" },
         { name: "SEBI Charges", value: "Rs 10/- Per Crore Turnover" },
         { name: "GST", value: "18% on Brokerage & Exchange Transaction Charges" },
         { name: "Stamp duty(w.e.f 01st Jul 2020)", value: "0.003% on Buyer - Rs.300 Per Cr" },
+        { name: "IPFT", value: "NSE 50/Crore" }
     ],
     CURRENCY_FUTURES: [
         { name: "Charges", value: "Currency Futures" },
         { name: "STT/CTT", value: "No STT" },
-        { name: "Transaction/ Turnover Charges", value: "NSE: 90/Crore MCS-SX: 125/Crore" },
+        { name: "Transaction/ Turnover Charges", value: "NSE: 90/Crore" },
         { name: "SEBI Charges", value: "Rs 10/- Per Crore Turnover" },
         { name: "GST", value: "18% on Brokerage & Exchange Transaction Charges" },
         { name: "Stamp duty(w.e.f 01st Jul 2020)", value: "0.0001% on Buyer - Rs. 10 Per Cr" },
@@ -118,7 +122,7 @@ export const CHARGE_LIST: Record<string, any> = {
     COMMODITY: [
         { name: "Charges", value: "Commodity" },
         { name: "CTT", value: "0.01% on Sell Side" },
-        { name: "Transaction/ Turnover Charges", value: "MCX: 350/Crore" },
+        { name: "Transaction/ Turnover Charges", value: "MCX: 260/Crore" },
         { name: "SEBI Charges", value: "Rs 10/- Per Crore Turnover" },
         { name: "GST", value: "18% on Brokerage & Exchange Transaction Charges" },
         { name: "Stamp duty(w.e.f 01st Jul 2020)", value: "0.002% on Buyer - Rs.200 per Cr" },
