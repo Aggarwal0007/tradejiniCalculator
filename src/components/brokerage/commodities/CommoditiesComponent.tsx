@@ -1,6 +1,7 @@
 import { Category, Charges, ErrorType, InputTypes } from "common/Types";
 import React, { useEffect, useState } from "react";
 import { ServiceRequest, useFetch } from "index";
+
 import BrokerageOutputs from "../BrokerageOutputsComponent";
 import { calculateCommodityBrokerage } from "../BrokerageCalcUtils";
 import { COMMODITY_CATEGORY } from "../../../common/Constants";
@@ -61,10 +62,6 @@ const CommoditiesCalculator = (props: PropsTypes) => {
     const onSelectedCategory = (selectedItem: string) => {
         setSelectedCategory(selectedItem);
     };
-
-    const [
-        categorySelected, setCategorySelected
-    ] = useState<string>(selectedCategory);
 
     const successCB = (response: { d: CommodityType[]; }) => {
         const result = [
@@ -132,12 +129,9 @@ const CommoditiesCalculator = (props: PropsTypes) => {
             sellPrice: sellPrc,
             type: selectedCategory
         });
-        setCategorySelected(selectedCategory);
-
     };
 
-    useEffect(() => {
-
+    function initialCalculation() {
         if (commodityList && commodityList.length) {
             setDispCommodity(commodityList[ 0 ].name);
             setBuyPrice(commodityList[ 0 ].buyPrice);
@@ -152,9 +146,13 @@ const CommoditiesCalculator = (props: PropsTypes) => {
                 commodityList[ 0 ].name
             );
         }
+    }
+    useEffect(() => {
+
+        initialCalculation();
 
     }, [
-        commodityList
+        commodityList, selectedCategory
     ]);
 
     const onChangeQuantity = (qty: number) => {
@@ -303,7 +301,7 @@ const CommoditiesCalculator = (props: PropsTypes) => {
                 <>
                     <BrokerageOutputs
                         chargesBreakDown={viewResult as Charges}
-                        categorySelected={categorySelected}
+                        categorySelected={selectedCategory}
                     />
                 </>
             </div>

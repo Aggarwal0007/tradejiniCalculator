@@ -32,7 +32,8 @@ export const CURRENCY_CATEGORY = [
 ];
 
 export const COMMODITY_CATEGORY = [
-    { name: "COMMODITY", value: "Commodity" }
+    { name: "COMMODITY", value: "Commodity" },
+    { name: "COMMODITY_OPTIONS", value: "Commodity Options" }
 ];
 
 export const COMMODITY_SELECT_LIST = [
@@ -126,6 +127,14 @@ export const CHARGE_LIST: Record<string, any> = {
         { name: "SEBI Charges", value: "Rs 10/- Per Crore Turnover" },
         { name: "GST", value: "18% on Brokerage & Exchange Transaction Charges" },
         { name: "Stamp duty(w.e.f 01st Jul 2020)", value: "0.002% on Buyer - Rs.200 per Cr" },
+    ],
+    COMMODITY_OPTIONS: [
+        { name: "Charges", value: "Commodity Options" },
+        { name: "CTT", value: "0.05% On Sell Side" },
+        { name: "Transaction/ Turnover Charges", value: "MCX: 5000/Crore" },
+        { name: "SEBI Charges", value: "Rs 10/- Per Crore Turnover" },
+        { name: "GST", value: "18% on Brokerage & Exchange Transaction Charges" },
+        { name: "Stamp duty(w.e.f 01st Jul 2020)", value: "0.003% on Buyer Rs.300 per Cr" },
     ],
 };
 
