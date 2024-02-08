@@ -5,7 +5,6 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
-    "@iouring/reactjs-lib": "^0.0.68",
     "@mui/lab": "^5.0.0-alpha.76",
     "@mui/material": "^5.5.3",
     "@mui/x-data-grid": "^5.9.0",
@@ -20,6 +19,7 @@
     "@types/node": "^16.11.26",
     "@types/npm": "^7.19.0",
     "@types/react": "^17.0.41",
+    "crypto-js": "^4.2.0",
     "date-fns": "^2.28.0",
     "env-cmd": "^8.0.2",
     "install": "^0.13.0",

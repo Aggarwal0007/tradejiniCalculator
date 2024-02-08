@@ -1,6 +1,6 @@
 import "./assets/css/_index.scss";
 
-import { ServiceConfig, ServiceRequest, storage, useFetch } from "@iouring/reactjs-lib";
+import { ServiceConfig, ServiceRequest, storage, useFetch } from "./customLib";
 
 import App from "./App";
 import { Provider } from "react-redux";
@@ -15,12 +15,10 @@ export {
     useFetch
 };
 
-
 console.log = () => {
     return null;
 };
    
-
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
